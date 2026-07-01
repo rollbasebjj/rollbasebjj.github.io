@@ -35,7 +35,7 @@ Android:
 **How do i log my moves?**
   -First, log your move name in the box. Then, select if the move you're logging is a sub-position*, and then select the position from the dropdown where this move is performed. Depending on the position selected, choose your supposed role in the position. Finally, put whether the move is gi + nogi or gi only and click "add move".
 
-  *Sub-positions are only used for grouping moves to it using the "transition*" option in the "position" dropdown. For example, logging "Front headlock" as a sub-position, so then you can add "Guillotine" as a transition from front headlock. Sub-positions do not have success/faliure rates, since they are just positions*
+  *Sub-positions are only used for grouping moves to it using the "transition" option in the "position" dropdown. For example, logging "Front headlock" as a sub-position, so then you can add "Guillotine" as a transition from front headlock. Sub-positions do not have success/faliure rates, since they are just positions*
 
 *Transitions are moves that depend on other moves. You log a move first, and then you can log a transition to that move, and it will appear under the original. Example: 1. Log "Armbar" 2. Log "Triangle" 3. Set position of "Triangle" to "Transition", and then select "Armbar"*
   
