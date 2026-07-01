@@ -553,6 +553,9 @@
         fileName = `${normalized.replace(/\s+/g, '')}${stripes}.png`;
       }
 
+      return fileName;
+    }
+
     function updateBeltImage() {
       const img = document.getElementById('profileBeltImage');
       if (!img) return;
