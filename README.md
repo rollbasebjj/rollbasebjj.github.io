@@ -20,3 +20,8 @@ Downside:
 Safari downloads the website and runs the code locally. And because of such, installing any future update will require you to manually copy your data from
 the old app to the new app.
 
+Android: 
+1. Go to "Releases" tag on the Github Sidebar (right side)
+2. Download RollBaseBJJ.apk
+3. Install the APK on your android device (download an APK installer if needed)
+4. Done!
