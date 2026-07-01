@@ -538,21 +538,20 @@
     }
 
     function getBeltImageFileName() {
-      const belt = (profile.belt || 'White').trim().toLowerCase();
+      const belt = (profile.belt || 'White').trim();
       const stripes = Number(profile.stripes) || 0;
-      let color = belt;
+      const normalized = belt.toLowerCase();
       let fileName = '';
 
-      if (belt.startsWith('white ')) {
-        color = belt.slice(6).replace(/\s+/g, '');
+      if (normalized.startsWith('white ')) {
+        const color = belt.slice(6).replace(/\s+/g, '').toLowerCase();
         fileName = `w${color}${stripes}.png`;
+      } else if (normalized.startsWith('black ') && normalized !== 'black') {
+        const color = belt.slice(6).replace(/\s+/g, '').toLowerCase();
+        fileName = `b${color}${stripes}.png`;
       } else {
-        color = belt.replace(/\s+/g, '');
-        fileName = `${color}${stripes}.png`;
+        fileName = `${normalized.replace(/\s+/g, '')}${stripes}.png`;
       }
-
-      return fileName;
-    }
 
     function updateBeltImage() {
       const img = document.getElementById('profileBeltImage');
