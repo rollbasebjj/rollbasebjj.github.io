@@ -30,7 +30,7 @@ Android:
 **FAQ:**
 
 **Where should i start?**
-  -Start by going to "My Profile", and filling in your details, this will unlock some features
+  -Start by going to "My Profile", and filling in your details, this will unlock some features, such as Belt Display and IBJJF Legality Index
 
 **How do i log my moves?**
   -First, log your move name in the box. Then, select if the move you're logging is a sub-position*, and then select the position from the dropdown where this move is performed. Depending on the position selected, choose your supposed role in the position. Finally, put whether the move is gi + nogi or gi only and click "add move".
