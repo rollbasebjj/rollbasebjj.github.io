@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brazillian Jiu-Jitsu Move Tracker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            body: '#0b1120',
+            surface: '#111827',
+            card: '#1f2937',
+            accent: '#38bdf8'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.15), transparent 35%), #040812;
+      color: #e5e7eb;
+      min-height: 100vh;
+    }
+    .glass {
+      background: rgba(15, 23, 42, 0.72);
+      backdrop-filter: blur(16px);
+    }
+  </style>
+</head>
+<body class="body font-sans">
+  <main class="max-w-sm mx-auto min-h-screen px-4 py-6">
+    <section class="glass rounded-3xl border border-slate-700/50 p-4 shadow-2xl shadow-slate-900/40">
+      <div class="flex justify-center gap-2">
+
+        <button id="trackerTabBtn" type="button" class="rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800">Move tracker</button>
+        <button id="profileTabBtn" type="button" class="rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-400 transition hover:bg-slate-800">My Profile</button>
+      </div>
+      <div id="pageTracker">
+        <div class="flex flex-col items-center gap-4 text-center">
+          <div>
+            <p class="text-sm uppercase tracking-[0.35em] text-sky-300/80">Vibe-coded by ig@ryanalex_g</p>
+          <h1 class="mt-2 text-3xl font-semibold tracking-tight text-white">Brazilian Jiu-Jitsu <br> Move Tracker</h1>
+          <p class="mt-2 max-w-xs text-sm leading-6 text-slate-300/90">Add new moves, track attempts, count successes, and add transitions.</p>
+        </div>
+      </div>
+      <form id="moveForm" class="mt-6 grid gap-4">
+        <div>
+          <label class="block text-sm font-medium text-slate-300">Move name</label>
+          <input id="moveTitle" type="text" placeholder="Knee Bar" required class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400" />
+        </div>
+        <div class="rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3">
+          <label class="flex items-center gap-3 text-sm font-medium text-slate-300">
+            <input id="subPositionToggle" type="checkbox" class="h-4 w-4 rounded border-slate-600 bg-slate-950 text-sky-500 focus:ring-sky-500" />
+            <span>Add Sub-Position</span>
+          </label>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-300">Position</label>
+          <select id="movePosition" required class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400">
+            <option value="Standing">Standing</option>
+            <option value="Transition">Transition</option>
+            <optgroup label="Guard sitting">
+              <option value="Closed Guard">Closed Guard</option>
+              <option value="Open guard sitting">Open guard sitting</option>
+              <option value="Half guard">Half guard</option>
+              <option value="Quarter guard">Quarter guard</option>
+              <option value="Butterfly guard">Butterfly guard</option>
+              <option value="Half butterfly guard">Half butterfly guard</option>
+            </optgroup>
+            <optgroup label="Guard standing">
+              <option value="Sitting guard">Sitting guard</option>
+              <option value="Delariva">Delariva</option>
+              <option value="SLX">SLX</option>
+              <option value="X-guard">X-guard</option>
+              <option value="Spider guard">Spider guard</option>
+              <option value="Lasso guard">Lasso guard</option>
+            </optgroup>
+            <optgroup label="Leg Entanglements">
+              <option value="Straight Ashi">Straight Ashi (SLX)</option>
+              <option value="Cross Ashi">Cross Ashi</option>
+              <option value="50/50">50/50</option>
+            </optgroup>
+            <optgroup label="Advantageous Positions">
+              <option value="Side control">Side control</option>
+              <option value="Mount">Mount</option>
+              <option value="Turtle (backside)">Turtle (backside)</option>
+              <option value="Turtle (frontside)">Turtle (frontside)</option>
+              <option value="Turtle (side to side)">Turtle (side to side)</option>
+              <option value="Back mount">Back mount</option>
+              <option value="Back mount (body triangle)">Back mount (body triangle)</option>
+              <option value="Knee on belly">Knee on belly</option>
+              <option value="Top Crucifix">Top Crucifix</option>
+              <option value="Bottom Crucifix">Bottom Crucifix</option>
+              <option value="Katagatame">Katagatame</option>
+            </optgroup>
+          </select>
+        </div>
+        <div id="roleContainer">
+          <div id="roleInputs" class="hidden">
+            <label id="roleLabel" class="block text-sm font-medium text-slate-300">Top or Bottom</label>
+            <select id="moveRole" class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400">
+              <option value="Top">Top</option>
+              <option value="Bottom">Bottom</option>
+            </select>
+            <select id="transitionFrom" class="mt-2 hidden w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400">
+              <option value="">Select a move</option>
+            </select>
+          </div>
+        </div>
+        <div id="legEntanglementSideContainer" class="hidden">
+          <label class="block text-sm font-medium text-slate-300">Entanglement side</label>
+          <select id="legEntanglementSide" class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400">
+            <option value="Backside">Backside</option>
+            <option value="Frontside">Frontside</option>
+          </select>
+        </div>
+        <div id="giToggleContainer" class="mt-4 flex items-center gap-2 rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3">
+          <span class="text-sm font-medium text-slate-300">Gi and Nogi</span>
+          <label class="relative inline-flex h-7 w-14 cursor-pointer items-center">
+            <input id="giOnlyToggle" type="checkbox" class="peer sr-only" />
+            <div class="h-7 w-14 rounded-full bg-slate-700 transition-colors peer-checked:bg-emerald-500"></div>
+            <span class="pointer-events-none absolute left-1 top-1 h-5 w-5 rounded-full bg-white shadow transform transition-transform duration-200 translate-x-0 peer-checked:translate-x-7"></span>
+          </label>
+          <span class="text-sm font-medium text-slate-300">Gi only</span>
+        </div>
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <button type="submit" class="rounded-2xl bg-slate-800 px-5 py-3 text-sm font-semibold text-slate-100 transition hover:bg-slate-700">Add Move</button>
+          <p id="formTip" class="text-sm leading-6 text-slate-400">Save each move and track gym progress across sessions.</p>
+        </div>
+      </form>
+      <div class="mt-6 rounded-3xl border border-slate-700/60 bg-slate-950/40 p-4">
+        <div class="grid gap-4">
+          <div>
+            <label class="block text-sm font-medium text-slate-300">Search moves</label>
+            <input id="searchInput" type="search" placeholder="Type a move name to search" class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-300">Category</label>
+            <select id="filterCategory" class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400">
+              <option value="All">All</option>
+              <option value="Standing">Standing</option>
+              <option value="Guard sitting">Guard sitting</option>
+              <option value="Guard standing">Guard standing</option>
+              <option value="Leg Entanglements">Leg Entanglements</option>
+              <option value="Advantageous Positions">Advantageous Positions</option>
+              <option value="Transitions">Transitions</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-300">Position</label>
+            <select id="filterPosition" class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400">
+              <option value="All">All positions</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div id="cardsContainer" class="mt-8 space-y-6"></div>
+      </div>
+      <div id="pageProfile" class="hidden mt-6 space-y-4">
+        <div class="text-center">
+          <h2 class="text-2xl font-semibold tracking-tight text-white">My BJJ Profile</h2>
+        </div>
+        <div class="rounded-3xl border border-slate-700/60 bg-slate-950/40 p-4 space-y-4">
+          <div class="rounded-3xl border border-slate-700/60 bg-slate-900/70 p-4 text-center">
+            <p class="text-sm uppercase tracking-[0.18em] text-slate-400">CURRENT BELT</p>
+            <div class="mt-4 flex flex-col items-center gap-4">
+              <img id="profileBeltImage" class="h-28 w-auto rounded-3xl border border-slate-700 bg-slate-950 p-3" alt="Current belt image" src="" />
+              <div class="space-y-2 hidden">
+                <p id="profileBeltSummary" class="text-3xl font-semibold text-white">White belt</p>
+                <span id="profileBeltBadge" class="inline-flex items-center rounded-full border border-slate-700 bg-slate-950 px-3 py-1 text-sm font-semibold uppercase tracking-[0.14em] text-slate-200">White</span>
+                <p id="profileStripeSummary" class="mt-1 text-sm text-slate-400">0 stripes</p>
+              </div>
+            </div>
+          </div>
+          <section class="flex items-center justify-between gap-3 rounded-3xl border border-slate-700/60 bg-slate-900/70 p-4">
+            <div class="min-w-0">
+              <p class="text-sm uppercase tracking-[0.18em] text-slate-400">Name</p>
+              <p id="profileNameDisplay" class="mt-2 text-lg font-semibold text-white truncate"></p>
+              <div id="profileNameEdit" class="mt-3 hidden flex gap-2">
+                <input id="profileNameInput" type="text" placeholder="Enter name" class="w-full rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-white outline-none" />
+                <button id="profileNameSave" type="button" class="rounded-2xl bg-slate-800 px-3 py-2 text-sm font-semibold text-white transition hover:bg-slate-700">Enter</button>
+              </div>
+            </div>
+            <button type="button" class="profileEditBtn text-slate-400 transition hover:text-white" data-field="name" aria-label="Edit name">📝</button>
+          </section>
+          <section class="flex items-center justify-between gap-3 rounded-3xl border border-slate-700/60 bg-slate-900/70 p-4">
+            <div class="min-w-0">
+              <p class="text-sm uppercase tracking-[0.18em] text-slate-400">Age</p>
+              <p id="profileAgeDisplay" class="mt-2 text-lg font-semibold text-white">Not set</p>
+              <div id="profileAgeEdit" class="mt-3 hidden flex gap-2">
+                <input id="profileAgeInput" type="number" min="1" max="120" placeholder="Enter age" class="w-24 rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-white outline-none" />
+                <button id="profileAgeSave" type="button" class="rounded-2xl bg-slate-800 px-3 py-2 text-sm font-semibold text-white transition hover:bg-slate-700">Enter</button>
+              </div>
+            </div>
+            <button type="button" class="profileEditBtn text-slate-400 transition hover:text-white" data-field="age" aria-label="Edit age">📝</button>
+          </section>
+          <section class="flex items-center justify-between gap-3 rounded-3xl border border-slate-700/60 bg-slate-900/70 p-4">
+            <div class="min-w-0">
+              <p class="text-sm uppercase tracking-[0.18em] text-slate-400">Gym</p>
+              <p id="profileGymDisplay" class="mt-2 text-lg font-semibold text-white truncate"></p>
+              <div id="profileGymEdit" class="mt-3 hidden flex gap-2">
+                <input id="profileGymInput" type="text" placeholder="Enter gym" class="w-full rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-white outline-none" />
+                <button id="profileGymSave" type="button" class="rounded-2xl bg-slate-800 px-3 py-2 text-sm font-semibold text-white transition hover:bg-slate-700">Enter</button>
+              </div>
+            </div>
+            <button type="button" class="profileEditBtn text-slate-400 transition hover:text-white" data-field="gym" aria-label="Edit gym">📝</button>
+          </section>
+          <section class="flex flex-col gap-3 rounded-3xl border border-slate-700/60 bg-slate-900/70 p-4">
+            <div class="flex items-center justify-between gap-3">
+              <div>
+                <p class="text-sm uppercase tracking-[0.18em] text-slate-400">Belt level</p>
+                <p id="profileBeltDisplay" class="mt-2 text-lg font-semibold text-white">White</p>
+              </div>
+              <button type="button" class="profileEditBtn text-slate-400 transition hover:text-white" data-field="belt" aria-label="Edit belt">📝</button>
+            </div>
+            <div id="profileBeltEdit" class="hidden space-y-3">
+              <select id="profileBeltSelect" class="w-full rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-white outline-none">
+              </select>
+              <div class="flex flex-wrap gap-2" id="profileStripeButtons"></div>
+              <div id="profileStripeExtra" class="hidden flex items-center gap-2 text-sm text-slate-400">
+                <span>Stripes:</span>
+                <span id="profileStripeCountDisplay" class="font-semibold text-white">0</span>
+                <input id="profileStripeExtraInput" type="number" min="0" max="10" placeholder="0-10" class="w-20 rounded-2xl border border-slate-700 bg-slate-950 px-2 py-1 text-white outline-none" />
+              </div>
+              <button id="profileBeltSave" type="button" class="rounded-2xl bg-slate-800 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700">Enter</button>
+            </div>
+          </section>
+          <section class="flex items-center justify-between gap-3 rounded-3xl border border-slate-700/60 bg-slate-900/70 p-4">
+            <div class="min-w-0">
+              <p class="text-sm uppercase tracking-[0.18em] text-slate-400">Started training</p>
+              <p id="profileStartedDisplay" class="mt-2 text-lg font-semibold text-white">Not set</p>
+              <div id="profileStartedEdit" class="mt-3 hidden flex flex-wrap gap-2">
+                <select id="profileStartedMonthSelect" class="rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-white outline-none">
+                  <option value="Jan">Jan</option>
+                  <option value="Feb">Feb</option>
+                  <option value="Mar">Mar</option>
+                  <option value="Apr">Apr</option>
+                  <option value="May">May</option>
+                  <option value="Jun">Jun</option>
+                  <option value="Jul">Jul</option>
+                  <option value="Aug">Aug</option>
+                  <option value="Sep">Sep</option>
+                  <option value="Oct">Oct</option>
+                  <option value="Nov">Nov</option>
+                  <option value="Dec">Dec</option>
+                </select>
+                <select id="profileStartedYearSelect" class="w-24 rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-white outline-none"></select>
+                <button id="profileStartedSave" type="button" class="rounded-2xl bg-slate-800 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700">Enter</button>
+              </div>
+            </div>
+            <button type="button" class="profileEditBtn text-slate-400 transition hover:text-white" data-field="started" aria-label="Edit starting date">📝</button>
+          </section>
+          <section class="flex items-center justify-between gap-3 rounded-3xl border border-slate-700/60 bg-slate-900/70 p-4">
+            <div class="min-w-0">
+              <p class="text-sm uppercase tracking-[0.18em] text-slate-400">Favorite move</p>
+              <p id="profileFavoriteDisplay" class="mt-2 text-lg font-semibold text-white truncate">No favorite move set</p>
+              <div id="profileFavoriteEdit" class="mt-3 hidden flex gap-2">
+                <select id="profileFavoriteSelect" class="w-full rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-white outline-none">
+                </select>
+                <button id="profileFavoriteSave" type="button" class="rounded-2xl bg-slate-800 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700">Enter</button>
+              </div>
+            </div>
+            <button type="button" class="profileEditBtn text-slate-400 transition hover:text-white" data-field="favorite" aria-label="Edit favorite move">📝</button>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <template id="moveCardTemplate">
+    <article class="move-card glass rounded-3xl border border-slate-700 shadow-xl shadow-slate-900/20">
+      <div class="move-card-top flex w-full items-center gap-2 rounded-3xl bg-slate-900/80 p-4">
+        <button type="button" class="move-summary flex-1 rounded-2xl text-left transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-500">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div class="min-w-0">
+              <div class="flex flex-wrap items-center gap-2">
+                <h2 class="title min-w-0 text-lg font-semibold text-white truncate"></h2>
+                <p class="role-tag rounded-full border border-slate-700 bg-slate-800 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-300"></p>
+                <span class="position-badge inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em]"></span>
+                <span class="ibjjf-badge hidden inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em]"></span>
+              </div>
+            </div>
+            <div class="stats-summary flex flex-wrap items-center gap-3">
+              <div class="text-right">
+                <p class="text-[10px] uppercase tracking-[0.24em] text-slate-400">Attempts</p>
+                <p class="attempts text-xl font-semibold text-white">0</p>
+              </div>
+              <div class="text-right">
+                <p class="text-[10px] uppercase tracking-[0.24em] text-slate-400">Successes</p>
+                <p class="successes text-xl font-semibold text-white">0</p>
+              </div>
+              <div class="text-right">
+                <p class="text-[10px] uppercase tracking-[0.24em] text-slate-400">Success</p>
+                <p class="summary-rate text-xl font-semibold text-sky-300">0%</p>
+              </div>
+              <svg class="chevron-icon h-5 w-5 text-slate-400 transition-transform" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </button>
+        <button type="button" class="subposition-toggle-btn hidden rounded-full border border-slate-700 bg-slate-800 p-3 text-slate-300 transition hover:border-sky-400 hover:text-sky-300" aria-label="Toggle sub-position transitions">
+          <svg class="h-5 w-5 transition-transform" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="subposition-edit-btn hidden rounded-full border border-slate-700 bg-slate-800 p-3 text-slate-300 transition hover:border-sky-400 hover:text-sky-300" aria-label="Edit sub-position details">
+          <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 13.5V16h2.5l7.4-7.4-2.5-2.5L4 13.5z" stroke-linejoin="round"/><path d="M12.5 4.5l3 3" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="details hidden border-t border-slate-700/60 px-4 py-4">
+        <div class="mt-4 rounded-3xl bg-slate-900/80 p-4 space-y-4">
+          <div>
+            <label class="block text-sm uppercase tracking-[0.18em] text-slate-400">Origin</label>
+            <select class="origin-select mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400">
+              <option value="Modern BJJ">Modern BJJ</option>
+              <option value="Freestyle Wrestling">Freestyle Wrestling</option>
+              <option value="Catch Wrestling">Catch Wrestling</option>
+              <option value="Greco-Roman">Greco-Roman</option>
+              <option value="Judo">Judo</option>
+              <option value="Sambo">Sambo</option>
+              <option value="Other">Other</option>
+            </select>
+            <input type="text" class="origin-other mt-3 hidden w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400" placeholder="Specify other origin" />
+          </div>
+        </div>
+        <p class="ibjjf-note hidden mt-3 rounded-2xl border border-amber-500/20 bg-amber-500/5 px-4 py-3 text-sm text-amber-200">IBJJF Legality note</p>
+        <label class="block text-sm font-medium text-slate-300">Description</label>
+        <textarea class="move-notes mt-2 w-full rounded-3xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-sky-400" rows="4" placeholder="Add notes or a quick description..."></textarea>
+        <div class="mt-4 grid gap-4">
+          <div>
+            <label class="block text-sm font-medium text-slate-300">Move Image</label>
+            <div class="mt-2 rounded-3xl border border-slate-700 bg-slate-900 p-3">
+              <div class="image-preview relative h-40 overflow-hidden rounded-3xl bg-slate-950">
+                <img class="move-image h-full w-full object-cover hidden" alt="Move image preview" />
+                <div class="no-image absolute inset-0 flex items-center justify-center text-sm text-slate-500">No image selected</div>
+              </div>
+              <div class="mt-3 flex flex-wrap items-center gap-3">
+                <label class="inline-flex cursor-pointer items-center rounded-2xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm font-semibold text-slate-100 transition hover:border-sky-400">
+                  <input type="file" accept="image/*" class="sr-only image-input" />
+                  Choose image
+                </label>
+                <button type="button" class="remove-image-btn hidden rounded-2xl border border-rose-500 bg-transparent px-4 py-3 text-sm font-semibold text-rose-300 transition hover:bg-rose-500/10">Remove image</button>
+                <button type="button" class="delete-subposition-btn hidden rounded-2xl border border-rose-500 bg-transparent px-4 py-3 text-sm font-semibold text-rose-300 transition hover:bg-rose-500/10">Delete sub-position</button>
+              </div>
+            </div>
+          </div>
+          <div class="stats-panel rounded-3xl bg-slate-900/80 p-4 space-y-4">
+            <div>
+              <p class="text-sm uppercase tracking-[0.18em] text-slate-400">Success Rate</p>
+              <p class="success-rate mt-2 text-3xl font-semibold">0%</p>
+            </div>
+          </div>
+        </div>
+        <div class="action-row mt-4 flex flex-wrap gap-3">
+          <button class="attempt-btn rounded-2xl bg-slate-800 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-700">+1 Attempt</button>
+          <button class="success-btn rounded-2xl bg-emerald-500 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400">+1 Success</button>
+          <button class="undo-btn rounded-2xl border border-sky-500 bg-slate-800 px-4 py-3 text-sm font-semibold text-sky-300 transition hover:bg-sky-700 disabled:cursor-not-allowed disabled:opacity-50">Undo</button>
+          <button class="delete-btn rounded-2xl border border-rose-500 bg-transparent px-4 py-3 text-sm font-semibold text-rose-300 transition hover:bg-rose-500/10">Delete</button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script>
+    const STORAGE_KEY = 'jiuJitsuMoves';
+    const moves = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    let actionHistory = [];
+    const expandedMoves = new Set();
+    const expandedSubPositions = new Set();
+    const expandedSubPositionDetails = new Set();
+    let collapsedCategories = new Set();
+
+    const form = document.getElementById('moveForm');
+    const titleInput = document.getElementById('moveTitle');
+    const subPositionToggle = document.getElementById('subPositionToggle');
+    const positionInput = document.getElementById('movePosition');
+    const roleInput = document.getElementById('moveRole');
+    const transitionFromSelect = document.getElementById('transitionFrom');
+    const legEntanglementSideInput = document.getElementById('legEntanglementSide');
+    const giOnlyToggle = document.getElementById('giOnlyToggle');
+    const roleLabel = document.getElementById('roleLabel');
+    const searchInput = document.getElementById('searchInput');
+    const cardsContainer = document.getElementById('cardsContainer');
+    const filterCategorySelect = document.getElementById('filterCategory');
+    const filterPositionSelect = document.getElementById('filterPosition');
+    const template = document.getElementById('moveCardTemplate');
+    const trackerTabBtn = document.getElementById('trackerTabBtn');
+    const profileTabBtn = document.getElementById('profileTabBtn');
+    const pageTracker = document.getElementById('pageTracker');
+    const pageProfile = document.getElementById('pageProfile');
+    const PROFILE_KEY = 'jiuJitsuProfile';
+    const profileNameDisplay = document.getElementById('profileNameDisplay');
+    const profileNameEdit = document.getElementById('profileNameEdit');
+    const profileNameInput = document.getElementById('profileNameInput');
+    const profileNameSave = document.getElementById('profileNameSave');
+    const profileAgeDisplay = document.getElementById('profileAgeDisplay');
+    const profileAgeEdit = document.getElementById('profileAgeEdit');
+    const profileAgeInput = document.getElementById('profileAgeInput');
+    const profileAgeSave = document.getElementById('profileAgeSave');
+    const profileGymDisplay = document.getElementById('profileGymDisplay');
+    const profileGymEdit = document.getElementById('profileGymEdit');
+    const profileGymInput = document.getElementById('profileGymInput');
+    const profileGymSave = document.getElementById('profileGymSave');
+    const profileBeltSummary = document.getElementById('profileBeltSummary');
+    const profileStripeSummary = document.getElementById('profileStripeSummary');
+    const profileBeltDisplay = document.getElementById('profileBeltDisplay');
+    const profileBeltEdit = document.getElementById('profileBeltEdit');
+    const profileBeltSelect = document.getElementById('profileBeltSelect');
+    const profileStripeButtons = document.getElementById('profileStripeButtons');
+    const profileStripeExtra = document.getElementById('profileStripeExtra');
+    const profileStripeCountDisplay = document.getElementById('profileStripeCountDisplay');
+    const profileStripeExtraInput = document.getElementById('profileStripeExtraInput');
+    const profileBeltSave = document.getElementById('profileBeltSave');
+    const profileStartedDisplay = document.getElementById('profileStartedDisplay');
+    const profileStartedEdit = document.getElementById('profileStartedEdit');
+    const profileStartedMonthSelect = document.getElementById('profileStartedMonthSelect');
+    const profileStartedYearSelect = document.getElementById('profileStartedYearSelect');
+    const profileStartedSave = document.getElementById('profileStartedSave');
+    const profileFavoriteDisplay = document.getElementById('profileFavoriteDisplay');
+    const profileFavoriteEdit = document.getElementById('profileFavoriteEdit');
+    const profileFavoriteSelect = document.getElementById('profileFavoriteSelect');
+    const profileFavoriteSave = document.getElementById('profileFavoriteSave');
+    const profileBeltBadge = document.getElementById('profileBeltBadge');
+    const profileEditButtons = document.querySelectorAll('.profileEditBtn');
+
+    const beltLists = {
+      under16: ['White', 'White Gray', 'Gray', 'Black Gray', 'White Yellow', 'Yellow', 'Black Yellow', 'White Orange', 'Orange', 'Black Orange', 'White Green', 'Green', 'Black Green', 'Blue'],
+      over16: ['White', 'Blue', 'Purple', 'Brown', 'Black']
+    };
+
+    const defaultProfile = {
+      name: '',
+      age: '',
+      gym: '',
+      belt: 'White',
+      stripes: 0,
+      startedMonth: 'Jan',
+      startedYear: '2020',
+      favoriteMove: ''
+    };
+
+    let profile = loadProfile();
+
+    function setActivePage(page) {
+      const isTracker = page === 'tracker';
+      pageTracker.classList.toggle('hidden', !isTracker);
+      pageProfile.classList.toggle('hidden', isTracker);
+      trackerTabBtn.classList.toggle('bg-slate-900', !isTracker);
+      trackerTabBtn.classList.toggle('bg-slate-800', isTracker);
+      trackerTabBtn.classList.toggle('text-white', isTracker);
+      trackerTabBtn.classList.toggle('text-slate-400', !isTracker);
+      profileTabBtn.classList.toggle('bg-slate-900', isTracker);
+      profileTabBtn.classList.toggle('bg-slate-800', !isTracker);
+      profileTabBtn.classList.toggle('text-white', !isTracker);
+      profileTabBtn.classList.toggle('text-slate-400', isTracker);
+    }
+
+    function saveData() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(moves));
+    }
+
+    function saveProfile() {
+      localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
+    }
+
+    function loadProfile() {
+      try {
+        const stored = localStorage.getItem(PROFILE_KEY);
+        return stored ? { ...defaultProfile, ...JSON.parse(stored) } : { ...defaultProfile };
+      } catch {
+        return { ...defaultProfile };
+      }
+    }
+
+    function getBeltOptions() {
+      if (profile.age && Number(profile.age) < 16) return beltLists.under16;
+      if (profile.age && Number(profile.age) >= 16) return beltLists.over16;
+      return [...beltLists.under16, ...beltLists.over16];
+    }
+
+    function updateBeltOptions() {
+      profileBeltSelect.innerHTML = '';
+      getBeltOptions().forEach(belt => {
+        const option = document.createElement('option');
+        option.value = belt;
+        option.textContent = belt;
+        profileBeltSelect.appendChild(option);
+      });
+      if (!getBeltOptions().includes(profile.belt)) {
+        profile.belt = getBeltOptions()[0];
+      }
+      profileBeltSelect.value = profile.belt;
+    }
+
+    function renderStripeButtons() {
+      profileStripeButtons.innerHTML = '';
+      for (let i = 1; i <= 4; i += 1) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = '';
+        button.dataset.stripe = String(i);
+        button.className = 'h-10 w-10 rounded-xl border border-slate-600 bg-slate-700 transition';
+        if (profile.stripes >= i) {
+          button.classList.add('bg-white');
+        }
+        button.addEventListener('click', () => {
+          profile.stripes = i;
+          profileStripeExtraInput.value = String(profile.stripes);
+          renderStripeButtons();
+          updateBeltSummary();
+        });
+        profileStripeButtons.appendChild(button);
+      }
+      if (profile.belt === 'Black') {
+        profileStripeExtra.classList.remove('hidden');
+        profileStripeCountDisplay.textContent = String(profile.stripes);
+        profileStripeExtraInput.value = String(profile.stripes);
+        profileStripeExtraInput.max = '10';
+      } else {
+        profileStripeExtra.classList.add('hidden');
+      }
+    }
+
+    function updateBeltSummary() {
+      profileBeltDisplay.textContent = profile.belt;
+      profileBeltSummary.textContent = `${profile.belt} belt`;
+      profileStripeSummary.textContent = profile.stripes
+        ? `${profile.stripes} stripe${profile.stripes === 1 ? '' : 's'}`
+        : '0 stripes';
+      if (profile.belt === 'Black' && profile.stripes > 4) {
+        profileStripeSummary.textContent = `${profile.stripes} stripes`;
+      }
+      updateBeltBadge();
+      updateBeltImage();
+    }
+
+    function getBeltImageFileName() {
+      const belt = (profile.belt || 'White').trim().toLowerCase();
+      const stripes = Number(profile.stripes) || 0;
+      let color = belt;
+      let fileName = '';
+
+      if (belt.startsWith('white ')) {
+        color = belt.slice(6).replace(/\s+/g, '');
+        fileName = `w${color}${stripes}.png`;
+      } else {
+        color = belt.replace(/\s+/g, '');
+        fileName = `${color}${stripes}.png`;
+      }
+
+      return fileName;
+    }
+
+    function updateBeltImage() {
+      const img = document.getElementById('profileBeltImage');
+      if (!img) return;
+      const fileName = getBeltImageFileName();
+      img.src = `belts/${fileName}`;
+      img.alt = `${profile.belt} belt with ${profile.stripes || 0} stripes`;
+      img.onerror = () => {
+        img.src = '';
+        img.alt = 'Belt image not available';
+        img.classList.add('opacity-50');
+      };
+    }
+
+    function getBeltBadgeText() {
+      if (profile.belt === 'Black') {
+        return profile.stripes ? `Black +${profile.stripes}` : 'Black';
+      }
+      if (profile.stripes) {
+        return `${profile.belt} ${profile.stripes}`;
+      }
+      return profile.belt;
+    }
+
+    function getBeltBadgeClasses(belt) {
+      switch (belt) {
+        case 'White': return 'border-slate-200 bg-white text-slate-950';
+        case 'Blue': return 'border-blue-300 bg-blue-500/10 text-blue-200';
+        case 'Purple': return 'border-purple-300 bg-purple-500/10 text-purple-200';
+        case 'Brown': return 'border-amber-300 bg-amber-500/10 text-amber-200';
+        case 'Black': return 'border-slate-400 bg-slate-700 text-slate-100';
+        default: return 'border-slate-700 bg-slate-950 text-slate-200';
+      }
+    }
+
+    const IBJJF_BELT_ORDER = {
+      white: 0,
+      'white gray': 0,
+      gray: 0,
+      'black gray': 0,
+      'white yellow': 0,
+      yellow: 0,
+      'black yellow': 0,
+      'white orange': 0,
+      orange: 0,
+      'black orange': 0,
+      'white green': 0,
+      green: 0,
+      'black green': 0,
+      blue: 1,
+      purple: 2,
+      brown: 3,
+      black: 4
+    };
+
+    function getBeltRank(belt) {
+      return IBJJF_BELT_ORDER[belt?.toLowerCase()] ?? 0;
+    }
+
+    function isAtLeastBelt(userBelt, requiredBelt) {
+      return getBeltRank(userBelt) >= getBeltRank(requiredBelt);
+    }
+
+    function getIbjjfLegalityStatus(title, move) {
+      const normalizedTitle = title.trim().toLowerCase();
+      const age = Number(profile.age);
+      const belt = profile.belt || 'White';
+      const isNogi = !move.giOnly;
+
+      const rules = [
+        {
+          names: ['knee twist'],
+          allowedText: '18-29 Brown Belt+ Nogi only',
+          minAge: 18,
+          maxAge: 29,
+          minBelt: 'Brown',
+          nogiOnly: true
+        },
+        {
+          names: ['heel hook'],
+          allowedText: '18-29 Brown Belt+ Nogi only',
+          minAge: 18,
+          maxAge: 29,
+          minBelt: 'Brown',
+          nogiOnly: true
+        },
+        {
+          names: ['toe hold', 'musumeci lock'],
+          allowedText: '18+ Brown Belt+',
+          minAge: 18,
+          minBelt: 'Brown'
+        },
+        {
+          names: ['knee bar'],
+          allowedText: '18+ Brown Belt+',
+          minAge: 18,
+          minBelt: 'Brown'
+        },
+        {
+          names: ['calf slicer'],
+          allowedText: '18+ Brown Belt+',
+          minAge: 18,
+          minBelt: 'Brown'
+        },
+        {
+          names: ['bicep slicer'],
+          allowedText: '18+ Brown Belt+',
+          minAge: 18,
+          minBelt: 'Brown'
+        },
+        {
+          names: ['wrist lock'],
+          allowedText: '18+ Blue Belt+',
+          minAge: 18,
+          minBelt: 'Blue'
+        },
+        {
+          names: ['do-jime', 'dojime', 'do jime', 'scorpion crusher', 'kosovo cradle'],
+          allowedText: '18+ Blue Belt+',
+          minAge: 18,
+          minBelt: 'Blue'
+        },
+        {
+          names: ['arm triangle'],
+          allowedText: '16+ all belts',
+          minAge: 16
+        },
+        {
+          names: ['omoplata'],
+          allowedText: '16+ all belts',
+          minAge: 16
+        },
+        {
+          names: ['guillotine'],
+          allowedText: '16+ all belts',
+          minAge: 16
+        },
+        {
+          names: ['ezequiel', 'ezekiel'],
+          allowedText: '16+ all belts',
+          minAge: 16
+        },
+        {
+          names: ['straight foot lock', 'straight ankle lock', 'straight achilles', 'straight leg lock', 'botinha', 'tren lock', 'valente lock', 'sock lock'],
+          allowedText: '16+ all belts',
+          minAge: 16
+        },
+        {
+          names: ['banana split', 'suloev stretch', 'electric chair'],
+          allowedText: '12+ all belts',
+          minAge: 12
+        }
+      ];
+
+      const rule = rules.find(ruleItem =>
+        ruleItem.names.some(name => normalizedTitle.includes(name))
+      );
+
+      if (!rule) {
+        return null;
+      }
+
+      const hasCorrectAge = Number.isInteger(age) && age >= (rule.minAge || 0) && (!rule.maxAge || age <= rule.maxAge);
+      const hasCorrectBelt = !rule.minBelt || isAtLeastBelt(belt, rule.minBelt);
+      const hasCorrectNogi = !rule.nogiOnly || isNogi;
+      const allowed = hasCorrectAge && hasCorrectBelt && hasCorrectNogi;
+      const qualifier = rule.allowedText.toUpperCase();
+      const text = allowed ? `IBJJF: ${qualifier}` : `IBJJF ILLEGAL: ${qualifier}`;
+
+      return {
+        text,
+        allowed,
+        qualifier
+      };
+    }
+
+    function updateBeltBadge() {
+      if (!profileBeltBadge) return;
+      profileBeltBadge.textContent = getBeltBadgeText();
+      profileBeltBadge.className = `inline-flex items-center rounded-full border px-3 py-1 text-sm font-semibold uppercase tracking-[0.14em] ${getBeltBadgeClasses(profile.belt)}`;
+    }
+
+    function getIbjjfSpecialRuleNote(title, move) {
+      const normalizedTitle = title.trim().toLowerCase();
+      const age = Number(profile.age);
+      const belt = profile.belt || 'White';
+      const beltRank = getBeltRank(belt);
+      const isBrownPlus = beltRank >= getBeltRank('Brown');
+      const isWhite = beltRank === getBeltRank('White');
+      const isStanding = move.position === 'Standing';
+      const isToeHold = normalizedTitle.includes('toe hold');
+      const isSingleLeg = normalizedTitle.includes('single leg');
+      const isTriangle = normalizedTitle.includes('triangle');
+      const isGuillotine = normalizedTitle.includes('guillotine');
+      const footLockNames = ['straight foot lock', 'straight ankle lock', 'straight achilles', 'straight leg lock', 'botinha', 'tren lock', 'valente lock', 'sock lock'];
+      const isFootLock = footLockNames.some(name => normalizedTitle.includes(name));
+
+      if (isToeHold && isBrownPlus) {
+        return 'IBJJF Legality: Outward pressure on foot only allowed in Nogi';
+      }
+
+      if (isSingleLeg && isStanding && (age < 18 || isWhite)) {
+        return 'IBJJF Legality: Head must be on the inside of the opponents body, but no penalization exists for violation.';
+      }
+
+      if (isTriangle && age <= 15) {
+        return 'IBJJF Legality: Pulling head is forbidden';
+      }
+
+      if (isGuillotine && age >= 16) {
+        return 'IBJJF Legality Warning: Neck Crank without choke is illegal on all levels';
+      }
+
+      if (isFootLock) {
+        if (age >= 16 && age <= 29 && !isBrownPlus) {
+          return 'IBJJF Legality: Turning in the direction of the foot not under attack is illegal';
+        }
+        if (age >= 18 && age <= 29 && isBrownPlus) {
+          return 'IBJJF Legality: Turning in the direction of the foot not under attack is legal only in Brown Belt+ Nogi';
+        }
+      }
+
+      return null;
+    }
+
+    function populateStartedYearOptions() {
+      const currentYear = new Date().getFullYear();
+      profileStartedYearSelect.innerHTML = '';
+      for (let year = currentYear; year >= 1980; year -= 1) {
+        const option = document.createElement('option');
+        option.value = String(year);
+        option.textContent = String(year);
+        profileStartedYearSelect.appendChild(option);
+      }
+    }
+
+    function populateFavoriteMoveSelect() {
+      profileFavoriteSelect.innerHTML = '';
+      const noneOption = document.createElement('option');
+      noneOption.value = '';
+      noneOption.textContent = 'None';
+      profileFavoriteSelect.appendChild(noneOption);
+      moves.forEach(move => {
+        const option = document.createElement('option');
+        option.value = move.title;
+        option.textContent = move.title;
+        profileFavoriteSelect.appendChild(option);
+      });
+      if (profile.favoriteMove) {
+        if (!moves.some(move => move.title === profile.favoriteMove)) {
+          const customOption = document.createElement('option');
+          customOption.value = profile.favoriteMove;
+          customOption.textContent = profile.favoriteMove;
+          profileFavoriteSelect.appendChild(customOption);
+        }
+      }
+      profileFavoriteSelect.value = profile.favoriteMove || '';
+    }
+
+    function updateProfileDisplay() {
+      profileNameDisplay.textContent = profile.name || defaultProfile.name;
+      profileAgeDisplay.textContent = profile.age ? String(profile.age) : 'Not set';
+      profileGymDisplay.textContent = profile.gym || defaultProfile.gym;
+      profileStartedDisplay.textContent = profile.startedMonth && profile.startedYear ? `${profile.startedMonth} ${profile.startedYear}` : 'Not set';
+      profileFavoriteDisplay.textContent = profile.favoriteMove || 'No favorite move set';
+      updateBeltOptions();
+      renderStripeButtons();
+      populateStartedYearOptions();
+      updateBeltSummary();
+      populateFavoriteMoveSelect();
+    }
+
+    function toggleProfileEdit(field) {
+      profileNameEdit.classList.add('hidden');
+      profileAgeEdit.classList.add('hidden');
+      profileGymEdit.classList.add('hidden');
+      profileBeltEdit.classList.add('hidden');
+      profileStartedEdit.classList.add('hidden');
+      profileFavoriteEdit.classList.add('hidden');
+
+      if (field === 'name') {
+        profileNameInput.value = profile.name || '';
+        profileNameEdit.classList.remove('hidden');
+      } else if (field === 'age') {
+        profileAgeInput.value = profile.age ? String(profile.age) : '';
+        profileAgeEdit.classList.remove('hidden');
+      } else if (field === 'gym') {
+        profileGymInput.value = profile.gym || '';
+        profileGymEdit.classList.remove('hidden');
+      } else if (field === 'belt') {
+        profileBeltSelect.value = profile.belt;
+        updateBeltOptions();
+        profileBeltEdit.classList.remove('hidden');
+      } else if (field === 'started') {
+        profileStartedMonthSelect.value = profile.startedMonth || 'Jan';
+        profileStartedYearSelect.value = profile.startedYear || String(new Date().getFullYear());
+        profileStartedEdit.classList.remove('hidden');
+      } else if (field === 'favorite') {
+        populateFavoriteMoveSelect();
+        profileFavoriteEdit.classList.remove('hidden');
+      }
+    }
+
+    profileEditButtons.forEach(button => {
+      button.addEventListener('click', () => toggleProfileEdit(button.dataset.field));
+    });
+
+    profileNameSave.addEventListener('click', () => {
+      profile.name = profileNameInput.value.trim() || defaultProfile.name;
+      saveProfile();
+      updateProfileDisplay();
+      profileNameEdit.classList.add('hidden');
+    });
+
+    profileAgeSave.addEventListener('click', () => {
+      const age = Number(profileAgeInput.value);
+      profile.age = Number.isInteger(age) && age > 0 ? age : '';
+      saveProfile();
+      updateProfileDisplay();
+      profileAgeEdit.classList.add('hidden');
+    });
+
+    profileGymSave.addEventListener('click', () => {
+      profile.gym = profileGymInput.value.trim() || defaultProfile.gym;
+      saveProfile();
+      updateProfileDisplay();
+      profileGymEdit.classList.add('hidden');
+    });
+
+    profileBeltSave.addEventListener('click', () => {
+      profile.belt = profileBeltSelect.value;
+      if (profile.belt !== 'Black' && profile.stripes > 4) {
+        profile.stripes = 4;
+      }
+      saveProfile();
+      updateProfileDisplay();
+      profileBeltEdit.classList.add('hidden');
+    });
+
+    profileStripeExtraInput.addEventListener('input', () => {
+      const value = Math.min(10, Math.max(0, Number(profileStripeExtraInput.value) || 0));
+      profile.stripes = value;
+      profileStripeExtraInput.value = String(value);
+      renderStripeButtons();
+      updateBeltSummary();
+    });
+
+    profileStartedSave.addEventListener('click', () => {
+      profile.startedMonth = profileStartedMonthSelect.value;
+      profile.startedYear = profileStartedYearSelect.value;
+      saveProfile();
+      updateProfileDisplay();
+      profileStartedEdit.classList.add('hidden');
+    });
+
+    profileFavoriteSave.addEventListener('click', () => {
+      profile.favoriteMove = profileFavoriteSelect.value;
+      saveProfile();
+      updateProfileDisplay();
+      profileFavoriteEdit.classList.add('hidden');
+    });
+
+    function getBadgeClasses(position) {
+      switch (position) {
+        case 'Closed Guard': return 'bg-sky-500/15 text-sky-300 ring-1 ring-sky-400/20';
+        case 'Open guard sitting': return 'bg-indigo-500/15 text-indigo-300 ring-1 ring-indigo-400/20';
+        case 'Half guard': return 'bg-cyan-500/15 text-cyan-300 ring-1 ring-cyan-400/20';
+        case 'Quarter guard': return 'bg-cyan-500/15 text-cyan-300 ring-1 ring-cyan-400/20';
+        case 'Butterfly guard': return 'bg-fuchsia-500/15 text-fuchsia-300 ring-1 ring-fuchsia-400/20';
+        case 'Half butterfly guard': return 'bg-fuchsia-500/15 text-fuchsia-300 ring-1 ring-fuchsia-400/20';
+        case 'Sitting guard': return 'bg-slate-500/15 text-slate-300 ring-1 ring-slate-400/20';
+        case 'Delariva': return 'bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-400/20';
+        case 'SLX': return 'bg-violet-500/15 text-violet-300 ring-1 ring-violet-400/20';
+        case 'X-guard': return 'bg-blue-500/15 text-blue-300 ring-1 ring-blue-400/20';
+        case 'Spider guard': return 'bg-sky-500/15 text-sky-300 ring-1 ring-sky-400/20';
+        case 'Lasso guard': return 'bg-indigo-500/15 text-indigo-300 ring-1 ring-indigo-400/20';
+        case 'Side control': return 'bg-amber-500/15 text-amber-300 ring-1 ring-amber-400/20';
+        case 'Mount': return 'bg-rose-500/15 text-rose-300 ring-1 ring-rose-400/20';
+        case 'Turtle (backside)': return 'bg-amber-500/15 text-amber-300 ring-1 ring-amber-400/20';
+        case 'Turtle (frontside)': return 'bg-amber-500/15 text-amber-300 ring-1 ring-amber-400/20';
+        case 'Turtle (side to side)': return 'bg-amber-500/15 text-amber-300 ring-1 ring-amber-400/20';
+        case 'Back mount': return 'bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-400/20';
+        case 'Back mount (body triangle)': return 'bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-400/20';
+        case 'Knee on belly': return 'bg-lime-500/15 text-lime-300 ring-1 ring-lime-400/20';
+        case 'Top Crucifix': return 'bg-rose-500/15 text-rose-300 ring-1 ring-rose-400/20';
+        case 'Bottom Crucifix': return 'bg-rose-500/15 text-rose-300 ring-1 ring-rose-400/20';
+        case 'Katagatame': return 'bg-purple-500/15 text-purple-300 ring-1 ring-purple-400/20';
+        case 'Standing': return 'bg-slate-500/15 text-slate-300 ring-1 ring-slate-400/20';
+        default: return 'bg-slate-500/15 text-slate-300 ring-1 ring-slate-400/20';
+      }
+    }
+
+    const positionCategories = {
+      'Standing': ['Standing'],
+      'Guard sitting': ['Closed Guard', 'Open guard sitting', 'Half guard', 'Quarter guard', 'Butterfly guard', 'Half butterfly guard'],
+      'Guard standing': ['Sitting guard', 'Delariva', 'SLX', 'X-guard', 'Spider guard', 'Lasso guard'],
+      'Leg Entanglements': ['Straight Ashi', 'Cross Ashi', '50/50'],
+      'Advantageous Positions': ['Side control', 'Mount', 'Turtle (backside)', 'Turtle (frontside)', 'Turtle (side to side)', 'Back mount', 'Back mount (body triangle)', 'Knee on belly', 'Top Crucifix', 'Bottom Crucifix', 'Katagatame'],
+      'Transitions': ['Transition']
+    };
+    const allPositions = ['Standing', ...positionCategories['Guard sitting'], ...positionCategories['Guard standing'], ...positionCategories['Leg Entanglements'], ...positionCategories['Advantageous Positions'], ...positionCategories['Transitions']];
+    const categoryOrder = ['Standing', 'Guard sitting', 'Guard standing', 'Leg Entanglements', 'Advantageous Positions'];
+    let currentCategory = 'All';
+    let currentPosition = 'All';
+    let searchTerm = '';
+
+    function isLegEntanglementPosition(position) {
+      return positionCategories['Leg Entanglements'].includes(position);
+    }
+
+    function isControllerReceiverPosition(position, side = '') {
+      if (position === 'Straight Ashi' || position === 'Cross Ashi') return true;
+      if (position === '50/50') return side === 'Backside';
+      return positionCategories['Advantageous Positions'].includes(position);
+    }
+
+    function getCategoryForPosition(position) {
+      return Object.keys(positionCategories).find(category => positionCategories[category].includes(position)) || 'Standing';
+    }
+
+    function getSourceMove(move) {
+      return move.transitionFromId ? moves.find(item => item.id === move.transitionFromId) : null;
+    }
+
+    function getCategoryForMove(move) {
+      if (move.position === 'Transition' && move.transitionFromId) {
+        const sourceMove = getSourceMove(move);
+        if (sourceMove) {
+          return getCategoryForPosition(sourceMove.position);
+        }
+      }
+      return getCategoryForPosition(move.position);
+    }
+
+    function moveMatchesCategory(move) {
+      if (currentCategory === 'All') return true;
+      if (currentCategory === 'Transitions') return move.position === 'Transition';
+      const category = move.position === 'Transition' ? getCategoryForMove(move) : getCategoryForPosition(move.position);
+      return category === currentCategory;
+    }
+
+    collapsedCategories = new Set(categoryOrder);
+
+    function moveMatchesPosition(move) {
+      if (currentPosition === 'All') return true;
+      if (move.position === 'Transition') {
+        const sourceMove = getSourceMove(move);
+        return sourceMove ? sourceMove.position === currentPosition : false;
+      }
+      return move.position === currentPosition;
+    }
+
+    function getRoleLabel(position, side = '') {
+      return isControllerReceiverPosition(position, side) ? 'Controller / Receiver' : 'Top or Bottom';
+    }
+
+    function updateRoleLabel() {
+      const position = positionInput.value;
+      const side = legEntanglementSideInput.value || 'Backside';
+      const isTransition = position === 'Transition';
+      const showSide = ['Cross Ashi', '50/50'].includes(position);
+      const sideContainer = document.getElementById('legEntanglementSideContainer');
+      sideContainer.classList.toggle('hidden', !showSide);
+      if (showSide && !legEntanglementSideInput.value) {
+        legEntanglementSideInput.value = 'Backside';
+      }
+      const special = isControllerReceiverPosition(position, side);
+      const showRole = position !== 'Standing' && !(position === '50/50' && side === 'Frontside');
+      const roleInputs = document.getElementById('roleInputs');
+      roleInputs.classList.toggle('hidden', !showRole);
+      if (!showRole) {
+        roleInput.classList.add('hidden');
+        transitionFromSelect.classList.add('hidden');
+        return;
+      }
+
+      if (isTransition) {
+        roleLabel.textContent = 'Transition from';
+        roleInput.classList.add('hidden');
+        transitionFromSelect.classList.remove('hidden');
+        updateTransitionOptions();
+        transitionFromSelect.value = transitionFromSelect.value || '';
+        return;
+      }
+
+      roleInput.classList.remove('hidden');
+      transitionFromSelect.classList.add('hidden');
+      roleLabel.textContent = getRoleLabel(position, side);
+      if (special) {
+        roleInput.innerHTML = '<option value="Controller">Controller</option><option value="Receiver">Receiver</option>';
+        if (roleInput.value !== 'Controller' && roleInput.value !== 'Receiver') {
+          roleInput.value = 'Controller';
+        }
+      } else {
+        roleInput.innerHTML = '<option value="Top">Top</option><option value="Bottom">Bottom</option>';
+        if (roleInput.value !== 'Top' && roleInput.value !== 'Bottom') {
+          roleInput.value = 'Top';
+        }
+      }
+    }
+
+    function getRateClass(rate) {
+      if (rate >= 70) return 'text-emerald-400';
+      if (rate < 40) return 'text-orange-400';
+      return 'text-amber-300';
+    }
+
+    function updateFilterPositions() {
+      filterPositionSelect.innerHTML = '<option value="All">All positions</option>';
+      const positions = currentCategory === 'All'
+        ? allPositions
+        : positionCategories[currentCategory] || [];
+      positions.forEach(position => {
+        const item = document.createElement('option');
+        item.value = position;
+        item.textContent = position;
+        filterPositionSelect.appendChild(item);
+      });
+      currentPosition = 'All';
+      filterPositionSelect.value = 'All';
+    }
+
+    function updateTransitionOptions() {
+      const selectedValue = transitionFromSelect.value;
+      transitionFromSelect.innerHTML = '<option value="">Select a move</option>';
+      moves.forEach(move => {
+        const option = document.createElement('option');
+        option.value = move.id;
+        const label = `${move.title} (${move.role || 'No role'})${move.position ? ` - ${move.position}` : ''}`;
+        option.textContent = label;
+        transitionFromSelect.appendChild(option);
+      });
+      if (moves.some(move => move.id === selectedValue)) {
+        transitionFromSelect.value = selectedValue;
+      } else {
+        transitionFromSelect.value = '';
+      }
+    }
+
+    function renderCards() {
+      cardsContainer.innerHTML = '';
+      const query = searchTerm.trim().toLowerCase();
+      const filteredMoves = moves.filter(move => {
+        const matchCategory = moveMatchesCategory(move);
+        const matchPosition = moveMatchesPosition(move);
+        const matchSearch = !query || move.title.toLowerCase().includes(query);
+        return matchCategory && matchPosition && matchSearch;
+      });
+      if (!filteredMoves.length) {
+        cardsContainer.innerHTML = '<div class="rounded-3xl border border-dashed border-slate-700/60 bg-slate-900/70 p-10 text-center text-slate-400">No moves yet. Add one from the form above or choose a filter.</div>';
+        return;
+      }
+
+      const grouped = categoryOrder.map(category => ({
+        category,
+        mainMoves: [],
+        transitionMap: new Map(),
+        orphanTransitions: []
+      }));
+
+      const sourceLookup = new Map(moves.map(move => [move.id, move]));
+      const filteredIds = new Set(filteredMoves.map(move => move.id));
+      filteredMoves.forEach(move => {
+        if (move.position === 'Transition' && move.transitionFromId) {
+          const source = sourceLookup.get(move.transitionFromId);
+          const groupCategory = getCategoryForMove(move);
+          const group = grouped.find(g => g.category === groupCategory);
+          if (group) {
+            const bucket = group.transitionMap.get(move.transitionFromId) || [];
+            bucket.push(move);
+            group.transitionMap.set(move.transitionFromId, bucket);
+            if (!source || !filteredIds.has(move.transitionFromId)) {
+              group.orphanTransitions.push(move);
+            }
+          }
+          return;
+        }
+
+        const category = getCategoryForPosition(move.position);
+        const group = grouped.find(g => g.category === category);
+        if (group) {
+          group.mainMoves.push(move);
+        }
+      });
+
+      grouped.forEach(group => {
+        if (!group.mainMoves.length && !group.orphanTransitions.length) return;
+
+        const section = document.createElement('div');
+        section.className = 'space-y-4';
+
+        const header = document.createElement('div');
+        header.className = 'flex items-center justify-between gap-3 rounded-3xl border border-slate-700/60 bg-slate-900/70 px-4 py-3';
+
+        const title = document.createElement('div');
+        title.className = 'flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.24em] text-slate-300';
+        const label = document.createElement('span');
+        label.textContent = group.category;
+        title.appendChild(label);
+        const count = document.createElement('span');
+        count.className = 'inline-flex h-7 min-w-[1.75rem] items-center justify-center rounded-full bg-slate-800 px-2 text-xs font-semibold text-slate-300';
+        count.textContent = group.mainMoves.length + group.orphanTransitions.length;
+        title.appendChild(count);
+
+        const toggleButton = document.createElement('button');
+        toggleButton.type = 'button';
+        toggleButton.className = 'inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 bg-slate-900 text-slate-300 transition hover:border-sky-400 hover:text-sky-300';
+        toggleButton.setAttribute('aria-expanded', (!collapsedCategories.has(group.category)).toString());
+        toggleButton.innerHTML = `<svg class="h-4 w-4 transition-transform ${collapsedCategories.has(group.category) ? '' : 'rotate-180'}" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+        toggleButton.addEventListener('click', () => {
+          if (collapsedCategories.has(group.category)) {
+            collapsedCategories.delete(group.category);
+          } else {
+            collapsedCategories.add(group.category);
+          }
+          renderCards();
+        });
+
+        header.appendChild(title);
+        header.appendChild(toggleButton);
+        section.appendChild(header);
+
+        const list = document.createElement('div');
+        list.className = 'space-y-4';
+        if (collapsedCategories.has(group.category)) {
+          list.classList.add('hidden');
+        }
+
+        const renderMove = (move, indent = false, childMoves = [], targetContainer = list) => {
+          const clone = template.content.cloneNode(true);
+          const article = clone.querySelector('article');
+          if (indent) {
+            article.classList.add('ml-8', 'border-l', 'border-slate-700/40');
+          }
+          clone.querySelector('.title').textContent = move.title;
+          const statsSummary = clone.querySelector('.stats-summary');
+          const statsPanel = clone.querySelector('.stats-panel');
+          const actionRow = clone.querySelector('.action-row');
+          const isSubPosition = Boolean(move.isSubPosition);
+          const hasChildTransitions = isSubPosition && childMoves.length > 0;
+          statsSummary.classList.toggle('hidden', isSubPosition);
+          statsPanel.classList.toggle('hidden', isSubPosition);
+          actionRow.classList.toggle('hidden', isSubPosition);
+          const badge = clone.querySelector('.position-badge');
+          const ibjjfBadge = clone.querySelector('.ibjjf-badge');
+          badge.textContent = move.position;
+          badge.className = `position-badge inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] ${getBadgeClasses(move.position)}`;
+          const legality = getIbjjfLegalityStatus(move.title, move);
+          if (legality) {
+            ibjjfBadge.className = `ibjjf-badge inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] ${legality.allowed ? 'bg-emerald-500/15 text-emerald-200 ring-1 ring-emerald-400/20' : 'bg-rose-500/15 text-rose-200 ring-1 ring-rose-400/20'}`;
+            ibjjfBadge.textContent = legality.text;
+            ibjjfBadge.classList.remove('hidden');
+          } else {
+            ibjjfBadge.className = 'ibjjf-badge hidden inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em]';
+            ibjjfBadge.textContent = '';
+          }
+          const rate = move.attempts ? Math.round((move.successes / move.attempts) * 100) : 0;
+          clone.querySelector('.attempts').textContent = move.attempts;
+          clone.querySelector('.successes').textContent = move.successes;
+          if (move.position === 'Transition' && move.transitionFromId) {
+            const sourceMove = sourceLookup.get(move.transitionFromId);
+            if (sourceMove) {
+              clone.querySelector('.role-tag').textContent = `From: ${sourceMove.title} (${sourceMove.role || 'No role'}) (${sourceMove.position})`;
+            } else {
+              clone.querySelector('.role-tag').textContent = 'From: Unknown move';
+            }
+            badge.textContent = 'Transition';
+            badge.className = `position-badge inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] bg-violet-500/15 text-violet-300 ring-1 ring-violet-400/20`;
+          } else {
+            const roleTag = clone.querySelector('.role-tag');
+            if (move.position === 'Standing') {
+              roleTag.classList.add('hidden');
+            } else {
+              roleTag.textContent = `Role: ${move.role}`;
+              roleTag.classList.remove('hidden');
+            }
+          }
+          if (move.giOnly) {
+            const giTag = document.createElement('span');
+            giTag.className = 'ml-2 inline-flex items-center rounded-full bg-amber-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-amber-200 ring-1 ring-amber-400/20';
+            giTag.textContent = 'Gi only';
+            clone.querySelector('.position-badge').after(giTag);
+          }
+          clone.querySelector('.summary-rate').textContent = `${rate}%`;
+          clone.querySelector('.move-notes').value = move.notes || '';
+          const imagePreviewEl = clone.querySelector('.move-image');
+          const noImageEl = clone.querySelector('.no-image');
+          if (move.imageDataUrl) {
+            imagePreviewEl.src = move.imageDataUrl;
+            imagePreviewEl.classList.remove('hidden');
+            noImageEl.classList.add('hidden');
+          } else {
+            imagePreviewEl.classList.add('hidden');
+            noImageEl.classList.remove('hidden');
+          }
+          const rateEl = clone.querySelector('.success-rate');
+          rateEl.textContent = `${rate}%`;
+          rateEl.className = `success-rate mt-2 text-3xl font-semibold ${getRateClass(rate)}`;
+
+          const originSelect = clone.querySelector('.origin-select');
+          const originOtherInput = clone.querySelector('.origin-other');
+          const ibjjfNote = clone.querySelector('.ibjjf-note');
+          originSelect.value = move.origin || 'Modern BJJ';
+          originOtherInput.value = move.originOther || '';
+          const updateOriginInput = value => {
+            const showOther = value === 'Other';
+            originOtherInput.classList.toggle('hidden', !showOther);
+            if (!showOther) {
+              originOtherInput.value = move.originOther || '';
+            }
+          };
+          updateOriginInput(originSelect.value);
+          const specialRuleText = getIbjjfSpecialRuleNote(move.title, move);
+          if (specialRuleText) {
+            ibjjfNote.textContent = specialRuleText;
+            ibjjfNote.classList.remove('hidden');
+          } else {
+            ibjjfNote.textContent = '';
+            ibjjfNote.classList.add('hidden');
+          }
+          originSelect.addEventListener('change', event => {
+            const value = event.target.value;
+            move.origin = value;
+            if (value !== 'Other') {
+              move.originOther = '';
+            }
+            updateOriginInput(value);
+            saveData();
+          });
+          originOtherInput.addEventListener('input', event => {
+            move.originOther = event.target.value;
+            saveData();
+          });
+
+          const summaryBtn = clone.querySelector('.move-summary');
+          const detailsPanel = clone.querySelector('.details');
+          const subPositionEditBtn = clone.querySelector('.subposition-edit-btn');
+          const subPositionToggleBtn = clone.querySelector('.subposition-toggle-btn');
+          const cardTop = clone.querySelector('.move-card-top');
+          const chevron = clone.querySelector('.chevron-icon');
+          const attemptBtn = clone.querySelector('.attempt-btn');
+          const successBtn = clone.querySelector('.success-btn');
+          const undoBtn = clone.querySelector('.undo-btn');
+          const deleteBtn = clone.querySelector('.delete-btn');
+          const deleteSubPositionBtn = clone.querySelector('.delete-subposition-btn');
+          const notesTextarea = clone.querySelector('.move-notes');
+          const imageInput = clone.querySelector('.image-input');
+          const removeImageBtn = clone.querySelector('.remove-image-btn');
+          undoBtn.disabled = actionHistory.length === 0;
+
+          if (isSubPosition) {
+            subPositionEditBtn.classList.remove('hidden');
+            deleteSubPositionBtn.classList.remove('hidden');
+            subPositionToggleBtn.classList.toggle('hidden', !hasChildTransitions);
+          }
+
+          const updateImageControls = () => {
+            const hasImage = Boolean(move.imageDataUrl);
+            removeImageBtn.classList.toggle('hidden', !hasImage);
+          };
+
+          updateImageControls();
+
+          let childContainer = null;
+          if (hasChildTransitions) {
+            childContainer = document.createElement('div');
+            childContainer.className = 'sub-position-children mt-3 space-y-3 hidden';
+            summaryBtn.closest('.flex.items-center.gap-2')?.insertAdjacentElement('afterend', childContainer);
+            childMoves.forEach(child => {
+              renderMove(child, true, [], childContainer);
+            });
+          }
+
+          const updateCardHighlight = () => {
+            if (isSubPosition) {
+              const expandedChildren = expandedSubPositions.has(move.id);
+              const expandedDetails = expandedSubPositionDetails.has(move.id);
+              if (hasChildTransitions) {
+                childContainer?.classList.toggle('hidden', !expandedChildren);
+              }
+              detailsPanel.classList.toggle('hidden', !expandedDetails);
+              if (hasChildTransitions && subPositionToggleBtn) {
+                const toggleIcon = subPositionToggleBtn.querySelector('svg');
+                if (toggleIcon) {
+                  toggleIcon.style.transform = expandedChildren ? 'rotate(180deg)' : 'rotate(0deg)';
+                }
+              }
+              chevron.style.transform = expandedChildren || expandedDetails ? 'rotate(180deg)' : 'rotate(0deg)';
+              article.classList.toggle('border-sky-500/60', expandedChildren || expandedDetails);
+              article.classList.toggle('shadow-sky-500/10', expandedChildren || expandedDetails);
+              return;
+            }
+
+            const expanded = expandedMoves.has(move.id);
+            detailsPanel.classList.toggle('hidden', !expanded);
+            chevron.style.transform = expanded ? 'rotate(180deg)' : 'rotate(0deg)';
+            article.classList.toggle('border-sky-500/60', expanded);
+            article.classList.toggle('shadow-sky-500/10', expanded);
+          };
+
+          updateCardHighlight();
+
+          summaryBtn.addEventListener('click', event => {
+            if (isSubPosition) {
+              return;
+            }
+            if (expandedMoves.has(move.id)) {
+              expandedMoves.delete(move.id);
+            } else {
+              expandedMoves.add(move.id);
+            }
+            updateCardHighlight();
+          });
+
+          if (subPositionToggleBtn) {
+            subPositionToggleBtn.addEventListener('click', event => {
+              event.stopPropagation();
+              if (hasChildTransitions) {
+                if (expandedSubPositions.has(move.id)) {
+                  expandedSubPositions.delete(move.id);
+                } else {
+                  expandedSubPositions.add(move.id);
+                }
+                updateCardHighlight();
+              }
+            });
+          }
+
+          subPositionEditBtn.addEventListener('click', event => {
+            event.stopPropagation();
+            if (expandedSubPositionDetails.has(move.id)) {
+              expandedSubPositionDetails.delete(move.id);
+            } else {
+              expandedSubPositionDetails.add(move.id);
+            }
+            updateCardHighlight();
+          });
+
+          deleteSubPositionBtn.addEventListener('click', event => {
+            event.stopPropagation();
+            if (!confirm('Delete this sub-position?')) return;
+            const index = moves.findIndex(item => item.id === move.id);
+            if (index >= 0) {
+              moves.splice(index, 1);
+              saveData();
+              renderCards();
+              updateUndoState();
+            }
+          });
+
+          undoBtn.addEventListener('click', event => {
+            event.stopPropagation();
+            undoLastAction();
+          });
+
+          attemptBtn.addEventListener('click', event => {
+            event.stopPropagation();
+            move.attempts += 1;
+            expandedMoves.add(move.id);
+            actionHistory.push({ type: 'attempt', moveId: move.id });
+            saveData();
+            renderCards();
+            updateUndoState();
+          });
+
+          successBtn.addEventListener('click', event => {
+            event.stopPropagation();
+            move.attempts += 1;
+            move.successes += 1;
+            expandedMoves.add(move.id);
+            actionHistory.push({ type: 'success', moveId: move.id });
+            saveData();
+            renderCards();
+            updateUndoState();
+          });
+
+          deleteBtn.addEventListener('click', event => {
+            event.stopPropagation();
+            if (!confirm('Are you sure you want to delete this?')) return;
+            const index = moves.findIndex(item => item.id === move.id);
+            if (index >= 0) {
+              moves.splice(index, 1);
+              saveData();
+              renderCards();
+              updateUndoState();
+            }
+          });
+
+          notesTextarea.addEventListener('input', event => {
+            event.stopPropagation();
+            move.notes = notesTextarea.value;
+            saveData();
+          });
+
+          imageInput.addEventListener('change', event => {
+            event.stopPropagation();
+            const file = event.target.files?.[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => {
+              move.imageDataUrl = reader.result;
+              saveData();
+              imagePreviewEl.src = move.imageDataUrl;
+              imagePreviewEl.classList.remove('hidden');
+              noImageEl.classList.add('hidden');
+              updateImageControls();
+            };
+            reader.readAsDataURL(file);
+          });
+
+          removeImageBtn.addEventListener('click', event => {
+            event.stopPropagation();
+            move.imageDataUrl = '';
+            saveData();
+            imagePreviewEl.src = '';
+            imagePreviewEl.classList.add('hidden');
+            noImageEl.classList.remove('hidden');
+            updateImageControls();
+          });
+
+          targetContainer.appendChild(clone);
+        };
+
+        group.mainMoves.forEach(move => {
+          if (move.isSubPosition) {
+            renderMove(move, false, group.transitionMap.get(move.id) || []);
+          } else {
+            renderMove(move, false);
+            const children = group.transitionMap.get(move.id) || [];
+            children.forEach(child => renderMove(child, true));
+          }
+        });
+
+        group.orphanTransitions.forEach(transition => renderMove(transition, true));
+        section.appendChild(list);
+        cardsContainer.appendChild(section);
+      });
+    }
+
+    function updateUndoState() {
+      document.querySelectorAll('.undo-btn').forEach(btn => {
+        btn.disabled = actionHistory.length === 0;
+      });
+    }
+
+    function undoLastAction() {
+      if (!actionHistory.length) return;
+      const last = actionHistory.pop();
+      const move = moves.find(item => item.id === last.moveId);
+      if (!move) {
+        updateUndoState();
+        return;
+      }
+      if (last.type === 'attempt') {
+        move.attempts = Math.max(0, move.attempts - 1);
+      } else if (last.type === 'success') {
+        move.attempts = Math.max(0, move.attempts - 1);
+        move.successes = Math.max(0, move.successes - 1);
+      }
+      saveData();
+      renderCards();
+      updateUndoState();
+    }
+
+    function getNewMove(title, position, role, transitionFromId, giOnly, legEntanglementSide = '', isSubPosition = false) {
+      return {
+        id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+        title,
+        notes: '',
+        imageDataUrl: '',
+        position,
+        role,
+        transitionFromId: transitionFromId || '',
+        giOnly: Boolean(giOnly),
+        isSubPosition: Boolean(isSubPosition),
+        legEntanglementSide: ['Cross Ashi', '50/50'].includes(position) ? legEntanglementSide : '',
+        origin: 'Modern BJJ',
+        originOther: '',
+        attempts: 0,
+        successes: 0
+      };
+    }
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const title = titleInput.value.trim();
+      const position = positionInput.value;
+      let role = roleInput.value;
+      const transitionFromId = position === 'Transition' ? transitionFromSelect.value : '';
+      const giOnly = giOnlyToggle.checked;
+      const isSubPosition = subPositionToggle.checked;
+      const legEntanglementSide = ['Cross Ashi', '50/50'].includes(position) ? legEntanglementSideInput.value : '';
+      if (!title) return;
+      if (position === 'Transition' && !transitionFromId) return;
+      if (isControllerReceiverPosition(position, legEntanglementSide) && ['Top', 'Bottom'].includes(role)) {
+        role = 'Controller';
+      }
+      if (position === 'Transition' || (position === '50/50' && legEntanglementSide === 'Frontside')) {
+        role = '';
+      }
+      moves.unshift(getNewMove(title, position, role, transitionFromId, giOnly, legEntanglementSide, isSubPosition));
+      saveData();
+      renderCards();
+      form.reset();
+      positionInput.value = 'Standing';
+      subPositionToggle.checked = false;
+      roleInput.value = 'Top';
+      transitionFromSelect.value = '';
+      legEntanglementSideInput.value = 'Backside';
+      giOnlyToggle.checked = false;
+      updateRoleLabel();
+    });
+
+    positionInput.addEventListener('change', updateRoleLabel);
+    legEntanglementSideInput.addEventListener('change', updateRoleLabel);
+    filterCategorySelect.addEventListener('change', () => {
+      currentCategory = filterCategorySelect.value;
+      updateFilterPositions();
+      renderCards();
+    });
+    filterPositionSelect.addEventListener('change', () => {
+      currentPosition = filterPositionSelect.value;
+      renderCards();
+    });
+    searchInput.addEventListener('input', () => {
+      searchTerm = searchInput.value;
+      renderCards();
+    });
+    trackerTabBtn.addEventListener('click', () => setActivePage('tracker'));
+    profileTabBtn.addEventListener('click', () => setActivePage('profile'));
+
+    updateFilterPositions();
+    updateRoleLabel();
+    renderCards();
+    populateStartedYearOptions();
+    updateProfileDisplay();
+    updateUndoState();
+    setActivePage('tracker');
+  </script>
+</body>
+</html>
