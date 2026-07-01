@@ -25,3 +25,27 @@ Android:
 2. Download RollBaseBJJ.apk
 3. Install the APK on your android device (download an APK installer if needed)
 4. Done!
+
+
+FAQ:
+
+Where should i start?
+  -Start by going to "My Profile", and filling in your details, this will unlock some features
+
+How do i log my moves?
+  -First, log your move name in the box. Then, select if the move you're logging is a sub-position*, and then select the position from the dropdown where this move is performed. Depending on the position selected, choose your supposed role in the position. Finally, put whether the move is gi + nogi or gi only and click "add move".
+
+What now?
+  -Now, after each roll or after a whole training, you go through the moves that you know and log how many times you attempted it/succeeded in doing it. 
+   You can also add descriptions, general information, and images to these moves you add, to make it easier to share with friends or to avoid forgetting   how to do certain maneuvers.
+
+What determines success/faliure?
+  -A success counts as when, by attempting this move, you either win the fight or you obtain a better position. An attempt counts as when you attempt this move, and either end up in a neutral/worse position than before attempting it.
+
+  
+
+
+
+
+
+  *Sub-positions are only used for grouping moves to it using the "transition" option in the "position" dropdown. For example, logging "Front headlock" as a sub-position, so then you can add "Guillotine" as a transition from front headlock. Sub-positions do not have success/faliure rates, since they are just positions*
