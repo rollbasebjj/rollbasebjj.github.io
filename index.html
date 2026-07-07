@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5764842728125734"
+     crossorigin="anonymous"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RollBaseBJJ</title>
@@ -40,12 +42,18 @@
 
         <button id="trackerTabBtn" type="button" class="rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800">Move tracker</button>
         <button id="profileTabBtn" type="button" class="rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-400 transition hover:bg-slate-800">My Profile</button>
+        <button id="catalogTabBtn" type="button" class="rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-400 transition hover:bg-slate-800">Move catalog</button>
       </div>
       <div id="pageTracker">
         <div class="flex flex-col items-center gap-4 text-center">
           <div>
             <p class="text-sm uppercase tracking-[0.35em] text-sky-300/80">Vibe-coded by ig@ryanalex_g</p>
-          <h1 class="mt-2 text-3xl font-semibold tracking-tight text-white">Brazilian Jiu-Jitsu <br> Move Tracker</h1>
+          <div class="mt-2 flex items-center justify-center gap-3">
+            <h1 class="text-3xl font-semibold tracking-tight text-white">Brazilian Jiu-Jitsu <br> Move Tracker</h1>
+            <button id="helpButton" type="button" class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 bg-slate-900 text-slate-300 transition hover:border-sky-400 hover:text-white" aria-label="Help">
+              <span class="text-lg font-semibold">i</span>
+            </button>
+          </div>
           <p class="mt-2 max-w-xs text-sm leading-6 text-slate-300/90">Add new moves, track attempts, count successes, and add transitions.</p>
         </div>
       </div>
@@ -88,10 +96,10 @@
             </optgroup>
             <optgroup label="Advantageous Positions">
               <option value="Side control">Side control</option>
+              <option value="North South">North South</option>
               <option value="Mount">Mount</option>
               <option value="Turtle (backside)">Turtle (backside)</option>
-              <option value="Turtle (frontside)">Turtle (frontside)</option>
-              <option value="Turtle (side to side)">Turtle (side to side)</option>
+              <option value="Front Headlock (Sprawl)">Front Headlock (Sprawl)</option>
               <option value="Back mount">Back mount</option>
               <option value="Back mount (body triangle)">Back mount (body triangle)</option>
               <option value="Knee on belly">Knee on belly</option>
@@ -134,33 +142,6 @@
           <p id="formTip" class="text-sm leading-6 text-slate-400">Save each move and track gym progress across sessions.</p>
         </div>
       </form>
-      <div class="mt-6 rounded-3xl border border-slate-700/60 bg-slate-950/40 p-4">
-        <div class="grid gap-4">
-          <div>
-            <label class="block text-sm font-medium text-slate-300">Search moves</label>
-            <input id="searchInput" type="search" placeholder="Type a move name to search" class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-slate-300">Category</label>
-            <select id="filterCategory" class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400">
-              <option value="All">All</option>
-              <option value="Standing">Standing</option>
-              <option value="Guard sitting">Guard sitting</option>
-              <option value="Guard standing">Guard standing</option>
-              <option value="Leg Entanglements">Leg Entanglements</option>
-              <option value="Advantageous Positions">Advantageous Positions</option>
-              <option value="Transitions">Transitions</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-slate-300">Position</label>
-            <select id="filterPosition" class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400">
-              <option value="All">All positions</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div id="cardsContainer" class="mt-8 space-y-6"></div>
       </div>
       <div id="pageProfile" class="hidden mt-6 space-y-4">
         <div class="text-center">
@@ -270,6 +251,39 @@
           </section>
         </div>
       </div>
+      <div id="pageCatalog" class="hidden mt-6 space-y-4">
+        <div class="text-center">
+          <h2 class="text-2xl font-semibold tracking-tight text-white">Move Catalog</h2>
+          <p class="mt-3 text-sm leading-6 text-slate-300">Browse and review your move library in one place.</p>
+        </div>
+        <div class="rounded-3xl border border-slate-700/60 bg-slate-950/40 p-4">
+          <div class="grid gap-4">
+            <div>
+              <label class="block text-sm font-medium text-slate-300">Search moves</label>
+              <input id="searchInput" type="search" placeholder="Type a move name to search" class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-300">Category</label>
+              <select id="filterCategory" class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400">
+                <option value="All">All</option>
+                <option value="Standing">Standing</option>
+                <option value="Guard sitting">Guard sitting</option>
+                <option value="Guard standing">Guard standing</option>
+                <option value="Leg Entanglements">Leg Entanglements</option>
+                <option value="Advantageous Positions">Advantageous Positions</option>
+                <option value="Transitions">Transitions</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-300">Position</label>
+              <select id="filterPosition" class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400">
+                <option value="All">All positions</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div id="cardsContainer" class="mt-8 space-y-6"></div>
+      </div>
     </section>
   </main>
 
@@ -303,12 +317,14 @@
             </div>
           </div>
         </button>
-        <button type="button" class="subposition-toggle-btn hidden rounded-full border border-slate-700 bg-slate-800 p-3 text-slate-300 transition hover:border-sky-400 hover:text-sky-300" aria-label="Toggle sub-position transitions">
-          <svg class="h-5 w-5 transition-transform" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button type="button" class="subposition-edit-btn hidden rounded-full border border-slate-700 bg-slate-800 p-3 text-slate-300 transition hover:border-sky-400 hover:text-sky-300" aria-label="Edit sub-position details">
-          <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 13.5V16h2.5l7.4-7.4-2.5-2.5L4 13.5z" stroke-linejoin="round"/><path d="M12.5 4.5l3 3" stroke-linecap="round"/></svg>
-        </button>
+        <div class="flex flex-col gap-2">
+          <button type="button" class="subposition-edit-btn hidden rounded-full border border-slate-700 bg-slate-800 p-3 text-slate-300 transition hover:border-sky-400 hover:text-sky-300" aria-label="Edit sub-position details">
+            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 13.5V16h2.5l7.4-7.4-2.5-2.5L4 13.5z" stroke-linejoin="round"/><path d="M12.5 4.5l3 3" stroke-linecap="round"/></svg>
+          </button>
+          <button type="button" class="subposition-toggle-btn hidden rounded-full border border-slate-700 bg-slate-800 p-3 text-slate-300 transition hover:border-sky-400 hover:text-sky-300" aria-label="Toggle sub-position transitions">
+            <svg class="h-5 w-5 transition-transform" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
       </div>
       <div class="details hidden border-t border-slate-700/60 px-4 py-4">
         <div class="mt-4 rounded-3xl bg-slate-900/80 p-4 space-y-4">
@@ -320,6 +336,7 @@
               <option value="Catch Wrestling">Catch Wrestling</option>
               <option value="Greco-Roman">Greco-Roman</option>
               <option value="Judo">Judo</option>
+              <option value="Japanese Ju-Jutsu">Japanese Ju-Jutsu</option>
               <option value="Sambo">Sambo</option>
               <option value="Other">Other</option>
             </select>
@@ -329,6 +346,20 @@
         <p class="ibjjf-note hidden mt-3 rounded-2xl border border-amber-500/20 bg-amber-500/5 px-4 py-3 text-sm text-amber-200">IBJJF Legality note</p>
         <label class="block text-sm font-medium text-slate-300">Description</label>
         <textarea class="move-notes mt-2 w-full rounded-3xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-sky-400" rows="4" placeholder="Add notes or a quick description..."></textarea>
+        <div class="mt-4 rounded-3xl border border-slate-700/60 bg-slate-900/80 p-4">
+          <label class="block text-sm font-medium text-slate-300">Video</label>
+          <input type="text" class="move-video-url mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white outline-none transition focus:border-sky-400" placeholder="Add a video URL or file path (for example: belts/latdrop.mp4)" />
+          <div class="mt-3 flex flex-wrap items-center gap-3">
+            <label class="inline-flex cursor-pointer items-center rounded-2xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm font-semibold text-slate-100 transition hover:border-sky-400">
+              <input type="file" accept="video/*" class="sr-only video-input" />
+              Choose video
+            </label>
+            <button type="button" class="remove-video-btn hidden rounded-2xl border border-rose-500 bg-transparent px-4 py-3 text-sm font-semibold text-rose-300 transition hover:bg-rose-500/10">Remove video</button>
+          </div>
+          <div class="video-preview mt-3 hidden rounded-3xl border border-slate-700 bg-slate-950 p-3">
+            <video class="move-video w-full rounded-2xl bg-black" controls playsinline preload="metadata"></video>
+          </div>
+        </div>
         <div class="mt-4 grid gap-4">
           <div>
             <label class="block text-sm font-medium text-slate-300">Move Image</label>
@@ -364,9 +395,32 @@
     </article>
   </template>
 
+  <div id="helpModal" class="hidden fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-slate-950/80 p-4">
+    <div class="relative w-full max-w-lg rounded-3xl border border-slate-700 bg-slate-900 p-6 text-white shadow-2xl max-h-[calc(100vh-2rem)] overflow-y-auto">
+      <button id="helpModalClose" type="button" class="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 bg-slate-800 text-slate-300 transition hover:border-sky-400 hover:text-white" aria-label="Close help">×</button>
+      <h2 class="text-2xl font-semibold">Welcome to RollBase BJJ</h2>
+      <p class="mt-3 text-sm text-slate-300">Use this tracker to log moves, save sub-positions, track attempts and successes, and view IBJJF legality notes.</p>
+      <ul class="mt-4 space-y-3 text-sm text-slate-300 list-disc list-inside">
+        <li>Where should i start? -Start by going to "My Profile", and filling in your details, this will unlock some features, such as Belt Display and IBJJF Legality Index</li>
+        <li>How do i log my moves? -First, log your move name in the box. Then, select if the move you're logging is a sub-position, and then select the position from the dropdown where this move is performed. Depending on the position selected, choose your supposed role in the position. Finally, put whether the move is gi + nogi or gi only and click "add move". Your moves will appear in the "move catalog" tab.</li>
+        <li>What now? -Now, after each roll or after a whole training, you go through the moves that you know and log how many times you attempted it/succeeded in doing it. You can also add descriptions, general information, and images to these moves you add, to make it easier to share with friends or to avoid forgetting how to do certain maneuvers.</li>
+        <li>What determines success/attempt? -A success counts as when, by attempting this move, you either win the fight or you obtain a better position. An attempt counts as when you attempt this move, and either end up in a neutral/worse position than before attempting it.</li>
+       <br>
+        <p class="mt-3 text-sm text-slate-300">Dictionary: </p>
+        <li>Transition: A move that is performed from within another position. Log by selecting "transition" from the dropdown and selecting a move you have already logged.</li>
+        <li>Sub-Position: A move that is more like a position than a technique. Does not include success/attempt rates. Log by selecting "sub-position" in the move add form.</li>
+      </ul>
+      <div class="mt-6 flex justify-end">
+        <button id="helpDismissButton" type="button" class="rounded-2xl bg-sky-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-sky-400">Got it</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     const STORAGE_KEY = 'jiuJitsuMoves';
-    const moves = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    const HELP_SEEN_KEY = 'jiuJitsuHelpSeen';
+    const storedMoves = localStorage.getItem(STORAGE_KEY);
+    const moves = storedMoves ? ensureSeedMoves(normalizeStoredMoves(JSON.parse(storedMoves))) : getDefaultMoves();
     let actionHistory = [];
     const expandedMoves = new Set();
     const expandedSubPositions = new Set();
@@ -389,8 +443,10 @@
     const template = document.getElementById('moveCardTemplate');
     const trackerTabBtn = document.getElementById('trackerTabBtn');
     const profileTabBtn = document.getElementById('profileTabBtn');
+    const catalogTabBtn = document.getElementById('catalogTabBtn');
     const pageTracker = document.getElementById('pageTracker');
     const pageProfile = document.getElementById('pageProfile');
+    const pageCatalog = document.getElementById('pageCatalog');
     const PROFILE_KEY = 'jiuJitsuProfile';
     const profileNameDisplay = document.getElementById('profileNameDisplay');
     const profileNameEdit = document.getElementById('profileNameEdit');
@@ -425,6 +481,36 @@
     const profileFavoriteSave = document.getElementById('profileFavoriteSave');
     const profileBeltBadge = document.getElementById('profileBeltBadge');
     const profileEditButtons = document.querySelectorAll('.profileEditBtn');
+    const helpButton = document.getElementById('helpButton');
+    const helpModal = document.getElementById('helpModal');
+    const helpModalClose = document.getElementById('helpModalClose');
+    const helpDismissButton = document.getElementById('helpDismissButton');
+
+    function openHelpModal() {
+      helpModal.classList.remove('hidden');
+    }
+
+    function closeHelpModal() {
+      helpModal.classList.add('hidden');
+    }
+
+    function markHelpSeen() {
+      localStorage.setItem(HELP_SEEN_KEY, 'true');
+    }
+
+    function initHelpModal() {
+      helpButton?.addEventListener('click', openHelpModal);
+      helpModalClose?.addEventListener('click', closeHelpModal);
+      helpDismissButton?.addEventListener('click', () => {
+        markHelpSeen();
+        closeHelpModal();
+      });
+      helpModal?.addEventListener('click', closeHelpModal);
+      helpModal.querySelector('div')?.addEventListener('click', event => event.stopPropagation());
+      if (!localStorage.getItem(HELP_SEEN_KEY)) {
+        openHelpModal();
+      }
+    }
 
     const beltLists = {
       under16: ['White', 'White Gray', 'Gray', 'Black Gray', 'White Yellow', 'Yellow', 'Black Yellow', 'White Orange', 'Orange', 'Black Orange', 'White Green', 'Green', 'Black Green', 'Blue'],
@@ -446,20 +532,243 @@
 
     function setActivePage(page) {
       const isTracker = page === 'tracker';
+      const isProfile = page === 'profile';
+      const isCatalog = page === 'catalog';
+
       pageTracker.classList.toggle('hidden', !isTracker);
-      pageProfile.classList.toggle('hidden', isTracker);
+      pageProfile.classList.toggle('hidden', !isProfile);
+      pageCatalog.classList.toggle('hidden', !isCatalog);
+
       trackerTabBtn.classList.toggle('bg-slate-900', !isTracker);
       trackerTabBtn.classList.toggle('bg-slate-800', isTracker);
       trackerTabBtn.classList.toggle('text-white', isTracker);
       trackerTabBtn.classList.toggle('text-slate-400', !isTracker);
-      profileTabBtn.classList.toggle('bg-slate-900', isTracker);
-      profileTabBtn.classList.toggle('bg-slate-800', !isTracker);
-      profileTabBtn.classList.toggle('text-white', !isTracker);
-      profileTabBtn.classList.toggle('text-slate-400', isTracker);
+
+      profileTabBtn.classList.toggle('bg-slate-900', !isProfile);
+      profileTabBtn.classList.toggle('bg-slate-800', isProfile);
+      profileTabBtn.classList.toggle('text-white', isProfile);
+      profileTabBtn.classList.toggle('text-slate-400', !isProfile);
+
+      catalogTabBtn.classList.toggle('bg-slate-900', !isCatalog);
+      catalogTabBtn.classList.toggle('bg-slate-800', isCatalog);
+      catalogTabBtn.classList.toggle('text-white', isCatalog);
+      catalogTabBtn.classList.toggle('text-slate-400', !isCatalog);
     }
 
     function saveData() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(moves));
+    }
+
+    function normalizeMoveImageUrl(imageDataUrl) {
+      if (!imageDataUrl) return '';
+      return imageDataUrl.startsWith('/belts/') ? imageDataUrl.slice(1) : imageDataUrl;
+    }
+
+    function normalizeMoveVideoUrl(videoUrl) {
+      if (!videoUrl) return '';
+      const trimmed = String(videoUrl).trim();
+      if (!trimmed) return '';
+      return trimmed.startsWith('/belts/') ? trimmed.slice(1) : trimmed;
+    }
+
+    function extractVideoUrlFromNotes(notes) {
+      if (!notes) return '';
+      const match = String(notes).match(/(?:^|\n)\s*video\s*:\s*(\S+)/i);
+      return match ? match[1].trim() : '';
+    }
+
+    function normalizeStoredMoves(storedMoves) {
+      const normalized = storedMoves.map(move => ({
+        ...move,
+        imageDataUrl: normalizeMoveImageUrl(move.imageDataUrl),
+        videoDataUrl: move.videoDataUrl || '',
+        videoUrl: normalizeMoveVideoUrl(move.videoUrl)
+      }));
+      const original = JSON.stringify(storedMoves);
+      const updated = JSON.stringify(normalized);
+      if (original !== updated) {
+        localStorage.setItem(STORAGE_KEY, updated);
+      }
+      return normalized;
+    }
+
+    function ensureSeedMoves(moveList) {
+      const defaults = getDefaultMoves();
+      const existingTitles = new Set(moveList.map(move => move.title.toLowerCase()));
+      const missingMoves = defaults.filter(move => !existingTitles.has(move.title.toLowerCase()));
+      if (missingMoves.length) {
+        moveList.push(...missingMoves);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(moveList));
+      }
+      return moveList;
+    }
+
+    function getDefaultMoves() {
+      return [
+        {
+          id: 'armbar-0001',
+          title: 'Armbar',
+          notes: 'A submission from Closed guard involving the hyperextension of the elbow joint.\n1. Secure the arm of your opponent\n2. Open your guard\n3. Push off the hip with your leg\n4. Pass that leg over the head of your opponent\n5. Push your legs down and raise your hips',
+          imageDataUrl: 'belts/armbar.png',
+          position: 'Closed Guard',
+          role: 'Bottom',
+          transitionFromId: '',
+          giOnly: false,
+          isSubPosition: false,
+          legEntanglementSide: '',
+          origin: 'Modern BJJ',
+          originOther: '',
+          attempts: 0,
+          successes: 0
+        },
+        {
+          id: 'triangle-0001',
+          title: 'Triangle',
+          notes: 'A submission from closed guard using your legs to choke your opponent.\n1. Secure the arm of your opponent\n2. Push off the hips to gain space\n3. Pass your leg over the opposite shoulder of the opponent\'s arm\n4. Lock a figure 4 with your free leg',
+          imageDataUrl: 'belts/triangle.png',
+          position: 'Closed Guard',
+          role: 'Bottom',
+          transitionFromId: '',
+          giOnly: false,
+          isSubPosition: false,
+          legEntanglementSide: '',
+          origin: 'Judo',
+          originOther: '',
+          attempts: 0,
+          successes: 0
+        },
+        {
+          id: 'armtriangle-0001',
+          title: 'Arm Triangle',
+          notes: 'A submission from top mount using your head and arm to submit the opponent.\n1. Place your arm around the opponent\'s head\n2. Secure the opponent\'s arm between your head and theirs\n3. Step off into side control (headside)',
+          imageDataUrl: 'belts/armtriangle.png',
+          position: 'Mount',
+          role: 'Controller',
+          transitionFromId: '',
+          giOnly: false,
+          isSubPosition: false,
+          legEntanglementSide: '',
+          origin: 'Japanese Ju-Jutsu',
+          originOther: '',
+          attempts: 0,
+          successes: 0
+        },
+        {
+          id: 'americana-0001',
+          title: 'Americana',
+          notes: 'A submission from top side control involving the superrotation of the opponent\'s shoulder joint.\n1. Secure your opponent\'s far hand with your outside hand\n2. Thread your inside hand under their far tricep to connect to your outside hand\'s forearm.\n3. Carefully lift your inside hand and push your outside hand',
+          imageDataUrl: 'belts/americana.png',
+          position: 'Side control',
+          role: 'Controller',
+          transitionFromId: '',
+          giOnly: false,
+          isSubPosition: false,
+          legEntanglementSide: '',
+          origin: 'Japanese Ju-Jutsu',
+          originOther: '',
+          attempts: 0,
+          successes: 0
+        },
+        {
+          id: 'guillotine-0001',
+          title: 'Arm-in Guillotine',
+          notes: 'A submission from bottom closed guard involving the cutting of circulation to the opponent\'s head using your forearm.\n1. Secure your opponents head like the image shows\n2. Wrap your other hand around your opponent\'s arm and connect your hands\n3. Lean back, pull your forearm towards your bicep, and lower your elbow towards your hip',
+          imageDataUrl: 'belts/guillotine.png',
+          position: 'Closed Guard',
+          role: 'Bottom',
+          transitionFromId: '',
+          giOnly: false,
+          isSubPosition: false,
+          legEntanglementSide: '',
+          origin: 'Catch Wrestling',
+          originOther: '',
+          attempts: 0,
+          successes: 0
+        },
+        {
+          id: 'rear-naked-choke-0001',
+          title: 'Rear Naked Choke',
+          notes: 'A submission from the back mount involving a figure 4 grip with the arms to cut circulation to the opponent\'s brain.\n1. Push your fist along your opponent\'s chin to open up their neck\n2. Get your forearm under their chin\n3. Align your elbow to the middle of their neck\n4. Place your hand on your free arm\'s bicep and put your other hand on the back of their head\n5. Squeeze and pull your choking arm backwards',
+          imageDataUrl: 'belts/rearnakedchoke.png',
+          position: 'Back mount',
+          role: 'Controller',
+          transitionFromId: '',
+          giOnly: false,
+          isSubPosition: false,
+          legEntanglementSide: '',
+          origin: 'Other',
+          originOther: 'Ancient Greek Pankration',
+          attempts: 0,
+          successes: 0
+        },
+        {
+          id: 'mount-armbar-0001',
+          title: 'Armbar',
+          notes: 'A submission from mount involving the hyperextention of the opponent\'s elbow joint.\n1. Grab your opponent\'s arm by reaching under their hand and grabbing their tricep\n2. Pull towards you to put them on their side\n3. Face the side they are facing, and pass the leg under you over their head\n4. Pry their hands open and lie down, raising your hips and pulling the wrist down',
+          imageDataUrl: 'belts/mountarmbar.png',
+          position: 'Mount',
+          role: 'Controller',
+          transitionFromId: '',
+          giOnly: false,
+          isSubPosition: false,
+          legEntanglementSide: '',
+          origin: 'Judo',
+          originOther: '',
+          attempts: 0,
+          successes: 0
+        },
+        {
+          id: 'rnc-armbar-transition-0001',
+          title: 'Armbar',
+          notes: 'A transition from the Rear Naked Choke to the Armbar from the back.\n1. Underhook their left arm with yours\n2. Pull your right arm down and get on your right elbow\n3. Pull your right leg from under them and put it over their head\n4. Finish the armbar like normal\nVideo: rncarmbar.mp4',
+          imageDataUrl: '',
+          videoUrl: 'belts/rncarmbar.mp4',
+          position: 'Transition',
+          role: '',
+          transitionFromId: 'rear-naked-choke-0001',
+          giOnly: false,
+          isSubPosition: false,
+          legEntanglementSide: '',
+          origin: 'Modern BJJ',
+          originOther: '',
+          attempts: 0,
+          successes: 0
+        },
+        {
+          id: 'lat-drop-0001',
+          title: 'Lat Drop',
+          notes: 'A standing sacrifice throw using 2 overhooks.\n1. Once your opponent has 2 underhooks, clamp down on their elbows with your arms.\n2. Push against them, and when they resist, sit down with your legs spread out forward and lean back in the direction you want to throw them\n3. Transition to side control\nVideo: latdrop.mp4',
+          imageDataUrl: '',
+          videoUrl: 'belts/latdrop.mp4',
+          position: 'Standing',
+          role: 'Top',
+          transitionFromId: '',
+          giOnly: false,
+          isSubPosition: false,
+          legEntanglementSide: '',
+          origin: 'Greco-Roman Wrestling',
+          originOther: '',
+          attempts: 0,
+          successes: 0
+        },
+        {
+          id: 'osoto-gari-0001',
+          title: 'Osoto-Gari',
+          notes: 'A standing leg trip involving the hooking of the opponent\'s opposite leg to yours.\n1. Secure a hand grip and neck grip\n2. Destablize your opponent towards you and lift them slightly\n3. Step your hand grip side\'s leg to their side, staying with perfect back posture and breaking theirs down\n4. Step your other leg behind theirs, lift it behind you and push your neck grip forward, flipping them sideways.\nVideo: osotogari.mp4',
+          imageDataUrl: '',
+          videoUrl: 'belts/osotogari.mp4',
+          position: 'Standing',
+          role: 'Top',
+          transitionFromId: '',
+          giOnly: false,
+          isSubPosition: false,
+          legEntanglementSide: '',
+          origin: 'Judo',
+          originOther: '',
+          attempts: 0,
+          successes: 0
+        }
+      ];
     }
 
     function saveProfile() {
@@ -497,6 +806,23 @@
 
     function renderStripeButtons() {
       profileStripeButtons.innerHTML = '';
+
+      const zeroButton = document.createElement('button');
+      zeroButton.type = 'button';
+      zeroButton.textContent = '0';
+      zeroButton.dataset.stripe = '0';
+      zeroButton.className = 'flex h-10 w-10 items-center justify-center rounded-xl border border-slate-600 bg-slate-700 text-sm font-semibold text-slate-200 transition';
+      if (profile.stripes === 0) {
+        zeroButton.classList.add('bg-white', 'text-slate-950');
+      }
+      zeroButton.addEventListener('click', () => {
+        profile.stripes = 0;
+        profileStripeExtraInput.value = String(profile.stripes);
+        renderStripeButtons();
+        updateBeltSummary();
+      });
+      profileStripeButtons.appendChild(zeroButton);
+
       for (let i = 1; i <= 4; i += 1) {
         const button = document.createElement('button');
         button.type = 'button';
@@ -934,12 +1260,11 @@
         case 'Side control': return 'bg-amber-500/15 text-amber-300 ring-1 ring-amber-400/20';
         case 'Mount': return 'bg-rose-500/15 text-rose-300 ring-1 ring-rose-400/20';
         case 'Turtle (backside)': return 'bg-amber-500/15 text-amber-300 ring-1 ring-amber-400/20';
-        case 'Turtle (frontside)': return 'bg-amber-500/15 text-amber-300 ring-1 ring-amber-400/20';
-        case 'Turtle (side to side)': return 'bg-amber-500/15 text-amber-300 ring-1 ring-amber-400/20';
+        case 'Front Headlock (Sprawl)': return 'bg-amber-500/15 text-amber-300 ring-1 ring-amber-400/20';
         case 'Back mount': return 'bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-400/20';
         case 'Back mount (body triangle)': return 'bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-400/20';
         case 'Knee on belly': return 'bg-lime-500/15 text-lime-300 ring-1 ring-lime-400/20';
-        case 'Top Crucifix': return 'bg-rose-500/15 text-rose-300 ring-1 ring-rose-400/20';
+        case 'Top Crucifix (Salaverry)': return 'bg-rose-500/15 text-rose-300 ring-1 ring-rose-400/20';
         case 'Bottom Crucifix': return 'bg-rose-500/15 text-rose-300 ring-1 ring-rose-400/20';
         case 'Katagatame': return 'bg-purple-500/15 text-purple-300 ring-1 ring-purple-400/20';
         case 'Standing': return 'bg-slate-500/15 text-slate-300 ring-1 ring-slate-400/20';
@@ -952,7 +1277,7 @@
       'Guard sitting': ['Closed Guard', 'Open guard sitting', 'Half guard', 'Quarter guard', 'Butterfly guard', 'Half butterfly guard'],
       'Guard standing': ['Sitting guard', 'Delariva', 'SLX', 'X-guard', 'Spider guard', 'Lasso guard'],
       'Leg Entanglements': ['Straight Ashi', 'Cross Ashi', '50/50'],
-      'Advantageous Positions': ['Side control', 'Mount', 'Turtle (backside)', 'Turtle (frontside)', 'Turtle (side to side)', 'Back mount', 'Back mount (body triangle)', 'Knee on belly', 'Top Crucifix', 'Bottom Crucifix', 'Katagatame'],
+      'Advantageous Positions': ['Side control', 'North South', 'Mount', 'Turtle (backside)', 'Front Headlock (Sprawl)', 'Back mount', 'Back mount (body triangle)', 'Knee on belly', 'Top Crucifix (Salaverry)', 'Bottom Crucifix', 'Katagatame'],
       'Transitions': ['Transition']
     };
     const allPositions = ['Standing', ...positionCategories['Guard sitting'], ...positionCategories['Guard standing'], ...positionCategories['Leg Entanglements'], ...positionCategories['Advantageous Positions'], ...positionCategories['Transitions']];
@@ -977,6 +1302,10 @@
 
     function getSourceMove(move) {
       return move.transitionFromId ? moves.find(item => item.id === move.transitionFromId) : null;
+    }
+
+    function getChildTransitionsForMove(move) {
+      return moves.filter(item => item.position === 'Transition' && item.transitionFromId === move.id);
     }
 
     function getCategoryForMove(move) {
@@ -1194,7 +1523,10 @@
           const statsPanel = clone.querySelector('.stats-panel');
           const actionRow = clone.querySelector('.action-row');
           const isSubPosition = Boolean(move.isSubPosition);
-          const hasChildTransitions = isSubPosition && childMoves.length > 0;
+          const isTransitionCard = move.position === 'Transition';
+          const transitionChildren = childMoves.length > 0 ? childMoves : getChildTransitionsForMove(move);
+          const hasChildTransitions = transitionChildren.length > 0;
+          const canToggleChildTransitions = hasChildTransitions && (isSubPosition || isTransitionCard);
           statsSummary.classList.toggle('hidden', isSubPosition);
           statsPanel.classList.toggle('hidden', isSubPosition);
           actionRow.classList.toggle('hidden', isSubPosition);
@@ -1240,12 +1572,37 @@
           }
           clone.querySelector('.summary-rate').textContent = `${rate}%`;
           clone.querySelector('.move-notes').value = move.notes || '';
+          const videoInput = clone.querySelector('.move-video-url');
+          const videoFileInput = clone.querySelector('.video-input');
+          const removeVideoBtn = clone.querySelector('.remove-video-btn');
+          const videoPreviewEl = clone.querySelector('.video-preview');
+          const videoEl = clone.querySelector('.move-video');
+          const updateVideoPreview = () => {
+            const videoSource = move.videoDataUrl || normalizeMoveVideoUrl(move.videoUrl || extractVideoUrlFromNotes(move.notes));
+            if (videoSource) {
+              videoEl.src = videoSource;
+              videoEl.load();
+              videoPreviewEl.classList.remove('hidden');
+            } else {
+              videoEl.removeAttribute('src');
+              videoEl.load();
+              videoPreviewEl.classList.add('hidden');
+            }
+            videoInput.value = move.videoUrl || normalizeMoveVideoUrl(extractVideoUrlFromNotes(move.notes)) || '';
+            removeVideoBtn.classList.toggle('hidden', !Boolean(move.videoDataUrl || move.videoUrl || extractVideoUrlFromNotes(move.notes)));
+          };
+          updateVideoPreview();
           const imagePreviewEl = clone.querySelector('.move-image');
           const noImageEl = clone.querySelector('.no-image');
           if (move.imageDataUrl) {
-            imagePreviewEl.src = move.imageDataUrl;
+            const imageUrl = normalizeMoveImageUrl(move.imageDataUrl);
+            imagePreviewEl.src = imageUrl;
             imagePreviewEl.classList.remove('hidden');
             noImageEl.classList.add('hidden');
+            imagePreviewEl.onerror = () => {
+              imagePreviewEl.classList.add('hidden');
+              noImageEl.classList.remove('hidden');
+            };
           } else {
             imagePreviewEl.classList.add('hidden');
             noImageEl.classList.remove('hidden');
@@ -1305,10 +1662,13 @@
           const removeImageBtn = clone.querySelector('.remove-image-btn');
           undoBtn.disabled = actionHistory.length === 0;
 
-          if (isSubPosition) {
+          if (isSubPosition || isTransitionCard) {
             subPositionEditBtn.classList.remove('hidden');
             deleteSubPositionBtn.classList.remove('hidden');
-            subPositionToggleBtn.classList.toggle('hidden', !hasChildTransitions);
+            subPositionToggleBtn.classList.remove('hidden');
+            subPositionToggleBtn.disabled = false;
+            subPositionToggleBtn.classList.remove('opacity-50');
+            subPositionToggleBtn.classList.remove('cursor-not-allowed');
           }
 
           const updateImageControls = () => {
@@ -1319,11 +1679,11 @@
           updateImageControls();
 
           let childContainer = null;
-          if (hasChildTransitions) {
+          if (canToggleChildTransitions) {
             childContainer = document.createElement('div');
             childContainer.className = 'sub-position-children mt-3 space-y-3 hidden';
             summaryBtn.closest('.flex.items-center.gap-2')?.insertAdjacentElement('afterend', childContainer);
-            childMoves.forEach(child => {
+            transitionChildren.forEach(child => {
               renderMove(child, true, [], childContainer);
             });
           }
@@ -1332,11 +1692,11 @@
             if (isSubPosition) {
               const expandedChildren = expandedSubPositions.has(move.id);
               const expandedDetails = expandedSubPositionDetails.has(move.id);
-              if (hasChildTransitions) {
+              if (canToggleChildTransitions) {
                 childContainer?.classList.toggle('hidden', !expandedChildren);
               }
               detailsPanel.classList.toggle('hidden', !expandedDetails);
-              if (hasChildTransitions && subPositionToggleBtn) {
+              if (canToggleChildTransitions && subPositionToggleBtn) {
                 const toggleIcon = subPositionToggleBtn.querySelector('svg');
                 if (toggleIcon) {
                   toggleIcon.style.transform = expandedChildren ? 'rotate(180deg)' : 'rotate(0deg)';
@@ -1372,7 +1732,7 @@
           if (subPositionToggleBtn) {
             subPositionToggleBtn.addEventListener('click', event => {
               event.stopPropagation();
-              if (hasChildTransitions) {
+              if (canToggleChildTransitions) {
                 if (expandedSubPositions.has(move.id)) {
                   expandedSubPositions.delete(move.id);
                 } else {
@@ -1447,6 +1807,38 @@
             event.stopPropagation();
             move.notes = notesTextarea.value;
             saveData();
+            updateVideoPreview();
+          });
+
+          videoInput.addEventListener('input', event => {
+            event.stopPropagation();
+            const nextVideoUrl = normalizeMoveVideoUrl(event.target.value);
+            move.videoDataUrl = '';
+            move.videoUrl = nextVideoUrl;
+            saveData();
+            updateVideoPreview();
+          });
+
+          videoFileInput.addEventListener('change', event => {
+            event.stopPropagation();
+            const file = event.target.files?.[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => {
+              move.videoDataUrl = reader.result;
+              move.videoUrl = '';
+              saveData();
+              updateVideoPreview();
+            };
+            reader.readAsDataURL(file);
+          });
+
+          removeVideoBtn.addEventListener('click', event => {
+            event.stopPropagation();
+            move.videoDataUrl = '';
+            move.videoUrl = '';
+            saveData();
+            updateVideoPreview();
           });
 
           imageInput.addEventListener('change', event => {
@@ -1585,7 +1977,9 @@
     });
     trackerTabBtn.addEventListener('click', () => setActivePage('tracker'));
     profileTabBtn.addEventListener('click', () => setActivePage('profile'));
+    catalogTabBtn.addEventListener('click', () => setActivePage('catalog'));
 
+    initHelpModal();
     updateFilterPositions();
     updateRoleLabel();
     renderCards();
