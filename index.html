@@ -507,9 +507,6 @@
       });
       helpModal?.addEventListener('click', closeHelpModal);
       helpModal.querySelector('div')?.addEventListener('click', event => event.stopPropagation());
-      if (!localStorage.getItem(HELP_SEEN_KEY)) {
-        openHelpModal();
-      }
     }
 
     const beltLists = {
