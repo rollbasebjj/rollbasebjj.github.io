@@ -8,7 +8,7 @@ How to add as an app in your phone:
 
 IOS: 
 1. Open safari
-2. Go to rollbasebjj.github.io
+2. Go to rollbase.cc
 3. Click the "..." on the bottom right
 4. Click "Share"
 5. Scroll down until you see "Add to Home Screen"
