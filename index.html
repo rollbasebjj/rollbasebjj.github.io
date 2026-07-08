@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5764842728125734"
-     crossorigin="anonymous"></script>
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5764842728125734"
+     crossorigin="anonymous"></script> -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RollBaseBJJ</title>
@@ -743,7 +743,7 @@
           giOnly: false,
           isSubPosition: false,
           legEntanglementSide: '',
-          origin: 'Greco-Roman Wrestling',
+          origin: 'Greco-Roman',
           originOther: '',
           attempts: 0,
           successes: 0
@@ -1540,9 +1540,18 @@
             ibjjfBadge.className = 'ibjjf-badge hidden inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em]';
             ibjjfBadge.textContent = '';
           }
-          const rate = move.attempts ? Math.round((move.successes / move.attempts) * 100) : 0;
-          clone.querySelector('.attempts').textContent = move.attempts;
-          clone.querySelector('.successes').textContent = move.successes;
+          const updateCardStats = () => {
+            const rate = move.attempts ? Math.round((move.successes / move.attempts) * 100) : 0;
+            article.querySelector('.attempts').textContent = move.attempts;
+            article.querySelector('.successes').textContent = move.successes;
+            article.querySelector('.summary-rate').textContent = `${rate}%`;
+            const rateEl = article.querySelector('.success-rate');
+            if (rateEl) {
+              rateEl.textContent = `${rate}%`;
+              rateEl.className = `success-rate mt-2 text-3xl font-semibold ${getRateClass(rate)}`;
+            }
+          };
+          updateCardStats();
           if (move.position === 'Transition' && move.transitionFromId) {
             const sourceMove = sourceLookup.get(move.transitionFromId);
             if (sourceMove) {
@@ -1773,7 +1782,7 @@
             expandedMoves.add(move.id);
             actionHistory.push({ type: 'attempt', moveId: move.id });
             saveData();
-            renderCards();
+            updateCardStats();
             updateUndoState();
           });
 
@@ -1784,7 +1793,7 @@
             expandedMoves.add(move.id);
             actionHistory.push({ type: 'success', moveId: move.id });
             saveData();
-            renderCards();
+            updateCardStats();
             updateUndoState();
           });
 
