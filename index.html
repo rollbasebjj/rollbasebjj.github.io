@@ -301,18 +301,18 @@
               </div>
             </div>
             <div class="stats-summary flex flex-wrap items-center gap-3">
-              <div class="text-right">
-                <p class="text-[10px] uppercase tracking-[0.24em] text-slate-400">Attempts</p>
-                <p class="attempts text-xl font-semibold text-white">0</p>
-              </div>
-              <div class="text-right">
-                <p class="text-[10px] uppercase tracking-[0.24em] text-slate-400">Successes</p>
-                <p class="successes text-xl font-semibold text-white">0</p>
-              </div>
-              <div class="text-right">
-                <p class="text-[10px] uppercase tracking-[0.24em] text-slate-400">Success</p>
-                <p class="summary-rate text-xl font-semibold text-sky-300">0%</p>
-              </div>
+                <div class="text-right min-w-[60px]">
+                    <p class="text-[10px] uppercase tracking-[0.24em] text-slate-400">Attempts</p>
+                    <p class="attempts text-xl font-semibold text-white font-mono">0</p>
+                  </div>
+                <div class="text-right min-w-[65px]">
+                    <p class="text-[10px] uppercase tracking-[0.24em] text-slate-400">Successes</p>
+                    <p class="successes text-xl font-semibold text-white font-mono">0</p>
+                  </div>
+                <div class="text-right min-w-[55px]">
+                    <p class="text-[10px] uppercase tracking-[0.24em] text-slate-400">Success</p>
+                    <p class="summary-rate text-xl font-semibold text-sky-300 font-mono">0%</p>
+                  </div>
               <svg class="chevron-icon h-5 w-5 text-slate-400 transition-transform" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
           </div>
@@ -1541,20 +1541,8 @@
             ibjjfBadge.textContent = '';
           }
           const rate = move.attempts ? Math.round((move.successes / move.attempts) * 100) : 0;
-          const updateCardStats = () => {
-            const attemptsEl = article.querySelector('.attempts');
-            const successesEl = article.querySelector('.successes');
-            const summaryRateEl = article.querySelector('.summary-rate');
-            if (attemptsEl) attemptsEl.textContent = move.attempts;
-            if (successesEl) successesEl.textContent = move.successes;
-            if (summaryRateEl) summaryRateEl.textContent = `${rate}%`;
-            const rateEl = article.querySelector('.success-rate');
-            if (rateEl) {
-              rateEl.textContent = `${rate}%`;
-              rateEl.className = `success-rate mt-2 text-3xl font-semibold ${getRateClass(rate)}`;
-            }
-          };
-          updateCardStats();
+          clone.querySelector('.attempts').textContent = move.attempts;
+          clone.querySelector('.successes').textContent = move.successes;
           if (move.position === 'Transition' && move.transitionFromId) {
             const sourceMove = sourceLookup.get(move.transitionFromId);
             if (sourceMove) {
@@ -1775,28 +1763,31 @@
           });
 
           undoBtn.addEventListener('click', event => {
+            event.preventDefault();
             event.stopPropagation();
             undoLastAction();
           });
 
           attemptBtn.addEventListener('click', event => {
+            event.preventDefault();
             event.stopPropagation();
             move.attempts += 1;
             expandedMoves.add(move.id);
             actionHistory.push({ type: 'attempt', moveId: move.id });
             saveData();
-            updateCardStats();
+            renderCards();
             updateUndoState();
           });
 
           successBtn.addEventListener('click', event => {
+            event.preventDefault();
             event.stopPropagation();
             move.attempts += 1;
             move.successes += 1;
             expandedMoves.add(move.id);
             actionHistory.push({ type: 'success', moveId: move.id });
             saveData();
-            updateCardStats();
+            renderCards();
             updateUndoState();
           });
 
