@@ -1540,11 +1540,14 @@
             ibjjfBadge.className = 'ibjjf-badge hidden inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em]';
             ibjjfBadge.textContent = '';
           }
+          const rate = move.attempts ? Math.round((move.successes / move.attempts) * 100) : 0;
           const updateCardStats = () => {
-            const rate = move.attempts ? Math.round((move.successes / move.attempts) * 100) : 0;
-            article.querySelector('.attempts').textContent = move.attempts;
-            article.querySelector('.successes').textContent = move.successes;
-            article.querySelector('.summary-rate').textContent = `${rate}%`;
+            const attemptsEl = article.querySelector('.attempts');
+            const successesEl = article.querySelector('.successes');
+            const summaryRateEl = article.querySelector('.summary-rate');
+            if (attemptsEl) attemptsEl.textContent = move.attempts;
+            if (successesEl) successesEl.textContent = move.successes;
+            if (summaryRateEl) summaryRateEl.textContent = `${rate}%`;
             const rateEl = article.querySelector('.success-rate');
             if (rateEl) {
               rateEl.textContent = `${rate}%`;
