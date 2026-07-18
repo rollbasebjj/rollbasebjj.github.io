@@ -41,20 +41,20 @@
       <div class="flex justify-center gap-2">
 
         <button id="trackerTabBtn" type="button" class="rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800">Move tracker</button>
-        <button id="profileTabBtn" type="button" class="rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-400 transition hover:bg-slate-800">My Profile</button>
         <button id="catalogTabBtn" type="button" class="rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-400 transition hover:bg-slate-800">Move catalog</button>
+        <button id="profileTabBtn" type="button" class="rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-400 transition hover:bg-slate-800">My Profile</button>
       </div>
       <div id="pageTracker">
         <div class="flex flex-col items-center gap-4 text-center">
           <div>
             <p class="text-sm uppercase tracking-[0.35em] text-sky-300/80">Vibe-coded by ig@ryanalex_g</p>
           <div class="mt-2 flex items-center justify-center gap-3">
-            <h1 class="text-3xl font-semibold tracking-tight text-white">Brazilian Jiu-Jitsu <br> Move Tracker</h1>
+            <h1 class="text-3xl font-semibold tracking-tight text-white">RollBaseBJJ</h1>
             <button id="helpButton" type="button" class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 bg-slate-900 text-slate-300 transition hover:border-sky-400 hover:text-white" aria-label="Help">
               <span class="text-lg font-semibold">i</span>
             </button>
           </div>
-          <p class="mt-2 max-w-xs text-sm leading-6 text-slate-300/90">Add new moves, track attempts, count successes, and add transitions.</p>
+          <p class="mt-2 max-w-xs text-sm leading-6 text-slate-300/90">Your personal BJJ move journal.<br> Click the little (i) for help.</p>
         </div>
       </div>
       <form id="moveForm" class="mt-6 grid gap-4">
@@ -75,7 +75,6 @@
             <option value="Transition">Transition</option>
             <optgroup label="Guard sitting">
               <option value="Closed Guard">Closed Guard</option>
-              <option value="Open guard sitting">Open guard sitting</option>
               <option value="Half guard">Half guard</option>
               <option value="Quarter guard">Quarter guard</option>
               <option value="Butterfly guard">Butterfly guard</option>
@@ -268,9 +267,13 @@
                 <option value="All">All</option>
                 <option value="Standing">Standing</option>
                 <option value="Guard sitting">Guard sitting</option>
+                <option value="Guard sitting - Top">Guard sitting - Top</option>
+                <option value="Guard sitting - Bottom">Guard sitting - Bottom</option>
                 <option value="Guard standing">Guard standing</option>
                 <option value="Leg Entanglements">Leg Entanglements</option>
                 <option value="Advantageous Positions">Advantageous Positions</option>
+                <option value="Advantageous Positions - Top">Advantageous Positions - Top</option>
+                <option value="Advantageous Positions - Bottom">Advantageous Positions - Bottom</option>
                 <option value="Transitions">Transitions</option>
               </select>
             </div>
@@ -283,6 +286,10 @@
           </div>
         </div>
         <div id="cardsContainer" class="mt-8 space-y-6"></div>
+        <div class="mt-6 grid grid-cols-2 gap-3 border-t border-slate-800/80 pt-4">
+          <button id="exportCatalogBtn" type="button" class="w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm font-semibold text-slate-200 transition hover:border-sky-400 hover:text-white">Export</button>
+          <button id="importCatalogBtn" type="button" class="w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm font-semibold text-slate-200 transition hover:border-sky-400 hover:text-white">Import</button>
+        </div>
       </div>
     </section>
   </main>
@@ -296,6 +303,7 @@
               <div class="flex flex-wrap items-center gap-2">
                 <h2 class="title min-w-0 text-lg font-semibold text-white truncate"></h2>
                 <p class="role-tag rounded-full border border-slate-700 bg-slate-800 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-300"></p>
+                <span class="side-tag hidden rounded-full border border-slate-700 bg-slate-800 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-300"></span>
                 <span class="position-badge inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em]"></span>
                 <span class="ibjjf-badge hidden inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em]"></span>
               </div>
@@ -313,17 +321,19 @@
                 <p class="text-[10px] uppercase tracking-[0.24em] text-slate-400">Success</p>
                 <p class="summary-rate text-xl font-semibold text-sky-300">0%</p>
               </div>
-              <svg class="chevron-icon h-5 w-5 text-slate-400 transition-transform" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
           </div>
         </button>
         <div class="flex flex-col gap-2">
-          <button type="button" class="subposition-edit-btn hidden rounded-full border border-slate-700 bg-slate-800 p-3 text-slate-300 transition hover:border-sky-400 hover:text-sky-300" aria-label="Edit sub-position details">
+          <button type="button" class="subposition-edit-btn rounded-full border border-slate-700 bg-slate-800 p-3 text-slate-300 transition hover:border-sky-400 hover:text-sky-300" aria-label="Edit move details">
             <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 13.5V16h2.5l7.4-7.4-2.5-2.5L4 13.5z" stroke-linejoin="round"/><path d="M12.5 4.5l3 3" stroke-linecap="round"/></svg>
           </button>
-          <button type="button" class="subposition-toggle-btn hidden rounded-full border border-slate-700 bg-slate-800 p-3 text-slate-300 transition hover:border-sky-400 hover:text-sky-300" aria-label="Toggle sub-position transitions">
-            <svg class="h-5 w-5 transition-transform" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
+          <div class="flex flex-col items-center gap-1">
+            <button type="button" class="subposition-toggle-btn rounded-full border border-slate-700 bg-slate-800 p-3 text-slate-300 transition hover:border-sky-400 hover:text-sky-300" aria-label="Toggle dependent moves">
+              <svg class="h-5 w-5 transition-transform" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <span class="transition-count-badge hidden min-w-[1.75rem] rounded-full bg-violet-500/15 px-2 py-1 text-center text-[11px] font-semibold text-violet-200 ring-1 ring-violet-400/20"></span>
+          </div>
         </div>
       </div>
       <div class="details hidden border-t border-slate-700/60 px-4 py-4">
@@ -347,37 +357,34 @@
         <label class="block text-sm font-medium text-slate-300">Description</label>
         <textarea class="move-notes mt-2 w-full rounded-3xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-sky-400" rows="4" placeholder="Add notes or a quick description..."></textarea>
         <div class="mt-4 rounded-3xl border border-slate-700/60 bg-slate-900/80 p-4">
-          <label class="block text-sm font-medium text-slate-300">Video</label>
+          <label class="block text-sm font-medium text-slate-300">Media</label>
           <input type="text" class="move-video-url mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white outline-none transition focus:border-sky-400" placeholder="Add a video URL or file path (for example: belts/latdrop.mp4)" />
           <div class="mt-3 flex flex-wrap items-center gap-3">
             <label class="inline-flex cursor-pointer items-center rounded-2xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm font-semibold text-slate-100 transition hover:border-sky-400">
               <input type="file" accept="video/*" class="sr-only video-input" />
-              Choose video
+              Choose <Br> video
+            </label>
+            <label class="inline-flex cursor-pointer items-center rounded-2xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm font-semibold text-slate-100 transition hover:border-sky-400">
+              <input type="file" accept="image/*" class="sr-only image-input" />
+              Choose <Br> image
             </label>
             <button type="button" class="remove-video-btn hidden rounded-2xl border border-rose-500 bg-transparent px-4 py-3 text-sm font-semibold text-rose-300 transition hover:bg-rose-500/10">Remove video</button>
+            <button type="button" class="remove-image-btn hidden rounded-2xl border border-rose-500 bg-transparent px-4 py-3 text-sm font-semibold text-rose-300 transition hover:bg-rose-500/10">Remove image</button>
           </div>
           <div class="video-preview mt-3 hidden rounded-3xl border border-slate-700 bg-slate-950 p-3">
             <video class="move-video w-full rounded-2xl bg-black" controls playsinline preload="metadata"></video>
           </div>
-        </div>
-        <div class="mt-4 grid gap-4">
-          <div>
-            <label class="block text-sm font-medium text-slate-300">Move Image</label>
-            <div class="mt-2 rounded-3xl border border-slate-700 bg-slate-900 p-3">
-              <div class="image-preview relative h-40 overflow-hidden rounded-3xl bg-slate-950">
-                <img class="move-image h-full w-full object-cover hidden" alt="Move image preview" />
-                <div class="no-image absolute inset-0 flex items-center justify-center text-sm text-slate-500">No image selected</div>
-              </div>
-              <div class="mt-3 flex flex-wrap items-center gap-3">
-                <label class="inline-flex cursor-pointer items-center rounded-2xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm font-semibold text-slate-100 transition hover:border-sky-400">
-                  <input type="file" accept="image/*" class="sr-only image-input" />
-                  Choose image
-                </label>
-                <button type="button" class="remove-image-btn hidden rounded-2xl border border-rose-500 bg-transparent px-4 py-3 text-sm font-semibold text-rose-300 transition hover:bg-rose-500/10">Remove image</button>
-                <button type="button" class="delete-subposition-btn hidden rounded-2xl border border-rose-500 bg-transparent px-4 py-3 text-sm font-semibold text-rose-300 transition hover:bg-rose-500/10">Delete sub-position</button>
-              </div>
+          <div class="mt-4 rounded-3xl border border-slate-700 bg-slate-900 p-3">
+            <div class="image-preview relative h-40 overflow-hidden rounded-3xl bg-slate-950">
+              <img class="move-image h-full w-full object-cover hidden" alt="Move image preview" />
+              <div class="no-image absolute inset-0 flex items-center justify-center text-sm text-slate-500">No media selected</div>
+            </div>
+            <div class="mt-3 flex flex-wrap items-center gap-3">
+              <button type="button" class="delete-subposition-btn hidden rounded-2xl border border-rose-500 bg-transparent px-4 py-3 text-sm font-semibold text-rose-300 transition hover:bg-rose-500/10">Delete sub-position</button>
             </div>
           </div>
+        </div>
+        <div class="mt-4 grid gap-4">
           <div class="stats-panel rounded-3xl bg-slate-900/80 p-4 space-y-4">
             <div>
               <p class="text-sm uppercase tracking-[0.18em] text-slate-400">Success Rate</p>
@@ -412,6 +419,19 @@
       </ul>
       <div class="mt-6 flex justify-end">
         <button id="helpDismissButton" type="button" class="rounded-2xl bg-sky-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-sky-400">Got it</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="catalogImportExportModal" class="hidden fixed inset-0 z-[60] flex items-center justify-center overflow-y-auto bg-slate-950/80 p-4">
+    <div class="relative w-full max-w-xl rounded-3xl border border-slate-700 bg-slate-900 p-6 text-white shadow-2xl">
+      <button id="catalogImportExportClose" type="button" class="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 bg-slate-800 text-slate-300 transition hover:border-sky-400 hover:text-white" aria-label="Close catalog import/export">×</button>
+      <h3 id="catalogImportExportTitle" class="text-xl font-semibold">Catalog export</h3>
+      <p id="catalogImportExportMessage" class="mt-2 text-sm text-slate-300">Copy or paste the catalog string below.</p>
+      <textarea id="catalogImportExportInput" class="mt-4 min-h-[180px] w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 font-mono text-sm text-slate-100 outline-none transition focus:border-sky-400"></textarea>
+      <div class="mt-4 flex flex-wrap gap-3">
+        <button id="catalogCopyBtn" type="button" class="rounded-2xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm font-semibold text-slate-100 transition hover:border-sky-400 hover:text-white">Copy</button>
+        <button id="catalogConfirmBtn" type="button" class="rounded-2xl bg-sky-500 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-sky-400">Import</button>
       </div>
     </div>
   </div>
@@ -485,6 +505,16 @@
     const helpModal = document.getElementById('helpModal');
     const helpModalClose = document.getElementById('helpModalClose');
     const helpDismissButton = document.getElementById('helpDismissButton');
+    const exportCatalogBtn = document.getElementById('exportCatalogBtn');
+    const importCatalogBtn = document.getElementById('importCatalogBtn');
+    const catalogImportExportModal = document.getElementById('catalogImportExportModal');
+    const catalogImportExportClose = document.getElementById('catalogImportExportClose');
+    const catalogImportExportTitle = document.getElementById('catalogImportExportTitle');
+    const catalogImportExportMessage = document.getElementById('catalogImportExportMessage');
+    const catalogImportExportInput = document.getElementById('catalogImportExportInput');
+    const catalogCopyBtn = document.getElementById('catalogCopyBtn');
+    const catalogConfirmBtn = document.getElementById('catalogConfirmBtn');
+    let catalogImportMode = false;
 
     function openHelpModal() {
       helpModal.classList.remove('hidden');
@@ -507,6 +537,43 @@
       });
       helpModal?.addEventListener('click', closeHelpModal);
       helpModal.querySelector('div')?.addEventListener('click', event => event.stopPropagation());
+    }
+
+    function closeCatalogImportExportModal() {
+      catalogImportExportModal?.classList.add('hidden');
+      catalogImportExportInput.value = '';
+      catalogImportMode = false;
+    }
+
+    function openCatalogImportExportModal({ title, message, initialValue, mode }) {
+      catalogImportMode = mode === 'import';
+      catalogImportExportTitle.textContent = title;
+      catalogImportExportMessage.textContent = message;
+      catalogImportExportInput.value = initialValue || '';
+      catalogConfirmBtn.textContent = catalogImportMode ? 'Import' : 'Done';
+      catalogImportExportModal?.classList.remove('hidden');
+      catalogImportExportInput.focus();
+      catalogImportExportInput.select();
+    }
+
+    async function copyCatalogText() {
+      const text = catalogImportExportInput.value;
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text);
+        alert('Catalog string copied.');
+      } catch (error) {
+        const temp = document.createElement('textarea');
+        temp.value = text;
+        temp.setAttribute('readonly', '');
+        temp.style.position = 'fixed';
+        temp.style.left = '-9999px';
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+        alert('Catalog string copied.');
+      }
     }
 
     const beltLists = {
@@ -554,6 +621,71 @@
 
     function saveData() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(moves));
+    }
+
+    function encodeCatalogPayload(value) {
+      const json = JSON.stringify(value);
+      const bytes = typeof TextEncoder !== 'undefined'
+        ? new TextEncoder().encode(json)
+        : Uint8Array.from(json.split('').map(char => char.charCodeAt(0)));
+      let binary = '';
+      bytes.forEach(byte => {
+        binary += String.fromCharCode(byte);
+      });
+      return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
+    }
+
+    function decodeCatalogPayload(value) {
+      const raw = String(value || '').trim();
+      const payload = raw.startsWith('BJJCAT1:') ? raw.slice('BJJCAT1:'.length) : raw;
+      const base64 = payload.replace(/-/g, '+').replace(/_/g, '/').replace(/\s+/g, '');
+      const padded = base64 + '='.repeat((4 - (base64.length % 4)) % 4);
+      const binary = atob(padded);
+      const bytes = Uint8Array.from(binary, char => char.charCodeAt(0));
+      if (typeof TextDecoder !== 'undefined') {
+        return new TextDecoder().decode(bytes);
+      }
+      return decodeURIComponent(escape(binary));
+    }
+
+    function normalizeImportedMoves(importedMoves) {
+      return (Array.isArray(importedMoves) ? importedMoves : []).map(move => ({
+        id: move?.id || `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+        title: move?.title || 'Untitled move',
+        notes: move?.notes || '',
+        imageDataUrl: normalizeMoveImageUrl(move?.imageDataUrl),
+        videoDataUrl: move?.videoDataUrl || '',
+        videoUrl: normalizeMoveVideoUrl(move?.videoUrl),
+        position: move?.position || 'Standing',
+        role: move?.role || '',
+        transitionFromId: move?.transitionFromId || '',
+        giOnly: Boolean(move?.giOnly),
+        isSubPosition: Boolean(move?.isSubPosition),
+        legEntanglementSide: move?.legEntanglementSide || '',
+        origin: move?.origin || 'Modern BJJ',
+        originOther: move?.originOther || '',
+        attempts: Number(move?.attempts) || 0,
+        successes: Number(move?.successes) || 0
+      }));
+    }
+
+    function exportCatalogLibrary() {
+      const payload = `BJJCAT1:${encodeCatalogPayload(moves)}`;
+      openCatalogImportExportModal({
+        title: 'Catalog export',
+        message: 'Export your catalog to another device or browser.',
+        initialValue: payload,
+        mode: 'export'
+      });
+    }
+
+    function importCatalogLibrary() {
+      openCatalogImportExportModal({
+        title: 'Import catalog',
+        message: 'Paste the catalog export string here and confirm to import it.',
+        initialValue: '',
+        mode: 'import'
+      });
     }
 
     function normalizeMoveImageUrl(imageDataUrl) {
@@ -1271,14 +1403,14 @@
 
     const positionCategories = {
       'Standing': ['Standing'],
-      'Guard sitting': ['Closed Guard', 'Open guard sitting', 'Half guard', 'Quarter guard', 'Butterfly guard', 'Half butterfly guard'],
+      'Guard sitting': ['Closed Guard', 'Half guard', 'Quarter guard', 'Butterfly guard', 'Half butterfly guard'],
       'Guard standing': ['Sitting guard', 'Delariva', 'SLX', 'X-guard', 'Spider guard', 'Lasso guard'],
       'Leg Entanglements': ['Straight Ashi', 'Cross Ashi', '50/50'],
-      'Advantageous Positions': ['Side control', 'North South', 'Mount', 'Turtle (backside)', 'Front Headlock (Sprawl)', 'Back mount', 'Back mount (body triangle)', 'Knee on belly', 'Top Crucifix (Salaverry)', 'Bottom Crucifix', 'Katagatame'],
+      'Advantageous Positions': ['Side control', 'North South', 'Mount', 'Turtle (backside)', 'Front Headlock (Sprawl)', 'Back mount', 'Back mount (body triangle)', 'Knee on belly', 'Top Crucifix', 'Bottom Crucifix', 'Katagatame'],
       'Transitions': ['Transition']
     };
     const allPositions = ['Standing', ...positionCategories['Guard sitting'], ...positionCategories['Guard standing'], ...positionCategories['Leg Entanglements'], ...positionCategories['Advantageous Positions'], ...positionCategories['Transitions']];
-    const categoryOrder = ['Standing', 'Guard sitting', 'Guard standing', 'Leg Entanglements', 'Advantageous Positions'];
+    const categoryOrder = ['Standing', 'Guard sitting', 'Guard sitting - Top', 'Guard sitting - Bottom', 'Guard standing', 'Leg Entanglements', 'Advantageous Positions', 'Advantageous Positions - Top', 'Advantageous Positions - Bottom'];
     let currentCategory = 'All';
     let currentPosition = 'All';
     let searchTerm = '';
@@ -1315,10 +1447,32 @@
       return getCategoryForPosition(move.position);
     }
 
+    function getCatalogCategoryForMove(move) {
+      if (move.position === 'Transition') {
+        const sourceMove = getSourceMove(move);
+        if (sourceMove) {
+          const baseCategory = getCategoryForPosition(sourceMove.position);
+          if (baseCategory === 'Standing') return 'Standing';
+          const role = (sourceMove.role || '').toLowerCase();
+          if (baseCategory === 'Guard sitting' || baseCategory === 'Advantageous Positions') {
+            return role === 'bottom' ? `${baseCategory} - Bottom` : `${baseCategory} - Top`;
+          }
+          return baseCategory;
+        }
+      }
+      const baseCategory = getCategoryForPosition(move.position);
+      if (baseCategory === 'Standing') return 'Standing';
+      const role = (move.role || '').toLowerCase();
+      if (baseCategory === 'Guard sitting' || baseCategory === 'Advantageous Positions') {
+        return role === 'bottom' ? `${baseCategory} - Bottom` : `${baseCategory} - Top`;
+      }
+      return baseCategory;
+    }
+
     function moveMatchesCategory(move) {
       if (currentCategory === 'All') return true;
       if (currentCategory === 'Transitions') return move.position === 'Transition';
-      const category = move.position === 'Transition' ? getCategoryForMove(move) : getCategoryForPosition(move.position);
+      const category = move.position === 'Transition' ? getCatalogCategoryForMove(move) : getCatalogCategoryForMove(move);
       return category === currentCategory;
     }
 
@@ -1388,11 +1542,18 @@
       return 'text-amber-300';
     }
 
+    function getFilterCategoryBase(category) {
+      if (category === 'Guard sitting - Top' || category === 'Guard sitting - Bottom') return 'Guard sitting';
+      if (category === 'Advantageous Positions - Top' || category === 'Advantageous Positions - Bottom') return 'Advantageous Positions';
+      return category;
+    }
+
     function updateFilterPositions() {
       filterPositionSelect.innerHTML = '<option value="All">All positions</option>';
+      const baseCategory = getFilterCategoryBase(currentCategory);
       const positions = currentCategory === 'All'
         ? allPositions
-        : positionCategories[currentCategory] || [];
+        : positionCategories[baseCategory] || [];
       positions.forEach(position => {
         const item = document.createElement('option');
         item.value = position;
@@ -1446,7 +1607,7 @@
       filteredMoves.forEach(move => {
         if (move.position === 'Transition' && move.transitionFromId) {
           const source = sourceLookup.get(move.transitionFromId);
-          const groupCategory = getCategoryForMove(move);
+          const groupCategory = getCatalogCategoryForMove(move);
           const group = grouped.find(g => g.category === groupCategory);
           if (group) {
             const bucket = group.transitionMap.get(move.transitionFromId) || [];
@@ -1459,7 +1620,7 @@
           return;
         }
 
-        const category = getCategoryForPosition(move.position);
+        const category = getCatalogCategoryForMove(move);
         const group = grouped.find(g => g.category === category);
         if (group) {
           group.mainMoves.push(move);
@@ -1523,11 +1684,12 @@
           const isTransitionCard = move.position === 'Transition';
           const transitionChildren = childMoves.length > 0 ? childMoves : getChildTransitionsForMove(move);
           const hasChildTransitions = transitionChildren.length > 0;
-          const canToggleChildTransitions = hasChildTransitions && (isSubPosition || isTransitionCard);
+          const canToggleChildTransitions = hasChildTransitions;
           statsSummary.classList.toggle('hidden', isSubPosition);
           statsPanel.classList.toggle('hidden', isSubPosition);
           actionRow.classList.toggle('hidden', isSubPosition);
           const badge = clone.querySelector('.position-badge');
+          const sideTag = clone.querySelector('.side-tag');
           const ibjjfBadge = clone.querySelector('.ibjjf-badge');
           badge.textContent = move.position;
           badge.className = `position-badge inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] ${getBadgeClasses(move.position)}`;
@@ -1543,6 +1705,14 @@
           const rate = move.attempts ? Math.round((move.successes / move.attempts) * 100) : 0;
           clone.querySelector('.attempts').textContent = move.attempts;
           clone.querySelector('.successes').textContent = move.successes;
+          if (['Straight Ashi', 'Cross Ashi', '50/50'].includes(move.position) && move.legEntanglementSide) {
+            sideTag.textContent = move.legEntanglementSide;
+            sideTag.classList.remove('hidden');
+          } else {
+            sideTag.textContent = '';
+            sideTag.classList.add('hidden');
+          }
+
           if (move.position === 'Transition' && move.transitionFromId) {
             const sourceMove = sourceLookup.get(move.transitionFromId);
             if (sourceMove) {
@@ -1647,8 +1817,7 @@
           const detailsPanel = clone.querySelector('.details');
           const subPositionEditBtn = clone.querySelector('.subposition-edit-btn');
           const subPositionToggleBtn = clone.querySelector('.subposition-toggle-btn');
-          const cardTop = clone.querySelector('.move-card-top');
-          const chevron = clone.querySelector('.chevron-icon');
+          const transitionCountBadge = clone.querySelector('.transition-count-badge');
           const attemptBtn = clone.querySelector('.attempt-btn');
           const successBtn = clone.querySelector('.success-btn');
           const undoBtn = clone.querySelector('.undo-btn');
@@ -1659,13 +1828,13 @@
           const removeImageBtn = clone.querySelector('.remove-image-btn');
           undoBtn.disabled = actionHistory.length === 0;
 
+          subPositionEditBtn.classList.remove('hidden');
+          subPositionToggleBtn.classList.remove('hidden');
+          subPositionToggleBtn.disabled = false;
+          subPositionToggleBtn.classList.remove('opacity-50');
+          subPositionToggleBtn.classList.remove('cursor-not-allowed');
           if (isSubPosition || isTransitionCard) {
-            subPositionEditBtn.classList.remove('hidden');
             deleteSubPositionBtn.classList.remove('hidden');
-            subPositionToggleBtn.classList.remove('hidden');
-            subPositionToggleBtn.disabled = false;
-            subPositionToggleBtn.classList.remove('opacity-50');
-            subPositionToggleBtn.classList.remove('cursor-not-allowed');
           }
 
           const updateImageControls = () => {
@@ -1686,35 +1855,36 @@
           }
 
           const updateCardHighlight = () => {
-            if (isSubPosition) {
-              const expandedChildren = expandedSubPositions.has(move.id);
-              const expandedDetails = expandedSubPositionDetails.has(move.id);
-              if (canToggleChildTransitions) {
-                childContainer?.classList.toggle('hidden', !expandedChildren);
-              }
-              detailsPanel.classList.toggle('hidden', !expandedDetails);
-              if (canToggleChildTransitions && subPositionToggleBtn) {
-                const toggleIcon = subPositionToggleBtn.querySelector('svg');
-                if (toggleIcon) {
-                  toggleIcon.style.transform = expandedChildren ? 'rotate(180deg)' : 'rotate(0deg)';
-                }
-              }
-              chevron.style.transform = expandedChildren || expandedDetails ? 'rotate(180deg)' : 'rotate(0deg)';
-              article.classList.toggle('border-sky-500/60', expandedChildren || expandedDetails);
-              article.classList.toggle('shadow-sky-500/10', expandedChildren || expandedDetails);
-              return;
+            const expandedChildren = canToggleChildTransitions ? expandedSubPositions.has(move.id) : false;
+            if (canToggleChildTransitions) {
+              childContainer?.classList.toggle('hidden', !expandedChildren);
             }
-
-            const expanded = expandedMoves.has(move.id);
-            detailsPanel.classList.toggle('hidden', !expanded);
-            chevron.style.transform = expanded ? 'rotate(180deg)' : 'rotate(0deg)';
-            article.classList.toggle('border-sky-500/60', expanded);
-            article.classList.toggle('shadow-sky-500/10', expanded);
+            if (isSubPosition) {
+              const expandedDetails = expandedSubPositionDetails.has(move.id);
+              detailsPanel.classList.toggle('hidden', !expandedDetails);
+            } else {
+              const expandedDetails = expandedMoves.has(move.id);
+              detailsPanel.classList.toggle('hidden', !expandedDetails);
+            }
+            if (subPositionToggleBtn) {
+              const toggleIcon = subPositionToggleBtn.querySelector('svg');
+              if (toggleIcon) {
+                toggleIcon.style.transform = expandedChildren ? 'rotate(180deg)' : 'rotate(0deg)';
+              }
+            }
+            const shouldHighlight = expandedChildren || (isSubPosition ? expandedSubPositionDetails.has(move.id) : expandedMoves.has(move.id));
+            article.classList.toggle('border-sky-500/60', shouldHighlight);
+            article.classList.toggle('shadow-sky-500/10', shouldHighlight);
           };
+
+          transitionCountBadge.textContent = transitionChildren.length;
+          transitionCountBadge.classList.toggle('hidden', transitionChildren.length <= 0);
 
           updateCardHighlight();
 
           summaryBtn.addEventListener('click', event => {
+            event.preventDefault();
+            event.stopPropagation();
             if (isSubPosition) {
               return;
             }
@@ -1728,24 +1898,36 @@
 
           if (subPositionToggleBtn) {
             subPositionToggleBtn.addEventListener('click', event => {
+              event.preventDefault();
               event.stopPropagation();
-              if (canToggleChildTransitions) {
-                if (expandedSubPositions.has(move.id)) {
-                  expandedSubPositions.delete(move.id);
-                } else {
-                  expandedSubPositions.add(move.id);
-                }
-                updateCardHighlight();
+              if (!canToggleChildTransitions) {
+                return;
               }
+
+              if (expandedSubPositions.has(move.id)) {
+                expandedSubPositions.delete(move.id);
+              } else {
+                expandedSubPositions.add(move.id);
+              }
+              updateCardHighlight();
             });
           }
 
           subPositionEditBtn.addEventListener('click', event => {
+            event.preventDefault();
             event.stopPropagation();
-            if (expandedSubPositionDetails.has(move.id)) {
-              expandedSubPositionDetails.delete(move.id);
+            if (isSubPosition) {
+              if (expandedSubPositionDetails.has(move.id)) {
+                expandedSubPositionDetails.delete(move.id);
+              } else {
+                expandedSubPositionDetails.add(move.id);
+              }
             } else {
-              expandedSubPositionDetails.add(move.id);
+              if (expandedMoves.has(move.id)) {
+                expandedMoves.delete(move.id);
+              } else {
+                expandedMoves.add(move.id);
+              }
             }
             updateCardHighlight();
           });
@@ -1826,9 +2008,11 @@
             if (!file) return;
             const reader = new FileReader();
             reader.onload = () => {
+              if (typeof reader.result !== 'string') return;
               move.videoDataUrl = reader.result;
               move.videoUrl = '';
               saveData();
+              videoInput.value = '';
               updateVideoPreview();
             };
             reader.readAsDataURL(file);
@@ -1876,8 +2060,6 @@
             renderMove(move, false, group.transitionMap.get(move.id) || []);
           } else {
             renderMove(move, false);
-            const children = group.transitionMap.get(move.id) || [];
-            children.forEach(child => renderMove(child, true));
           }
         });
 
@@ -1979,6 +2161,36 @@
     trackerTabBtn.addEventListener('click', () => setActivePage('tracker'));
     profileTabBtn.addEventListener('click', () => setActivePage('profile'));
     catalogTabBtn.addEventListener('click', () => setActivePage('catalog'));
+    exportCatalogBtn?.addEventListener('click', exportCatalogLibrary);
+    importCatalogBtn?.addEventListener('click', importCatalogLibrary);
+    catalogImportExportClose?.addEventListener('click', closeCatalogImportExportModal);
+    catalogImportExportModal?.addEventListener('click', closeCatalogImportExportModal);
+    catalogImportExportModal?.querySelector('div')?.addEventListener('click', event => event.stopPropagation());
+    catalogCopyBtn?.addEventListener('click', () => {
+      copyCatalogText();
+    });
+    catalogConfirmBtn?.addEventListener('click', () => {
+      if (catalogImportMode) {
+        const input = catalogImportExportInput.value;
+        if (!input) return;
+        try {
+          const decoded = JSON.parse(decodeCatalogPayload(input));
+          const importedMoves = normalizeImportedMoves(decoded);
+          moves.splice(0, moves.length, ...importedMoves);
+          saveData();
+          updateTransitionOptions();
+          updateFilterPositions();
+          renderCards();
+          updateUndoState();
+          closeCatalogImportExportModal();
+          alert('Catalog imported successfully.');
+        } catch (error) {
+          alert('That catalog export string could not be read.');
+        }
+      } else {
+        closeCatalogImportExportModal();
+      }
+    });
 
     initHelpModal();
     updateFilterPositions();
