@@ -73,7 +73,7 @@
           <select id="movePosition" required class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400">
             <option value="Standing">Standing</option>
             <option value="Transition">Transition</option>
-            <optgroup label="Guard sitting">
+            <optgroup label="Guard">
               <option value="Closed Guard">Closed Guard</option>
               <option value="Half guard">Half guard</option>
               <option value="Quarter guard">Quarter guard</option>
@@ -266,9 +266,9 @@
               <select id="filterCategory" class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400">
                 <option value="All">All</option>
                 <option value="Standing">Standing</option>
-                <option value="Guard sitting">Guard sitting</option>
-                <option value="Guard sitting - Top">Guard sitting - Top</option>
-                <option value="Guard sitting - Bottom">Guard sitting - Bottom</option>
+                <option value="Guard">Guard</option>
+                <option value="Guard - Top">Guard - Top</option>
+                <option value="Guard - Bottom">Guard - Bottom</option>
                 <option value="Guard standing">Guard standing</option>
                 <option value="Leg Entanglements">Leg Entanglements</option>
                 <option value="Advantageous Positions">Advantageous Positions</option>
@@ -373,6 +373,7 @@
           </div>
           <div class="video-preview mt-3 hidden rounded-3xl border border-slate-700 bg-slate-950 p-3">
             <video class="move-video w-full rounded-2xl bg-black" controls playsinline preload="metadata"></video>
+            <div class="video-error mt-2 hidden text-sm text-rose-300">Unable to play this video.</div>
           </div>
           <div class="mt-4 rounded-3xl border border-slate-700 bg-slate-900 p-3">
             <div class="image-preview relative h-40 overflow-hidden rounded-3xl bg-slate-950">
@@ -443,6 +444,7 @@
     const moves = storedMoves ? ensureSeedMoves(normalizeStoredMoves(JSON.parse(storedMoves))) : getDefaultMoves();
     let actionHistory = [];
     const expandedMoves = new Set();
+    const videoBlobUrlMap = new WeakMap();
     const expandedSubPositions = new Set();
     const expandedSubPositionDetails = new Set();
     let collapsedCategories = new Set();
@@ -1403,14 +1405,14 @@
 
     const positionCategories = {
       'Standing': ['Standing'],
-      'Guard sitting': ['Closed Guard', 'Half guard', 'Quarter guard', 'Butterfly guard', 'Half butterfly guard'],
+      'Guard': ['Closed Guard', 'Half guard', 'Quarter guard', 'Butterfly guard', 'Half butterfly guard'],
       'Guard standing': ['Sitting guard', 'Delariva', 'SLX', 'X-guard', 'Spider guard', 'Lasso guard'],
       'Leg Entanglements': ['Straight Ashi', 'Cross Ashi', '50/50'],
       'Advantageous Positions': ['Side control', 'North South', 'Mount', 'Turtle (backside)', 'Front Headlock (Sprawl)', 'Back mount', 'Back mount (body triangle)', 'Knee on belly', 'Top Crucifix', 'Bottom Crucifix', 'Katagatame'],
       'Transitions': ['Transition']
     };
-    const allPositions = ['Standing', ...positionCategories['Guard sitting'], ...positionCategories['Guard standing'], ...positionCategories['Leg Entanglements'], ...positionCategories['Advantageous Positions'], ...positionCategories['Transitions']];
-    const categoryOrder = ['Standing', 'Guard sitting', 'Guard sitting - Top', 'Guard sitting - Bottom', 'Guard standing', 'Leg Entanglements', 'Advantageous Positions', 'Advantageous Positions - Top', 'Advantageous Positions - Bottom'];
+    const allPositions = ['Standing', ...positionCategories['Guard'], ...positionCategories['Guard standing'], ...positionCategories['Leg Entanglements'], ...positionCategories['Advantageous Positions'], ...positionCategories['Transitions']];
+    const categoryOrder = ['Standing', 'Guard', 'Guard - Top', 'Guard - Bottom', 'Guard standing', 'Guard standing - Top', 'Guard standing - Bottom', 'Leg Entanglements', 'Advantageous Positions', 'Advantageous Positions - Top', 'Advantageous Positions - Bottom'];
     let currentCategory = 'All';
     let currentPosition = 'All';
     let searchTerm = '';
@@ -1454,7 +1456,7 @@
           const baseCategory = getCategoryForPosition(sourceMove.position);
           if (baseCategory === 'Standing') return 'Standing';
           const role = (sourceMove.role || '').toLowerCase();
-          if (baseCategory === 'Guard sitting' || baseCategory === 'Advantageous Positions') {
+          if (baseCategory === 'Guard' || baseCategory === 'Guard standing' || baseCategory === 'Advantageous Positions') {
             return role === 'bottom' ? `${baseCategory} - Bottom` : `${baseCategory} - Top`;
           }
           return baseCategory;
@@ -1463,7 +1465,7 @@
       const baseCategory = getCategoryForPosition(move.position);
       if (baseCategory === 'Standing') return 'Standing';
       const role = (move.role || '').toLowerCase();
-      if (baseCategory === 'Guard sitting' || baseCategory === 'Advantageous Positions') {
+      if (baseCategory === 'Guard' || baseCategory === 'Guard standing' || baseCategory === 'Advantageous Positions') {
         return role === 'bottom' ? `${baseCategory} - Bottom` : `${baseCategory} - Top`;
       }
       return baseCategory;
@@ -1543,7 +1545,8 @@
     }
 
     function getFilterCategoryBase(category) {
-      if (category === 'Guard sitting - Top' || category === 'Guard sitting - Bottom') return 'Guard sitting';
+      if (category === 'Guard - Top' || category === 'Guard - Bottom') return 'Guard';
+      if (category === 'Guard standing - Top' || category === 'Guard standing - Bottom') return 'Guard standing';
       if (category === 'Advantageous Positions - Top' || category === 'Advantageous Positions - Bottom') return 'Advantageous Positions';
       return category;
     }
@@ -1744,8 +1747,17 @@
           const removeVideoBtn = clone.querySelector('.remove-video-btn');
           const videoPreviewEl = clone.querySelector('.video-preview');
           const videoEl = clone.querySelector('.move-video');
+          const videoErrorEl = clone.querySelector('.video-error');
           const updateVideoPreview = () => {
-            const videoSource = move.videoDataUrl || normalizeMoveVideoUrl(move.videoUrl || extractVideoUrlFromNotes(move.notes));
+            const videoObjectUrl = videoBlobUrlMap.get(move);
+            const videoSource = videoObjectUrl || move.videoDataUrl || normalizeMoveVideoUrl(move.videoUrl || extractVideoUrlFromNotes(move.notes));
+            videoErrorEl.classList.add('hidden');
+            videoEl.onerror = () => {
+              videoErrorEl.classList.remove('hidden');
+            };
+            videoEl.onloadeddata = () => {
+              videoErrorEl.classList.add('hidden');
+            };
             if (videoSource) {
               videoEl.src = videoSource;
               videoEl.load();
@@ -1756,7 +1768,7 @@
               videoPreviewEl.classList.add('hidden');
             }
             videoInput.value = move.videoUrl || normalizeMoveVideoUrl(extractVideoUrlFromNotes(move.notes)) || '';
-            removeVideoBtn.classList.toggle('hidden', !Boolean(move.videoDataUrl || move.videoUrl || extractVideoUrlFromNotes(move.notes)));
+            removeVideoBtn.classList.toggle('hidden', !Boolean(videoSource));
           };
           updateVideoPreview();
           const imagePreviewEl = clone.querySelector('.move-image');
@@ -2006,6 +2018,12 @@
             event.stopPropagation();
             const file = event.target.files?.[0];
             if (!file) return;
+            const previousBlobUrl = videoBlobUrlMap.get(move);
+            if (previousBlobUrl) {
+              URL.revokeObjectURL(previousBlobUrl);
+            }
+            const blobUrl = URL.createObjectURL(file);
+            videoBlobUrlMap.set(move, blobUrl);
             const reader = new FileReader();
             reader.onload = () => {
               if (typeof reader.result !== 'string') return;
@@ -2020,6 +2038,11 @@
 
           removeVideoBtn.addEventListener('click', event => {
             event.stopPropagation();
+            const previousBlobUrl = videoBlobUrlMap.get(move);
+            if (previousBlobUrl) {
+              URL.revokeObjectURL(previousBlobUrl);
+              videoBlobUrlMap.delete(move);
+            }
             move.videoDataUrl = '';
             move.videoUrl = '';
             saveData();
