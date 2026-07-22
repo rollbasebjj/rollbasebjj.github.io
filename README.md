@@ -16,9 +16,7 @@ IOS:
 7. Click "Add"
 8. Done!
 
-Downside: 
-Safari downloads the website and runs the code locally. And because of such, installing any future update will require you to manually copy your data from
-the old app to the new app.
+Obs. Make sure to keep your export data saved!
 
 Android: 
 1. Go to "Releases" tag on the Github Sidebar (right side)
