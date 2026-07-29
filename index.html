@@ -43,6 +43,12 @@
         <button id="trackerTabBtn" type="button" class="rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800">Move add</button>
         <button id="catalogTabBtn" type="button" class="rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-400 transition hover:bg-slate-800">Move catalog</button>
         <button id="profileTabBtn" type="button" class="rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-400 transition hover:bg-slate-800">My Profile</button>
+        <button id="settingsTabBtn" type="button" class="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900 px-3 py-2 text-sm font-semibold text-slate-400 transition hover:bg-slate-800" aria-label="Settings">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 0 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.6V21a2 2 0 0 1-4 0v-.2a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 0 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.6-1H3a2 2 0 0 1 0-4h.2a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 0 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3h.1a1.7 1.7 0 0 0 1-1.6V3a2 2 0 0 1 4 0v.2a1.7 1.7 0 0 0 1 1.6h.1a1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 0 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8v.1a1.7 1.7 0 0 0 1.6 1H21a2 2 0 0 1 0 4h-.2a1.7 1.7 0 0 0-1.6 1Z"></path>
+          </svg>
+        </button>
       </div>
       <div id="pageTracker">
         <div class="flex flex-col items-center gap-4 text-center">
@@ -138,7 +144,7 @@
         </div>
         <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <button type="submit" class="rounded-2xl bg-slate-800 px-5 py-3 text-sm font-semibold text-slate-100 transition hover:bg-slate-700">Add Move</button>
-          <p id="formTip" class="text-sm leading-6 text-slate-400">Save each move and track gym progress across sessions.</p>
+          <p id="formTip" class="text-sm leading-6 text-slate-400">Save move to catalog.</p>
         </div>
       </form>
       </div>
@@ -250,6 +256,26 @@
           </section>
         </div>
       </div>
+      <div id="pageSettings" class="hidden mt-6 space-y-4">
+        <div class="text-center">
+          <h2 class="text-2xl font-semibold tracking-tight text-white">Settings</h2>
+        </div>
+        <div class="rounded-3xl border border-slate-700/60 bg-slate-950/40 p-4 space-y-4">
+          <div class="rounded-3xl border border-slate-700/60 bg-slate-900/70 p-4">
+            <div class="flex items-center justify-between gap-3">
+              <div>
+                <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">Theme</p>
+                <p class="mt-2 text-sm leading-6 text-slate-300">Switch between dark and light mode.</p>
+              </div>
+              <label class="relative inline-flex h-7 w-14 cursor-pointer items-center">
+                <input id="themeToggle" type="checkbox" class="peer sr-only" />
+                <div class="h-7 w-14 rounded-full bg-slate-700 transition-colors peer-checked:bg-sky-500"></div>
+                <span class="pointer-events-none absolute left-1 top-1 h-5 w-5 rounded-full bg-white shadow transition-transform duration-200 translate-x-0 peer-checked:translate-x-7"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
       <div id="pageCatalog" class="hidden mt-6 space-y-4">
         <div class="text-center">
           <h2 class="text-2xl font-semibold tracking-tight text-white">Move Catalog</h2>
@@ -259,23 +285,10 @@
           <div class="grid gap-4">
             <div>
               <label class="block text-sm font-medium text-slate-300">Search moves</label>
-              <input id="searchInput" type="search" placeholder="Type a move name to search" class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400" />
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-slate-300">Category</label>
-              <select id="filterCategory" class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400">
-                <option value="All">All</option>
-                <option value="Standing">Standing</option>
-                <option value="Guard">Guard</option>
-                <option value="Guard - Top">Guard - Top</option>
-                <option value="Guard - Bottom">Guard - Bottom</option>
-                <option value="Guard standing">Guard standing</option>
-                <option value="Leg Entanglements">Leg Entanglements</option>
-                <option value="Advantageous Positions">Advantageous Positions</option>
-                <option value="Advantageous Positions - Controller">Advantageous Positions - Controller</option>
-                <option value="Advantageous Positions - Receiver">Advantageous Positions - Receiver</option>
-                <option value="Transitions">Transitions</option>
-              </select>
+              <div class="relative mt-2">
+                <input id="searchInput" type="search" placeholder="Type a move name to search" class="w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 pr-10 text-white outline-none transition focus:border-sky-400" style="-webkit-appearance:none; appearance:none;" />
+                <button id="searchClearBtn" type="button" class="absolute right-3 top-1/2 hidden -translate-y-1/2 rounded-full p-1 text-slate-400 transition hover:bg-slate-800 hover:text-white" aria-label="Clear search">×</button>
+              </div>
             </div>
             <div>
               <label class="block text-sm font-medium text-slate-300">Position</label>
@@ -301,7 +314,7 @@
           <div class="flex flex-wrap items-center justify-between gap-3">
             <div class="min-w-0">
               <div class="flex flex-wrap items-center gap-2">
-                <h2 class="title min-w-0 text-lg font-semibold text-white truncate"></h2>
+                <h2 class="title min-w-0 text-lg font-semibold leading-snug text-white break-words whitespace-normal"></h2>
                 <p class="role-tag rounded-full border border-slate-700 bg-slate-800 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-300"></p>
                 <span class="side-tag hidden rounded-full border border-slate-700 bg-slate-800 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-300"></span>
                 <span class="position-badge inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em]"></span>
@@ -434,6 +447,7 @@
   <script>
     const STORAGE_KEY = 'jiuJitsuMoves';
     const HELP_SEEN_KEY = 'jiuJitsuHelpSeen';
+    const THEME_KEY = 'jiuJitsuTheme';
     const storedMoves = localStorage.getItem(STORAGE_KEY);
     const moves = storedMoves ? ensureSeedMoves(normalizeStoredMoves(JSON.parse(storedMoves))) : getDefaultMoves();
     let actionHistory = [];
@@ -453,16 +467,20 @@
     const giOnlyToggle = document.getElementById('giOnlyToggle');
     const roleLabel = document.getElementById('roleLabel');
     const searchInput = document.getElementById('searchInput');
+    const searchClearBtn = document.getElementById('searchClearBtn');
     const cardsContainer = document.getElementById('cardsContainer');
     const filterCategorySelect = document.getElementById('filterCategory');
     const filterPositionSelect = document.getElementById('filterPosition');
     const template = document.getElementById('moveCardTemplate');
     const trackerTabBtn = document.getElementById('trackerTabBtn');
     const profileTabBtn = document.getElementById('profileTabBtn');
+    const settingsTabBtn = document.getElementById('settingsTabBtn');
     const catalogTabBtn = document.getElementById('catalogTabBtn');
     const pageTracker = document.getElementById('pageTracker');
     const pageProfile = document.getElementById('pageProfile');
+    const pageSettings = document.getElementById('pageSettings');
     const pageCatalog = document.getElementById('pageCatalog');
+    const themeToggle = document.getElementById('themeToggle');
     const PROFILE_KEY = 'jiuJitsuProfile';
     const profileNameDisplay = document.getElementById('profileNameDisplay');
     const profileNameEdit = document.getElementById('profileNameEdit');
@@ -626,13 +644,37 @@
 
     let profile = loadProfile();
 
+    function collapseAllMoveDetails() {
+      expandedMoves.clear();
+      expandedSubPositions.clear();
+      expandedSubPositionDetails.clear();
+    }
+
+    function resetCatalogSearch() {
+      searchInput.value = '';
+      searchTerm = '';
+      if (searchClearBtn) {
+        searchClearBtn.classList.add('hidden');
+      }
+      if (pageCatalog && !pageCatalog.classList.contains('hidden')) {
+        renderCards();
+      }
+    }
+
     function setActivePage(page) {
       const isTracker = page === 'tracker';
       const isProfile = page === 'profile';
+      const isSettings = page === 'settings';
       const isCatalog = page === 'catalog';
+
+      collapseAllMoveDetails();
+      if (!isCatalog) {
+        resetCatalogSearch();
+      }
 
       pageTracker.classList.toggle('hidden', !isTracker);
       pageProfile.classList.toggle('hidden', !isProfile);
+      pageSettings.classList.toggle('hidden', !isSettings);
       pageCatalog.classList.toggle('hidden', !isCatalog);
 
       trackerTabBtn.classList.toggle('bg-slate-900', !isTracker);
@@ -645,10 +687,34 @@
       profileTabBtn.classList.toggle('text-white', isProfile);
       profileTabBtn.classList.toggle('text-slate-400', !isProfile);
 
+      settingsTabBtn.classList.toggle('bg-slate-900', !isSettings);
+      settingsTabBtn.classList.toggle('bg-slate-800', isSettings);
+      settingsTabBtn.classList.toggle('text-white', isSettings);
+      settingsTabBtn.classList.toggle('text-slate-400', !isSettings);
+
       catalogTabBtn.classList.toggle('bg-slate-900', !isCatalog);
       catalogTabBtn.classList.toggle('bg-slate-800', isCatalog);
       catalogTabBtn.classList.toggle('text-white', isCatalog);
       catalogTabBtn.classList.toggle('text-slate-400', !isCatalog);
+
+      if (isCatalog) {
+        renderCards();
+      }
+    }
+
+    function applyTheme(theme) {
+      const isLight = theme === 'light';
+      document.body.classList.toggle('bg-slate-50', isLight);
+      document.body.classList.toggle('text-slate-900', isLight);
+      document.body.classList.toggle('bg-[#040812]', !isLight);
+      document.body.classList.toggle('text-slate-100', !isLight);
+      document.documentElement.classList.toggle('light', isLight);
+      document.documentElement.classList.toggle('dark', !isLight);
+      if (themeToggle) {
+        themeToggle.checked = isLight;
+      }
+      const root = document.documentElement;
+      root.style.setProperty('--tw-bg-opacity', isLight ? '1' : '0.72');
     }
 
     function saveData() {
@@ -1285,7 +1351,8 @@
       noneOption.value = '';
       noneOption.textContent = 'None';
       profileFavoriteSelect.appendChild(noneOption);
-      moves.forEach(move => {
+      const sortedMoves = [...moves].sort((a, b) => a.title.localeCompare(b.title));
+      sortedMoves.forEach(move => {
         const option = document.createElement('option');
         option.value = move.title;
         option.textContent = move.title;
@@ -1607,14 +1674,15 @@
     function updateTransitionOptions() {
       const selectedValue = transitionFromSelect.value;
       transitionFromSelect.innerHTML = '<option value="">Select a move</option>';
-      moves.forEach(move => {
+      const sortedMoves = [...moves].sort((a, b) => a.title.localeCompare(b.title));
+      sortedMoves.forEach(move => {
         const option = document.createElement('option');
         option.value = move.id;
         const label = `${move.title} (${move.role || 'No role'})${move.position ? ` - ${move.position}` : ''}`;
         option.textContent = label;
         transitionFromSelect.appendChild(option);
       });
-      if (moves.some(move => move.id === selectedValue)) {
+      if (sortedMoves.some(move => move.id === selectedValue)) {
         transitionFromSelect.value = selectedValue;
       } else {
         transitionFromSelect.value = '';
@@ -1657,7 +1725,7 @@
         return matchCategory && matchPosition && matchSearch;
       });
       if (!filteredMoves.length) {
-        cardsContainer.innerHTML = '<div class="rounded-3xl border border-dashed border-slate-700/60 bg-slate-900/70 p-10 text-center text-slate-400">No moves yet. Add one from the form above or choose a filter.</div>';
+        cardsContainer.innerHTML = '<div class="rounded-3xl border border-dashed border-slate-700/60 bg-slate-900/70 p-10 text-center text-slate-400">No moves yet. Add one from the move add form or select a different filter.</div>';
         return;
       }
 
@@ -2037,7 +2105,6 @@
             event.stopPropagation();
             move.notes = notesTextarea.value;
             saveData();
-            updateVideoPreview();
           });
 
           imageInput.addEventListener('change', event => {
@@ -2161,22 +2228,36 @@
 
     positionInput.addEventListener('change', updateRoleLabel);
     legEntanglementSideInput.addEventListener('change', updateRoleLabel);
-    filterCategorySelect.addEventListener('change', () => {
-      currentCategory = filterCategorySelect.value;
-      updateFilterPositions();
-      renderCards();
-    });
+    
     filterPositionSelect.addEventListener('change', () => {
       currentPosition = filterPositionSelect.value;
       renderCards();
     });
+    function syncSearchClearButton() {
+      if (!searchClearBtn) return;
+      searchClearBtn.classList.toggle('hidden', !searchInput.value.trim());
+    }
+
     searchInput.addEventListener('input', () => {
       searchTerm = searchInput.value;
+      syncSearchClearButton();
+      renderCards();
+    });
+    searchClearBtn?.addEventListener('click', () => {
+      searchInput.value = '';
+      searchTerm = '';
+      syncSearchClearButton();
       renderCards();
     });
     trackerTabBtn.addEventListener('click', () => setActivePage('tracker'));
     profileTabBtn.addEventListener('click', () => setActivePage('profile'));
+    settingsTabBtn.addEventListener('click', () => setActivePage('settings'));
     catalogTabBtn.addEventListener('click', () => setActivePage('catalog'));
+    themeToggle?.addEventListener('change', () => {
+      const preferredTheme = themeToggle.checked ? 'light' : 'dark';
+      localStorage.setItem(THEME_KEY, preferredTheme);
+      applyTheme(preferredTheme);
+    });
     exportCatalogBtn?.addEventListener('click', exportCatalogLibrary);
     importCatalogBtn?.addEventListener('click', importCatalogLibrary);
     catalogImportExportClose?.addEventListener('click', closeCatalogImportExportModal);
@@ -2208,7 +2289,20 @@
       }
     });
 
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') {
+        collapseAllMoveDetails();
+        resetCatalogSearch();
+      } else if (!pageCatalog.classList.contains('hidden')) {
+        renderCards();
+      }
+    });
+
+    const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
+    applyTheme(savedTheme);
+
     initHelpModal();
+    syncSearchClearButton();
     updateFilterPositions();
     updateRoleLabel();
     renderCards();
