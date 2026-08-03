@@ -28,10 +28,94 @@
       background: radial-gradient(circle at top, rgba(56, 189, 248, 0.15), transparent 35%), #040812;
       color: #e5e7eb;
       min-height: 100vh;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    body.theme-light {
+      background: radial-gradient(circle at top, rgba(14, 165, 233, 0.12), transparent 35%), #f8fafc;
+      color: #0f172a;
     }
     .glass {
       background: rgba(15, 23, 42, 0.72);
       backdrop-filter: blur(16px);
+    }
+    body.theme-light .glass {
+      background: rgba(255, 255, 255, 0.82);
+      border-color: rgba(203, 213, 225, 0.85);
+      box-shadow: 0 24px 45px -18px rgba(15, 23, 42, 0.16);
+    }
+    body.theme-light .bg-slate-900 {
+      background-color: #f8fafc !important;
+    }
+    body.theme-light .bg-slate-800 {
+      background-color: #e2e8f0 !important;
+    }
+    body.theme-light .bg-slate-700 {
+      background-color: #cbd5e1 !important;
+    }
+    body.theme-light .bg-slate-950 {
+      background-color: #ffffff !important;
+    }
+    body.theme-light .bg-slate-600 {
+      background-color: #94a3b8 !important;
+    }
+    body.theme-light [class*="bg-slate-900/70"],
+    body.theme-light [class*="bg-slate-900/80"],
+    body.theme-light [class*="bg-slate-950/40"],
+    body.theme-light [class*="bg-slate-950/70"] {
+      background-color: rgba(255, 255, 255, 0.92) !important;
+    }
+    body.theme-light .text-white,
+    body.theme-light .text-slate-100 {
+      color: #0f172a !important;
+    }
+    body.theme-light .text-slate-200 {
+      color: #1e293b !important;
+    }
+    body.theme-light .text-slate-300,
+    body.theme-light .text-slate-300\/90 {
+      color: #334155 !important;
+    }
+    body.theme-light .text-slate-400 {
+      color: #475569 !important;
+    }
+    body.theme-light .text-slate-500 {
+      color: #64748b !important;
+    }
+    body.theme-light .text-sky-300,
+    body.theme-light .text-sky-300\/80,
+    body.theme-light .text-sky-400 {
+      color: #0369a1 !important;
+    }
+    body.theme-light .text-emerald-200 {
+      color: #047857 !important;
+    }
+    body.theme-light .text-amber-200 {
+      color: #b45309 !important;
+    }
+    body.theme-light .text-rose-200 {
+      color: #be123c !important;
+    }
+    body.theme-light .text-violet-200 {
+      color: #7c3aed !important;
+    }
+    body.theme-light .border-slate-700,
+    body.theme-light .border-slate-700\/50,
+    body.theme-light .border-slate-700\/60 {
+      border-color: #cbd5e1 !important;
+    }
+    body.theme-light input,
+    body.theme-light select,
+    body.theme-light textarea {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+      border-color: #cbd5e1 !important;
+    }
+    body.theme-light input::placeholder,
+    body.theme-light textarea::placeholder {
+      color: #64748b !important;
+    }
+    body.theme-light button {
+      color: inherit;
     }
   </style>
 </head>
@@ -40,10 +124,10 @@
     <section class="glass rounded-3xl border border-slate-700/50 p-4 shadow-2xl shadow-slate-900/40">
       <div class="flex justify-center gap-2">
 
-        <button id="trackerTabBtn" type="button" class="rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800">Move add</button>
-        <button id="catalogTabBtn" type="button" class="rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-400 transition hover:bg-slate-800">Move catalog</button>
-        <button id="profileTabBtn" type="button" class="rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-400 transition hover:bg-slate-800">My Profile</button>
-        <button id="settingsTabBtn" type="button" class="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900 px-3 py-2 text-sm font-semibold text-slate-400 transition hover:bg-slate-800" aria-label="Settings">
+        <button id="trackerTabBtn" type="button" class="rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800" data-i18n="tabs.addMove">Move add</button>
+        <button id="catalogTabBtn" type="button" class="rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-400 transition hover:bg-slate-800" data-i18n="tabs.catalog">Move catalog</button>
+        <button id="profileTabBtn" type="button" class="rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-400 transition hover:bg-slate-800" data-i18n="tabs.profile">My Profile</button>
+        <button id="settingsTabBtn" type="button" class="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900 px-3 py-2 text-sm font-semibold text-slate-400 transition hover:bg-slate-800" aria-label="Settings" data-i18n-aria-label="tabs.settings">
           <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <circle cx="12" cy="12" r="3"></circle>
             <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 0 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.6V21a2 2 0 0 1-4 0v-.2a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 0 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.6-1H3a2 2 0 0 1 0-4h.2a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 0 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3h.1a1.7 1.7 0 0 0 1-1.6V3a2 2 0 0 1 4 0v.2a1.7 1.7 0 0 0 1 1.6h.1a1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 0 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8v.1a1.7 1.7 0 0 0 1.6 1H21a2 2 0 0 1 0 4h-.2a1.7 1.7 0 0 0-1.6 1Z"></path>
@@ -53,73 +137,73 @@
       <div id="pageTracker">
         <div class="flex flex-col items-center gap-4 text-center">
           <div>
-            <p class="text-sm uppercase tracking-[0.35em] text-sky-300/80">Vibe-coded by ig@ryanalex_g</p>
+            <p class="text-sm uppercase tracking-[0.35em] text-sky-300/80" data-i18n="hero.credit">Vibe-coded by ig@ryanalex_g</p>
           <div class="mt-2 flex items-center justify-center gap-3">
-            <h1 class="text-3xl font-semibold tracking-tight text-white">RollBaseBJJ</h1>
-            <button id="helpButton" type="button" class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 bg-slate-900 text-slate-300 transition hover:border-sky-400 hover:text-white" aria-label="Help">
-              <span class="text-lg font-semibold">i</span>
+            <h1 class="text-3xl font-semibold tracking-tight text-white" data-i18n="app.title">RollBaseBJJ</h1>
+            <button id="helpButton" type="button" class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 bg-slate-900 text-slate-300 transition hover:border-sky-400 hover:text-white" aria-label="Help" data-i18n-aria-label="help.open">
+              <span class="text-lg font-semibold" data-i18n="help.iconText">i</span>
             </button>
           </div>
-          <p class="mt-2 max-w-xs text-sm leading-6 text-slate-300/90">Your personal BJJ move journal.<br> Click the little (i) for help.</p>
+          <p class="mt-2 max-w-xs text-sm leading-6 text-slate-300/90" data-i18n-html="hero.description">Your personal BJJ move journal.<br> Click the little (i) for help.</p>
         </div>
       </div>
       <form id="moveForm" class="mt-6 grid gap-4">
         <div>
-          <label class="block text-sm font-medium text-slate-300">Move name</label>
-          <input id="moveTitle" type="text" placeholder="Knee Bar" required class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400" />
+          <label class="block text-sm font-medium text-slate-300" data-i18n="form.moveName">Move name</label>
+          <input id="moveTitle" type="text" placeholder="Knee Bar" required class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400" data-i18n-placeholder="form.moveNamePlaceholder" />
         </div>
         <div class="rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3">
           <label class="flex items-center gap-3 text-sm font-medium text-slate-300">
             <input id="subPositionToggle" type="checkbox" class="h-4 w-4 rounded border-slate-600 bg-slate-950 text-sky-500 focus:ring-sky-500" />
-            <span>Add Sub-Position</span>
+            <span data-i18n="form.addSubPosition">Add Sub-Position</span>
           </label>
         </div>
         <div>
-          <label class="block text-sm font-medium text-slate-300">Position</label>
+          <label class="block text-sm font-medium text-slate-300" data-i18n="form.position">Position</label>
           <select id="movePosition" required class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400">
-            <option value="Standing">Standing</option>
-            <option value="Transition">Transition</option>
-            <optgroup label="Guard">
-              <option value="Closed Guard">Closed Guard</option>
-              <option value="Half guard">Half guard</option>
-              <option value="Quarter guard">Quarter guard</option>
-              <option value="Butterfly guard">Butterfly guard</option>
-              <option value="Half butterfly guard">Half butterfly guard</option>
+            <option value="Standing" data-i18n="form.positionOptions.standing">Standing</option>
+            <option value="Transition" data-i18n="form.positionOptions.transition">Transition</option>
+            <optgroup label="Guard" data-i18n-label="form.positionGroups.guard">
+              <option value="Closed Guard" data-i18n="form.positionOptions.closedGuard">Closed Guard</option>
+              <option value="Half guard" data-i18n="form.positionOptions.halfGuard">Half guard</option>
+              <option value="Quarter guard" data-i18n="form.positionOptions.quarterGuard">Quarter guard</option>
+              <option value="Butterfly guard" data-i18n="form.positionOptions.butterflyGuard">Butterfly guard</option>
+              <option value="Half butterfly guard" data-i18n="form.positionOptions.halfButterflyGuard">Half butterfly guard</option>
             </optgroup>
-            <optgroup label="Guard standing">
-              <option value="Sitting guard">Sitting guard</option>
-              <option value="Delariva">Delariva</option>
-              <option value="SLX">SLX</option>
-              <option value="X-guard">X-guard</option>
-              <option value="Spider guard">Spider guard</option>
-              <option value="Lasso guard">Lasso guard</option>
+            <optgroup label="Guard standing" data-i18n-label="form.positionGroups.guardStanding">
+              <option value="Sitting guard" data-i18n="form.positionOptions.sittingGuard">Sitting guard</option>
+              <option value="Delariva" data-i18n="form.positionOptions.delariva">Delariva</option>
+              <option value="SLX" data-i18n="form.positionOptions.slx">SLX</option>
+              <option value="X-guard" data-i18n="form.positionOptions.xGuard">X-guard</option>
+              <option value="Spider guard" data-i18n="form.positionOptions.spiderGuard">Spider guard</option>
+              <option value="Lasso guard" data-i18n="form.positionOptions.lassoGuard">Lasso guard</option>
             </optgroup>
-            <optgroup label="Leg Entanglements">
-              <option value="Straight Ashi">Straight Ashi (SLX)</option>
-              <option value="Cross Ashi">Cross Ashi</option>
-              <option value="50/50">50/50</option>
+            <optgroup label="Leg Entanglements" data-i18n-label="form.positionGroups.legEntanglements">
+              <option value="Straight Ashi" data-i18n="form.positionOptions.straightAshi">Straight Ashi (SLX)</option>
+              <option value="Cross Ashi" data-i18n="form.positionOptions.crossAshi">Cross Ashi</option>
+              <option value="50/50" data-i18n="form.positionOptions.fiftyFifty">50/50</option>
             </optgroup>
-            <optgroup label="Advantageous Positions">
-              <option value="Side control">Side control</option>
-              <option value="North South">North South</option>
-              <option value="Katagatame">Katagatame</option>
-              <option value="Knee on belly">Knee on belly</option>
-              <option value="Top Crucifix">Top Crucifix (Salaverry)</option>
-              <option value="Bottom Crucifix">Bottom Crucifix</option>
-              <option value="Mount">Mount</option>
-              <option value="Back mount">Back mount</option>
-              <option value="Back mount (body triangle)">Back mount (Body triangle)</option>
-              <option value="Turtle (backside)">Turtle (Backside)</option>
-              <option value="Front Headlock (Sprawl)">Front Headlock (Sprawl)</option>
+            <optgroup label="Advantageous Positions" data-i18n-label="form.positionGroups.advantageousPositions">
+              <option value="Side control" data-i18n="form.positionOptions.sideControl">Side control</option>
+              <option value="North South" data-i18n="form.positionOptions.northSouth">North South</option>
+              <option value="Kesa-gatame" data-i18n="form.positionOptions.katagatame">Kesa-gatame</option>
+              <option value="Knee on belly" data-i18n="form.positionOptions.kneeOnBelly">Knee on belly</option>
+              <option value="Top Crucifix" data-i18n="form.positionOptions.topCrucifix">Top Crucifix (Salaverry)</option>
+              <option value="Bottom Crucifix" data-i18n="form.positionOptions.bottomCrucifix">Bottom Crucifix</option>
+              <option value="Mount" data-i18n="form.positionOptions.mount">Mount</option>
+              <option value="Back mount" data-i18n="form.positionOptions.backMount">Back mount</option>
+              <option value="Back mount (body triangle)" data-i18n="form.positionOptions.backMountBodyTriangle">Back mount (Body triangle)</option>
+              <option value="Turtle (backside)" data-i18n="form.positionOptions.turtleBackside">Turtle (Backside)</option>
+              <option value="Front Headlock (Sprawl)" data-i18n="form.positionOptions.frontHeadlockSprawl">Front Headlock (Sprawl)</option>
             </optgroup>
           </select>
         </div>
         <div id="roleContainer">
           <div id="roleInputs" class="hidden">
-            <label id="roleLabel" class="block text-sm font-medium text-slate-300">Top or Bottom</label>
+            <label id="roleLabel" class="block text-sm font-medium text-slate-300" data-i18n="form.roleLabel">Top or Bottom</label>
             <select id="moveRole" class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400">
-              <option value="Top">Top</option>
-              <option value="Bottom">Bottom</option>
+              <option value="Top" data-i18n="form.roleOptions.top">Top</option>
+              <option value="Bottom" data-i18n="form.roleOptions.bottom">Bottom</option>
             </select>
             <select id="transitionFrom" class="mt-2 hidden w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400">
               <option value="">Select a move</option>
@@ -127,145 +211,145 @@
           </div>
         </div>
         <div id="legEntanglementSideContainer" class="hidden">
-          <label class="block text-sm font-medium text-slate-300">Entanglement side</label>
+          <label class="block text-sm font-medium text-slate-300" data-i18n="form.entanglementSide">Entanglement side</label>
           <select id="legEntanglementSide" class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400">
-            <option value="Backside">Backside</option>
-            <option value="Frontside">Frontside</option>
+            <option value="Backside" data-i18n="form.entanglementSideOptions.backside">Backside</option>
+            <option value="Frontside" data-i18n="form.entanglementSideOptions.frontside">Frontside</option>
           </select>
         </div>
         <div id="giToggleContainer" class="mt-4 flex items-center gap-2 rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3">
-          <span class="text-sm font-medium text-slate-300">Gi and Nogi</span>
+          <span class="text-sm font-medium text-slate-300" data-i18n="form.giAndNogi">Gi and Nogi</span>
           <label class="relative inline-flex h-7 w-14 cursor-pointer items-center">
             <input id="giOnlyToggle" type="checkbox" class="peer sr-only" />
             <div class="h-7 w-14 rounded-full bg-slate-700 transition-colors peer-checked:bg-emerald-500"></div>
             <span class="pointer-events-none absolute left-1 top-1 h-5 w-5 rounded-full bg-white shadow transform transition-transform duration-200 translate-x-0 peer-checked:translate-x-7"></span>
           </label>
-          <span class="text-sm font-medium text-slate-300">Gi only</span>
+          <span class="text-sm font-medium text-slate-300" data-i18n="form.giOnly">Gi only</span>
         </div>
         <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <button type="submit" class="rounded-2xl bg-slate-800 px-5 py-3 text-sm font-semibold text-slate-100 transition hover:bg-slate-700">Add Move</button>
-          <p id="formTip" class="text-sm leading-6 text-slate-400">Save move to catalog.</p>
+          <button type="submit" class="rounded-2xl bg-slate-800 px-5 py-3 text-sm font-semibold text-slate-100 transition hover:bg-slate-700" data-i18n="form.addMove">Add Move</button>
+          <p id="formTip" class="text-sm leading-6 text-slate-400" data-i18n="form.tip">Save move to catalog.</p>
         </div>
       </form>
       </div>
       <div id="pageProfile" class="hidden mt-6 space-y-4">
         <div class="text-center">
-          <h2 class="text-2xl font-semibold tracking-tight text-white">My BJJ Profile</h2>
+          <h2 class="text-2xl font-semibold tracking-tight text-white" data-i18n="profile.title">My BJJ Profile</h2>
         </div>
         <div class="rounded-3xl border border-slate-700/60 bg-slate-950/40 p-4 space-y-4">
           <div class="rounded-3xl border border-slate-700/60 bg-slate-900/70 p-4 text-center">
-            <p class="text-sm uppercase tracking-[0.18em] text-slate-400">CURRENT BELT</p>
+            <p class="text-sm uppercase tracking-[0.18em] text-slate-400" data-i18n="profile.currentBelt">CURRENT BELT</p>
             <div class="mt-4 flex flex-col items-center gap-4">
               <img id="profileBeltImage" class="h-28 w-auto rounded-3xl border border-slate-700 bg-transparent p-3" alt="Current belt image" src="" />
               <div class="space-y-2 hidden">
-                <p id="profileBeltSummary" class="text-3xl font-semibold text-white">White belt</p>
+                <p id="profileBeltSummary" class="text-3xl font-semibold text-white" data-i18n="profile.whiteBelt">White belt</p>
                 <span id="profileBeltBadge" class="inline-flex items-center rounded-full border border-slate-700 bg-slate-950 px-3 py-1 text-sm font-semibold uppercase tracking-[0.14em] text-slate-200">White</span>
-                <p id="profileStripeSummary" class="mt-1 text-sm text-slate-400">0 stripes</p>
+                <p id="profileStripeSummary" class="mt-1 text-sm text-slate-400" data-i18n="profile.stripes">0 stripes</p>
               </div>
             </div>
           </div>
           <section class="flex items-center justify-between gap-3 rounded-3xl border border-slate-700/60 bg-slate-900/70 p-4">
             <div class="min-w-0">
-              <p class="text-sm uppercase tracking-[0.18em] text-slate-400">Name</p>
+              <p class="text-sm uppercase tracking-[0.18em] text-slate-400" data-i18n="profile.name">Name</p>
               <p id="profileNameDisplay" class="mt-2 text-lg font-semibold text-white truncate"></p>
               <div id="profileNameEdit" class="mt-3 hidden flex gap-2">
-                <input id="profileNameInput" type="text" placeholder="Enter name" class="w-full rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-white outline-none" />
-                <button id="profileNameSave" type="button" class="rounded-2xl bg-slate-800 px-3 py-2 text-sm font-semibold text-white transition hover:bg-slate-700">Enter</button>
+                <input id="profileNameInput" type="text" placeholder="Enter name" class="w-full rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-white outline-none" data-i18n-placeholder="profile.namePlaceholder" />
+                <button id="profileNameSave" type="button" class="rounded-2xl bg-slate-800 px-3 py-2 text-sm font-semibold text-white transition hover:bg-slate-700" data-i18n="profile.enter">Enter</button>
               </div>
             </div>
-            <button type="button" class="profileEditBtn text-slate-400 transition hover:text-white" data-field="name" aria-label="Edit name">📝</button>
+            <button type="button" class="profileEditBtn text-slate-400 transition hover:text-white" data-field="name" aria-label="Edit name" data-i18n-aria-label="profile.editName">📝</button>
           </section>
           <section class="flex items-center justify-between gap-3 rounded-3xl border border-slate-700/60 bg-slate-900/70 p-4">
             <div class="min-w-0">
-              <p class="text-sm uppercase tracking-[0.18em] text-slate-400">Age</p>
-              <p id="profileAgeDisplay" class="mt-2 text-lg font-semibold text-white">Not set</p>
+              <p class="text-sm uppercase tracking-[0.18em] text-slate-400" data-i18n="profile.age">Age</p>
+              <p id="profileAgeDisplay" class="mt-2 text-lg font-semibold text-white" data-i18n="profile.notSet">Not set</p>
               <div id="profileAgeEdit" class="mt-3 hidden flex gap-2">
-                <input id="profileAgeInput" type="number" min="1" max="120" placeholder="Enter age" class="w-24 rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-white outline-none" />
-                <button id="profileAgeSave" type="button" class="rounded-2xl bg-slate-800 px-3 py-2 text-sm font-semibold text-white transition hover:bg-slate-700">Enter</button>
+                <input id="profileAgeInput" type="number" min="1" max="120" placeholder="Enter age" class="w-24 rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-white outline-none" data-i18n-placeholder="profile.agePlaceholder" />
+                <button id="profileAgeSave" type="button" class="rounded-2xl bg-slate-800 px-3 py-2 text-sm font-semibold text-white transition hover:bg-slate-700" data-i18n="profile.enter">Enter</button>
               </div>
             </div>
-            <button type="button" class="profileEditBtn text-slate-400 transition hover:text-white" data-field="age" aria-label="Edit age">📝</button>
+            <button type="button" class="profileEditBtn text-slate-400 transition hover:text-white" data-field="age" aria-label="Edit age" data-i18n-aria-label="profile.editAge">📝</button>
           </section>
           <section class="flex items-center justify-between gap-3 rounded-3xl border border-slate-700/60 bg-slate-900/70 p-4">
             <div class="min-w-0">
-              <p class="text-sm uppercase tracking-[0.18em] text-slate-400">Gym</p>
+              <p class="text-sm uppercase tracking-[0.18em] text-slate-400" data-i18n="profile.gym">Gym</p>
               <p id="profileGymDisplay" class="mt-2 text-lg font-semibold text-white truncate"></p>
               <div id="profileGymEdit" class="mt-3 hidden flex gap-2">
-                <input id="profileGymInput" type="text" placeholder="Enter gym" class="w-full rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-white outline-none" />
-                <button id="profileGymSave" type="button" class="rounded-2xl bg-slate-800 px-3 py-2 text-sm font-semibold text-white transition hover:bg-slate-700">Enter</button>
+                <input id="profileGymInput" type="text" placeholder="Enter gym" class="w-full rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-white outline-none" data-i18n-placeholder="profile.gymPlaceholder" />
+                <button id="profileGymSave" type="button" class="rounded-2xl bg-slate-800 px-3 py-2 text-sm font-semibold text-white transition hover:bg-slate-700" data-i18n="profile.enter">Enter</button>
               </div>
             </div>
-            <button type="button" class="profileEditBtn text-slate-400 transition hover:text-white" data-field="gym" aria-label="Edit gym">📝</button>
+            <button type="button" class="profileEditBtn text-slate-400 transition hover:text-white" data-field="gym" aria-label="Edit gym" data-i18n-aria-label="profile.editGym">📝</button>
           </section>
           <section class="flex flex-col gap-3 rounded-3xl border border-slate-700/60 bg-slate-900/70 p-4">
             <div class="flex items-center justify-between gap-3">
               <div>
-                <p class="text-sm uppercase tracking-[0.18em] text-slate-400">Belt level</p>
-                <p id="profileBeltDisplay" class="mt-2 text-lg font-semibold text-white">White</p>
+                <p class="text-sm uppercase tracking-[0.18em] text-slate-400" data-i18n="profile.beltLevel">Belt level</p>
+                <p id="profileBeltDisplay" class="mt-2 text-lg font-semibold text-white" data-i18n="profile.white">White</p>
               </div>
-              <button type="button" class="profileEditBtn text-slate-400 transition hover:text-white" data-field="belt" aria-label="Edit belt">📝</button>
+              <button type="button" class="profileEditBtn text-slate-400 transition hover:text-white" data-field="belt" aria-label="Edit belt" data-i18n-aria-label="profile.editBelt">📝</button>
             </div>
             <div id="profileBeltEdit" class="hidden space-y-3">
               <select id="profileBeltSelect" class="w-full rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-white outline-none">
               </select>
               <div class="flex flex-wrap gap-2" id="profileStripeButtons"></div>
               <div id="profileStripeExtra" class="hidden flex items-center gap-2 text-sm text-slate-400">
-                <span>Stripes:</span>
+                <span data-i18n="profile.stripesLabel">Stripes:</span>
                 <span id="profileStripeCountDisplay" class="font-semibold text-white">0</span>
                 <input id="profileStripeExtraInput" type="number" min="0" max="10" placeholder="0-10" class="w-20 rounded-2xl border border-slate-700 bg-slate-950 px-2 py-1 text-white outline-none" />
               </div>
-              <button id="profileBeltSave" type="button" class="rounded-2xl bg-slate-800 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700">Enter</button>
+              <button id="profileBeltSave" type="button" class="rounded-2xl bg-slate-800 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700" data-i18n="profile.enter">Enter</button>
             </div>
           </section>
           <section class="flex items-center justify-between gap-3 rounded-3xl border border-slate-700/60 bg-slate-900/70 p-4">
             <div class="min-w-0">
-              <p class="text-sm uppercase tracking-[0.18em] text-slate-400">Started training</p>
-              <p id="profileStartedDisplay" class="mt-2 text-lg font-semibold text-white">Not set</p>
+              <p class="text-sm uppercase tracking-[0.18em] text-slate-400" data-i18n="profile.startedTraining">Started training</p>
+              <p id="profileStartedDisplay" class="mt-2 text-lg font-semibold text-white" data-i18n="profile.notSet">Not set</p>
               <div id="profileStartedEdit" class="mt-3 hidden flex flex-wrap gap-2">
                 <select id="profileStartedMonthSelect" class="rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-white outline-none">
-                  <option value="Jan">Jan</option>
-                  <option value="Feb">Feb</option>
-                  <option value="Mar">Mar</option>
-                  <option value="Apr">Apr</option>
-                  <option value="May">May</option>
-                  <option value="Jun">Jun</option>
-                  <option value="Jul">Jul</option>
-                  <option value="Aug">Aug</option>
-                  <option value="Sep">Sep</option>
-                  <option value="Oct">Oct</option>
-                  <option value="Nov">Nov</option>
-                  <option value="Dec">Dec</option>
+                  <option value="Jan" data-i18n="profile.months.jan">Jan</option>
+                  <option value="Feb" data-i18n="profile.months.feb">Feb</option>
+                  <option value="Mar" data-i18n="profile.months.mar">Mar</option>
+                  <option value="Apr" data-i18n="profile.months.apr">Apr</option>
+                  <option value="May" data-i18n="profile.months.may">May</option>
+                  <option value="Jun" data-i18n="profile.months.jun">Jun</option>
+                  <option value="Jul" data-i18n="profile.months.jul">Jul</option>
+                  <option value="Aug" data-i18n="profile.months.aug">Aug</option>
+                  <option value="Sep" data-i18n="profile.months.sep">Sep</option>
+                  <option value="Oct" data-i18n="profile.months.oct">Oct</option>
+                  <option value="Nov" data-i18n="profile.months.nov">Nov</option>
+                  <option value="Dec" data-i18n="profile.months.dec">Dec</option>
                 </select>
                 <select id="profileStartedYearSelect" class="w-24 rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-white outline-none"></select>
-                <button id="profileStartedSave" type="button" class="rounded-2xl bg-slate-800 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700">Enter</button>
+                <button id="profileStartedSave" type="button" class="rounded-2xl bg-slate-800 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700" data-i18n="profile.enter">Enter</button>
               </div>
             </div>
-            <button type="button" class="profileEditBtn text-slate-400 transition hover:text-white" data-field="started" aria-label="Edit starting date">📝</button>
+            <button type="button" class="profileEditBtn text-slate-400 transition hover:text-white" data-field="started" aria-label="Edit starting date" data-i18n-aria-label="profile.editStarted">📝</button>
           </section>
           <section class="flex items-center justify-between gap-3 rounded-3xl border border-slate-700/60 bg-slate-900/70 p-4">
             <div class="min-w-0">
-              <p class="text-sm uppercase tracking-[0.18em] text-slate-400">Favorite move</p>
-              <p id="profileFavoriteDisplay" class="mt-2 text-lg font-semibold text-white truncate">No favorite move set</p>
+              <p class="text-sm uppercase tracking-[0.18em] text-slate-400" data-i18n="profile.favoriteMove">Favorite move</p>
+              <p id="profileFavoriteDisplay" class="mt-2 text-lg font-semibold text-white truncate" data-i18n="profile.noFavorite">No favorite move set</p>
               <div id="profileFavoriteEdit" class="mt-3 hidden flex gap-2">
                 <select id="profileFavoriteSelect" class="w-full rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-white outline-none">
                 </select>
-                <button id="profileFavoriteSave" type="button" class="rounded-2xl bg-slate-800 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700">Enter</button>
+                <button id="profileFavoriteSave" type="button" class="rounded-2xl bg-slate-800 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700" data-i18n="profile.enter">Enter</button>
               </div>
             </div>
-            <button type="button" class="profileEditBtn text-slate-400 transition hover:text-white" data-field="favorite" aria-label="Edit favorite move">📝</button>
+            <button type="button" class="profileEditBtn text-slate-400 transition hover:text-white" data-field="favorite" aria-label="Edit favorite move" data-i18n-aria-label="profile.editFavorite">📝</button>
           </section>
         </div>
       </div>
       <div id="pageSettings" class="hidden mt-6 space-y-4">
         <div class="text-center">
-          <h2 class="text-2xl font-semibold tracking-tight text-white">Settings</h2>
+          <h2 class="text-2xl font-semibold tracking-tight text-white" data-i18n="settings.pageTitle">Settings</h2>
         </div>
         <div class="rounded-3xl border border-slate-700/60 bg-slate-950/40 p-4 space-y-4">
           <div class="rounded-3xl border border-slate-700/60 bg-slate-900/70 p-4">
             <div class="flex items-center justify-between gap-3">
               <div>
-                <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">Theme</p>
-                <p class="mt-2 text-sm leading-6 text-slate-300">Switch between dark and light mode.</p>
+                <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400" data-i18n="settings.theme">Theme</p>
+                <p class="mt-2 text-sm leading-6 text-slate-300" data-i18n="settings.themeHint">Switch between dark and light mode.</p>
               </div>
               <label class="relative inline-flex h-7 w-14 cursor-pointer items-center">
                 <input id="themeToggle" type="checkbox" class="peer sr-only" />
@@ -274,34 +358,46 @@
               </label>
             </div>
           </div>
+          <div class="rounded-3xl border border-slate-700/60 bg-slate-900/70 p-4">
+            <div class="flex items-center justify-between gap-3">
+              <div>
+                <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-400" data-i18n="settings.language">Language</p>
+                <p class="mt-2 text-sm leading-6 text-slate-300" data-i18n="settings.languageHint">Choose your preferred language.</p>
+              </div>
+              <select id="languageSelect" class="rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white outline-none">
+                <option value="en" data-i18n="settings.languageOptions.english">English</option>
+                <option value="pt" data-i18n="settings.languageOptions.portuguese">Português</option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
       <div id="pageCatalog" class="hidden mt-6 space-y-4">
         <div class="text-center">
-          <h2 class="text-2xl font-semibold tracking-tight text-white">Move Catalog</h2>
-          <p class="mt-3 text-sm leading-6 text-slate-300">Browse and review your move library in one place.</p>
+          <h2 class="text-2xl font-semibold tracking-tight text-white" data-i18n="catalog.pageTitle">Move Catalog</h2>
+          <p class="mt-3 text-sm leading-6 text-slate-300" data-i18n="catalog.pageDescription">Browse and review your move library in one place.</p>
         </div>
         <div class="rounded-3xl border border-slate-700/60 bg-slate-950/40 p-4">
           <div class="grid gap-4">
             <div>
-              <label class="block text-sm font-medium text-slate-300">Search moves</label>
+              <label class="block text-sm font-medium text-slate-300" data-i18n="catalog.searchLabel">Search moves</label>
               <div class="relative mt-2">
-                <input id="searchInput" type="search" placeholder="Type a move name to search" class="w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 pr-10 text-white outline-none transition focus:border-sky-400" style="-webkit-appearance:none; appearance:none;" />
-                <button id="searchClearBtn" type="button" class="absolute right-3 top-1/2 hidden -translate-y-1/2 rounded-full p-1 text-slate-400 transition hover:bg-slate-800 hover:text-white" aria-label="Clear search">×</button>
+                <input id="searchInput" type="search" placeholder="Type a move name to search" class="w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 pr-10 text-white outline-none transition focus:border-sky-400" style="-webkit-appearance:none; appearance:none;" data-i18n-placeholder="catalog.searchPlaceholder" />
+                <button id="searchClearBtn" type="button" class="absolute right-3 top-1/2 hidden -translate-y-1/2 rounded-full p-1 text-slate-400 transition hover:bg-slate-800 hover:text-white" aria-label="Clear search" data-i18n-aria-label="catalog.clearSearch">×</button>
               </div>
             </div>
             <div>
-              <label class="block text-sm font-medium text-slate-300">Position</label>
+              <label class="block text-sm font-medium text-slate-300" data-i18n="catalog.positionLabel">Position</label>
               <select id="filterPosition" class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400">
-                <option value="All">All positions</option>
+                <option value="All" data-i18n="catalog.allPositions">All positions</option>
               </select>
             </div>
           </div>
         </div>
         <div id="cardsContainer" class="mt-8 space-y-6"></div>
         <div class="mt-6 grid grid-cols-2 gap-3 border-t border-slate-800/80 pt-4">
-          <button id="exportCatalogBtn" type="button" class="w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm font-semibold text-slate-200 transition hover:border-sky-400 hover:text-white">Export</button>
-          <button id="importCatalogBtn" type="button" class="w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm font-semibold text-slate-200 transition hover:border-sky-400 hover:text-white">Import</button>
+          <button id="exportCatalogBtn" type="button" class="w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm font-semibold text-slate-200 transition hover:border-sky-400 hover:text-white" data-i18n="catalog.exportAction">Export</button>
+          <button id="importCatalogBtn" type="button" class="w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm font-semibold text-slate-200 transition hover:border-sky-400 hover:text-white" data-i18n="catalog.importAction">Import</button>
         </div>
       </div>
     </section>
@@ -323,26 +419,26 @@
             </div>
             <div class="stats-summary flex flex-wrap items-center gap-3">
               <div class="text-right">
-                <p class="text-[10px] uppercase tracking-[0.24em] text-slate-400">Attempts</p>
+                <p class="text-[10px] uppercase tracking-[0.24em] text-slate-400" data-i18n="catalog.attempts">Attempts</p>
                 <p class="attempts text-xl font-semibold text-white">0</p>
               </div>
               <div class="text-right">
-                <p class="text-[10px] uppercase tracking-[0.24em] text-slate-400">Successes</p>
+                <p class="text-[10px] uppercase tracking-[0.24em] text-slate-400" data-i18n="catalog.successes">Successes</p>
                 <p class="successes text-xl font-semibold text-white">0</p>
               </div>
               <div class="text-right">
-                <p class="text-[10px] uppercase tracking-[0.24em] text-slate-400">Success</p>
+                <p class="text-[10px] uppercase tracking-[0.24em] text-slate-400" data-i18n="catalog.success">Success</p>
                 <p class="summary-rate text-xl font-semibold text-sky-300">0%</p>
               </div>
             </div>
           </div>
         </button>
         <div class="flex flex-col gap-2">
-          <button type="button" class="subposition-edit-btn rounded-full border border-slate-700 bg-slate-800 p-3 text-slate-300 transition hover:border-sky-400 hover:text-sky-300" aria-label="Edit move details">
+          <button type="button" class="subposition-edit-btn rounded-full border border-slate-700 bg-slate-800 p-3 text-slate-300 transition hover:border-sky-400 hover:text-sky-300" aria-label="Edit move details" data-i18n-aria-label="catalog.editMoveDetails">
             <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 13.5V16h2.5l7.4-7.4-2.5-2.5L4 13.5z" stroke-linejoin="round"/><path d="M12.5 4.5l3 3" stroke-linecap="round"/></svg>
           </button>
           <div class="flex flex-col items-center gap-1">
-            <button type="button" class="subposition-toggle-btn rounded-full border border-slate-700 bg-slate-800 p-3 text-slate-300 transition hover:border-sky-400 hover:text-sky-300" aria-label="Toggle dependent moves">
+            <button type="button" class="subposition-toggle-btn rounded-full border border-slate-700 bg-slate-800 p-3 text-slate-300 transition hover:border-sky-400 hover:text-sky-300" aria-label="Toggle dependent moves" data-i18n-aria-label="catalog.toggleDependentMoves">
               <svg class="h-5 w-5 transition-transform" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <span class="transition-count-badge hidden min-w-[1.75rem] rounded-full bg-violet-500/15 px-2 py-1 text-center text-[11px] font-semibold text-violet-200 ring-1 ring-violet-400/20"></span>
@@ -352,53 +448,53 @@
       <div class="details hidden border-t border-slate-700/60 px-4 py-4">
         <div class="mt-4 rounded-3xl bg-slate-900/80 p-4 space-y-4">
           <div>
-            <label class="block text-sm uppercase tracking-[0.18em] text-slate-400">Origin</label>
+            <label class="block text-sm uppercase tracking-[0.18em] text-slate-400" data-i18n="catalog.origin">Origin</label>
             <select class="origin-select mt-2 w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400">
-              <option value="Modern BJJ">Modern BJJ</option>
-              <option value="Freestyle Wrestling">Freestyle Wrestling</option>
-              <option value="Catch Wrestling">Catch Wrestling</option>
-              <option value="Greco-Roman">Greco-Roman</option>
-              <option value="Judo">Judo</option>
-              <option value="Japanese Ju-Jutsu">Japanese Ju-Jutsu</option>
-              <option value="Sambo">Sambo</option>
-              <option value="Other">Other</option>
+              <option value="Modern BJJ" data-i18n="catalog.originOptions.modernBjj">Modern BJJ</option>
+              <option value="Freestyle Wrestling" data-i18n="catalog.originOptions.freestyleWrestling">Freestyle Wrestling</option>
+              <option value="Catch Wrestling" data-i18n="catalog.originOptions.catchWrestling">Catch Wrestling</option>
+              <option value="Greco-Roman" data-i18n="catalog.originOptions.grecoRoman">Greco-Roman</option>
+              <option value="Judo" data-i18n="catalog.originOptions.judo">Judo</option>
+              <option value="Japanese Ju-Jutsu" data-i18n="catalog.originOptions.japaneseJuJutsu">Japanese Ju-Jutsu</option>
+              <option value="Sambo" data-i18n="catalog.originOptions.sambo">Sambo</option>
+              <option value="Other" data-i18n="catalog.originOptions.other">Other</option>
             </select>
-            <input type="text" class="origin-other mt-3 hidden w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400" placeholder="Specify other origin" />
+            <input type="text" class="origin-other mt-3 hidden w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-white outline-none transition focus:border-sky-400" placeholder="Specify other origin" data-i18n-placeholder="catalog.originOtherPlaceholder" />
           </div>
         </div>
-        <p class="ibjjf-note hidden mt-3 rounded-2xl border border-amber-500/20 bg-amber-500/5 px-4 py-3 text-sm text-amber-200">IBJJF Legality note</p>
-        <label class="block text-sm font-medium text-slate-300">Description</label>
-        <textarea class="move-notes mt-2 w-full rounded-3xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-sky-400" rows="4" placeholder="Add notes or a quick description..."></textarea>
+        <p class="ibjjf-note hidden mt-3 rounded-2xl border border-amber-500/20 bg-amber-500/5 px-4 py-3 text-sm text-amber-200" data-i18n="catalog.ibjjfNote">IBJJF Legality note</p>
+        <label class="block text-sm font-medium text-slate-300" data-i18n="catalog.description">Description</label>
+        <textarea class="move-notes mt-2 w-full rounded-3xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-slate-100 outline-none transition focus:border-sky-400" rows="4" placeholder="Add notes or a quick description..." data-i18n-placeholder="catalog.descriptionPlaceholder"></textarea>
         <div class="mt-4 rounded-3xl border border-slate-700/60 bg-slate-900/80 p-4">
-          <label class="block text-sm font-medium text-slate-300">Image</label>
+          <label class="block text-sm font-medium text-slate-300" data-i18n="catalog.image">Image</label>
           <div class="mt-4 rounded-3xl border border-slate-700 bg-slate-900 p-3">
             <div class="image-preview relative h-40 overflow-hidden rounded-3xl bg-slate-950">
               <img class="move-image h-full w-full object-cover hidden" alt="Move image preview" />
-              <div class="no-image absolute inset-0 flex items-center justify-center text-sm text-slate-500">No image selected</div>
+              <div class="no-image absolute inset-0 flex items-center justify-center text-sm text-slate-500" data-i18n="catalog.noImage">No image selected</div>
             </div>
             <div class="mt-3 flex flex-wrap items-center gap-3">
               <label class="inline-flex cursor-pointer items-center rounded-2xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm font-semibold text-slate-100 transition hover:border-sky-400">
                 <input type="file" accept="image/*" class="sr-only image-input" />
-                Choose image
+                <span data-i18n="catalog.chooseImage">Choose image</span>
               </label>
-              <button type="button" class="remove-image-btn hidden rounded-2xl border border-rose-500 bg-transparent px-4 py-3 text-sm font-semibold text-rose-300 transition hover:bg-rose-500/10">Remove image</button>
-              <button type="button" class="delete-subposition-btn hidden rounded-2xl border border-rose-500 bg-transparent px-4 py-3 text-sm font-semibold text-rose-300 transition hover:bg-rose-500/10">Delete sub-position</button>
+              <button type="button" class="remove-image-btn hidden rounded-2xl border border-rose-500 bg-transparent px-4 py-3 text-sm font-semibold text-rose-300 transition hover:bg-rose-500/10" data-i18n="catalog.removeImage">Remove image</button>
+              <button type="button" class="delete-subposition-btn hidden rounded-2xl border border-rose-500 bg-transparent px-4 py-3 text-sm font-semibold text-rose-300 transition hover:bg-rose-500/10" data-i18n="catalog.deleteSubPosition">Delete sub-position</button>
             </div>
           </div>
         </div>
         <div class="mt-4 grid gap-4">
           <div class="stats-panel rounded-3xl bg-slate-900/80 p-4 space-y-4">
             <div>
-              <p class="text-sm uppercase tracking-[0.18em] text-slate-400">Success Rate</p>
+              <p class="text-sm uppercase tracking-[0.18em] text-slate-400" data-i18n="catalog.successRate">Success Rate</p>
               <p class="success-rate mt-2 text-3xl font-semibold">0%</p>
             </div>
           </div>
         </div>
         <div class="action-row mt-4 flex flex-wrap gap-3">
-          <button type="button" class="attempt-btn rounded-2xl bg-slate-800 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-700">+1 Attempt</button>
-          <button type="button" class="success-btn rounded-2xl bg-emerald-500 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400">+1 Success</button>
-          <button type="button" class="undo-btn rounded-2xl border border-sky-500 bg-slate-800 px-4 py-3 text-sm font-semibold text-sky-300 transition hover:bg-sky-700 disabled:cursor-not-allowed disabled:opacity-50">Undo</button>
-          <button type="button" class="delete-btn rounded-2xl border border-rose-500 bg-transparent px-4 py-3 text-sm font-semibold text-rose-300 transition hover:bg-rose-500/10">Delete</button>
+          <button type="button" class="attempt-btn rounded-2xl bg-slate-800 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-700" data-i18n="catalog.attemptAction">+1 Attempt</button>
+          <button type="button" class="success-btn rounded-2xl bg-emerald-500 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400" data-i18n="catalog.successAction">+1 Success</button>
+          <button type="button" class="undo-btn rounded-2xl border border-sky-500 bg-slate-800 px-4 py-3 text-sm font-semibold text-sky-300 transition hover:bg-sky-700 disabled:cursor-not-allowed disabled:opacity-50" data-i18n="catalog.undoAction">Undo</button>
+          <button type="button" class="delete-btn rounded-2xl border border-rose-500 bg-transparent px-4 py-3 text-sm font-semibold text-rose-300 transition hover:bg-rose-500/10" data-i18n="catalog.deleteAction">Delete</button>
         </div>
       </div>
     </article>
@@ -406,40 +502,39 @@
 
   <div id="helpModal" class="hidden fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-slate-950/80 p-4">
     <div class="relative w-full max-w-lg rounded-3xl border border-slate-700 bg-slate-900 p-6 text-white shadow-2xl max-h-[calc(100vh-2rem)] overflow-y-auto">
-      <button id="helpModalClose" type="button" class="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 bg-slate-800 text-slate-300 transition hover:border-sky-400 hover:text-white" aria-label="Close help">×</button>
-      <h2 class="text-2xl font-semibold">Welcome to RollBase BJJ</h2>
-      <p class="mt-3 text-sm text-slate-300">Use this tracker to log moves, save sub-positions, track attempts and successes, and view IBJJF legality notes.</p>
+      <button id="helpModalClose" type="button" class="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 bg-slate-800 text-slate-300 transition hover:border-sky-400 hover:text-white" aria-label="Close help" data-i18n-aria-label="help.close">×</button>
+      <h2 class="text-2xl font-semibold" data-i18n="help.title">Welcome to RollBase BJJ</h2>
+      <p class="mt-3 text-sm text-slate-300" data-i18n="help.intro">Use this tracker to log moves, save sub-positions, track attempts and successes, and view IBJJF legality notes.</p>
       <ul class="mt-4 space-y-3 text-sm text-slate-300 list-disc list-inside">
-        <li>Where should i start? -Start by going to "My Profile", and filling in your details, this will unlock some features, such as Belt Display and IBJJF Legality Index</li>
-        <li>How do i log my moves? -First, log your move name in the box. Then, select if the move you're logging is a sub-position, and then select the position from the dropdown where this move is performed. Depending on the position selected, choose your supposed role in the position. Finally, put whether the move is gi + nogi or gi only and click "add move". Your moves will appear in the "move catalog" tab.</li>
-        <li>What now? -Now, after each roll or after a whole training, you go through the moves that you know and log how many times you attempted it/succeeded in doing it. You can also add descriptions, general information, and images to these moves you add, to make it easier to share with friends or to avoid forgetting how to do certain maneuvers.</li>
-        <li>What determines success/attempt? -A success counts as when, by attempting this move, you either win the fight or you obtain a better position. An attempt counts as when you attempt this move, and either end up in a neutral/worse position than before attempting it.</li>
-       <br>
-        <p class="mt-3 text-sm text-slate-300">Dictionary: </p>
-        <li>Transition: A move that is performed from within another position. Log by selecting "transition" from the dropdown and selecting a move you have already logged.</li>
-        <li>Sub-Position: A move that is more like a position than a technique. Does not include success/attempt rates. Log by selecting "sub-position" in the move add form.</li>
+        <li data-i18n="help.start">Where should i start? -Start by going to "My Profile", and filling in your details, this will unlock some features, such as Belt Display and IBJJF Legality Index</li>
+        <li data-i18n="help.logMoves">How do i log my moves? -First, log your move name in the box. Then, select if the move you're logging is a sub-position, and then select the position from the dropdown where this move is performed. Depending on the position selected, choose your supposed role in the position. Finally, put whether the move is gi + nogi or gi only and click "add move". Your moves will appear in the "move catalog" tab.</li>
+        <li data-i18n="help.whatNow">What now? -Now, after each roll or after a whole training, you go through the moves that you know and log how many times you attempted it/succeeded in doing it. You can also add descriptions, general information, and images to these moves you add, to make it easier to share with friends or to avoid forgetting how to do certain maneuvers.</li>
+        <li data-i18n="help.successAttempt">What determines success/attempt? -A success counts as when, by attempting this move, you either win the fight or you obtain a better position. An attempt counts as when you attempt this move, and either end up in a neutral/worse position than before attempting it.</li>
+        <li class="mt-3" data-i18n="help.dictionary">Dictionary:</li>
+        <li data-i18n="help.transition">Transition: A move that is performed from within another position. Log by selecting "transition" from the dropdown and selecting a move you have already logged.</li>
+        <li data-i18n="help.subPosition">Sub-Position: A move that is more like a position than a technique. Does not include success/attempt rates. Log by selecting "sub-position" in the move add form.</li>
       </ul>
       <div class="mt-6 flex justify-end">
-        <button id="helpDismissButton" type="button" class="rounded-2xl bg-sky-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-sky-400">Got it</button>
+        <button id="helpDismissButton" type="button" class="rounded-2xl bg-sky-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-sky-400" data-i18n="help.dismiss">Got it</button>
       </div>
     </div>
   </div>
 
   <div id="catalogImportExportModal" class="hidden fixed inset-0 z-[60] flex items-center justify-center overflow-y-auto bg-slate-950/80 p-4">
     <div class="relative w-full max-w-xl rounded-3xl border border-slate-700 bg-slate-900 p-6 text-white shadow-2xl">
-      <button id="catalogImportExportClose" type="button" class="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 bg-slate-800 text-slate-300 transition hover:border-sky-400 hover:text-white" aria-label="Close catalog import/export">×</button>
-      <h3 id="catalogImportExportTitle" class="text-xl font-semibold">Catalog export</h3>
-      <p id="catalogImportExportMessage" class="mt-2 text-sm text-slate-300">Copy or paste the catalog string below.</p>
+      <button id="catalogImportExportClose" type="button" class="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 bg-slate-800 text-slate-300 transition hover:border-sky-400 hover:text-white" aria-label="Close catalog import/export" data-i18n-aria-label="catalogImportExport.close">×</button>
+      <h3 id="catalogImportExportTitle" class="text-xl font-semibold" data-i18n="catalogImportExport.exportTitle">Catalog export</h3>
+      <p id="catalogImportExportMessage" class="mt-2 text-sm text-slate-300" data-i18n="catalogImportExport.exportMessage">Copy or paste the catalog string below.</p>
       <textarea id="catalogImportExportInput" class="mt-4 min-h-[180px] w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 font-mono text-sm text-slate-100 outline-none transition focus:border-sky-400"></textarea>
       <div id="catalogImportOptions" class="mt-4 hidden rounded-2xl border border-slate-700/60 bg-slate-900/70 p-3">
         <label class="flex items-center gap-3 text-sm text-slate-300">
           <input id="catalogImportIncludeStats" type="checkbox" class="h-4 w-4 rounded border-slate-600 bg-slate-950 text-sky-500 focus:ring-sky-400" checked />
-          <span>Import attempts and successes data</span>
+          <span data-i18n="catalogImportExport.includeStats">Import attempts and successes data</span>
         </label>
       </div>
       <div class="mt-4 flex flex-wrap gap-3">
-        <button id="catalogCopyBtn" type="button" class="rounded-2xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm font-semibold text-slate-100 transition hover:border-sky-400 hover:text-white">Copy</button>
-        <button id="catalogConfirmBtn" type="button" class="rounded-2xl bg-sky-500 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-sky-400">Import</button>
+        <button id="catalogCopyBtn" type="button" class="rounded-2xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm font-semibold text-slate-100 transition hover:border-sky-400 hover:text-white" data-i18n="catalogImportExport.copy">Copy</button>
+        <button id="catalogConfirmBtn" type="button" class="rounded-2xl bg-sky-500 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-sky-400" data-i18n="catalogImportExport.import">Import</button>
       </div>
     </div>
   </div>
@@ -448,6 +543,58 @@
     const STORAGE_KEY = 'jiuJitsuMoves';
     const HELP_SEEN_KEY = 'jiuJitsuHelpSeen';
     const THEME_KEY = 'jiuJitsuTheme';
+    const LANGUAGE_KEY = 'jiuJitsuLanguage';
+    const translations = {
+      en: {
+        app: { title: 'RollBaseBJJ' },
+        tabs: { addMove: 'Move add', catalog: 'Move catalog', profile: 'My Profile', settings: 'Settings' },
+        hero: { credit: 'Vibe-coded by ig@ryanalex_g', description: 'Your personal BJJ move journal.<br> Click the little (i) for help.' },
+        help: { open: 'Help', iconText: 'i', close: 'Close help', title: 'Welcome to RollBase BJJ', intro: 'Use this tracker to log moves, save sub-positions, track attempts and successes, and view IBJJF legality notes.', start: 'Where should I start? - Start by going to "My Profile" and filling in your details; this will unlock features such as the belt display and IBJJF legality index.', logMoves: 'How do I log my moves? - First, enter the move name. Then choose whether it is a sub-position, select the position, choose your role, specify whether it is gi + nogi or gi only, and click "add move". Your moves will appear in the "move catalog" tab.', whatNow: 'What now? - After each roll or training session, review the moves you know and log how many times you attempted or succeeded with them. You can also add descriptions, information, and images to help you remember them.', successAttempt: 'What determines success/attempt? - A success counts when you either win the exchange or gain a better position. An attempt counts when you try the move and end in either a worse position or a neutral position having spent more energy than your opponent.', dictionary: 'Dictionary:', transition: 'Transition: A move performed from within another position. Log it by selecting "transition" from the dropdown and choosing a move you already logged.', subPosition: 'Sub-Position: A move that is more like a position than a technique. It does not include success/attempt rates. Log it by selecting "sub-position" in the move add form.', dismiss: 'Got it' },
+        form: { moveName: 'Move name', moveNamePlaceholder: 'Knee Bar', addSubPosition: 'Add Sub-Position', position: 'Position', roleLabel: 'Top or Bottom', transitionFromLabel: 'Transition from', transitionSelectPrompt: 'Select a move', roleOptions: { top: 'Top', bottom: 'Bottom', controller: 'Controller', receiver: 'Receiver', controllerReceiverLabel: 'Controller / Receiver' }, entanglementSide: 'Entanglement side', entanglementSideOptions: { backside: 'Backside', frontside: 'Frontside' }, positionGroups: { guard: 'Guard', guardStanding: 'Guard standing', legEntanglements: 'Leg Entanglements', advantageousPositions: 'Advantageous Positions' }, positionOptions: { standing: 'Standing', transition: 'Transition', closedGuard: 'Closed Guard', halfGuard: 'Half guard', quarterGuard: 'Quarter guard', butterflyGuard: 'Butterfly guard', halfButterflyGuard: 'Half butterfly guard', sittingGuard: 'Sitting guard', delariva: 'Delariva', slx: 'SLX', xGuard: 'X-guard', spiderGuard: 'Spider guard', lassoGuard: 'Lasso guard', straightAshi: 'Straight Ashi (SLX)', crossAshi: 'Cross Ashi', fiftyFifty: '50/50', sideControl: 'Side control', northSouth: 'North South', katagatame: 'Kesa-gatame', kneeOnBelly: 'Knee on belly', topCrucifix: 'Top Crucifix (Salaverry)', bottomCrucifix: 'Bottom Crucifix', mount: 'Mount', backMount: 'Back mount', backMountBodyTriangle: 'Back mount (Body triangle)', turtleBackside: 'Turtle (Backside)', frontHeadlockSprawl: 'Front Headlock (Sprawl)' }, giAndNogi: 'Gi and Nogi', giOnly: 'Gi only', addMove: 'Add Move', tip: 'Save move to catalog.' },
+        seedMoves: {
+          'armbar-0001': 'A submission from Closed guard involving the hyperextension of the elbow joint.\n1. Secure the arm of your opponent\n2. Open your guard\n3. Push off the hip with your leg\n4. Pass that leg over the head of your opponent\n5. Push your legs down and raise your hips',
+          'triangle-0001': 'A submission from closed guard using your legs to choke your opponent.\n1. Secure the arm of your opponent\n2. Push off the hips to gain space\n3. Pass your leg over the opposite shoulder of the opponent\'s arm\n4. Lock a figure 4 with your free leg',
+          'armtriangle-0001': 'A submission from top mount using your head and arm to submit the opponent.\n1. Place your arm around the opponent\'s head\n2. Secure the opponent\'s arm between your head and theirs\n3. Step off into side control (headside)',
+          'americana-0001': 'A submission from top side control involving the superrotation of the opponent\'s shoulder joint.\n1. Secure your opponent\'s far hand with your outside hand\n2. Thread your inside hand under their far tricep to connect to your outside hand\'s forearm.\n3. Carefully lift your inside hand and push your outside hand',
+          'guillotine-0001': 'A submission from bottom closed guard involving the cutting of circulation to the opponent\'s head using your forearm.\n1. Secure your opponents head like the image shows\n2. Wrap your other hand around your opponent\'s arm and connect your hands\n3. Lean back, pull your forearm towards your bicep, and lower your elbow towards your hip',
+          'rear-naked-choke-0001': 'A submission from the back mount involving a figure 4 grip with the arms to cut circulation to the opponent\'s brain.\n1. Push your fist along your opponent\'s chin to open up their neck\n2. Get your forearm under their chin\n3. Align your elbow to the middle of their neck\n4. Place your hand on your free arm\'s bicep and put your other hand on the back of their head\n5. Squeeze and pull your choking arm backwards',
+          'mount-armbar-0001': 'A submission from mount involving the hyperextention of the opponent\'s elbow joint.\n1. Grab your opponent\'s arm by reaching under their hand and grabbing their tricep\n2. Pull towards you to put them on their side\n3. Face the side they are facing, and pass the leg under you over their head\n4. Pry their hands open and lie down, raising your hips and pulling the wrist down',
+          'rnc-armbar-transition-0001': 'A transition from the Rear Naked Choke to the Armbar from the back.\n1. Underhook their left arm with yours\n2. Pull your right arm down and get on your right elbow\n3. Pull your right leg from under them and put it over their head\n4. Finish the armbar like normal\nVideo: rncarmbar.mp4',
+          'lat-drop-0001': 'A standing sacrifice throw using 2 overhooks.\n1. Once your opponent has 2 underhooks, clamp down on their elbows with your arms.\n2. Push against them, and when they resist, sit down with your legs spread out forward and lean back in the direction you want to throw them\n3. Transition to side control\nVideo: latdrop.mp4',
+          'osoto-gari-0001': 'A standing leg trip involving the hooking of the opponent\'s opposite leg to yours.\n1. Secure a hand grip and neck grip\n2. Destablize your opponent towards you and lift them slightly\n3. Step your hand grip side\'s leg to their side, staying with perfect back posture and breaking theirs down\n4. Step your other leg behind theirs, lift it behind you and push your neck grip forward, flipping them sideways.\nVideo: osotogari.mp4'
+        },
+        settings: { pageTitle: 'Settings', theme: 'Theme', themeHint: 'Switch between dark and light mode.', language: 'Language', languageHint: 'Choose your preferred language.', languageOptions: { english: 'English', portuguese: 'Português' }, comingSoon: 'Coming soon', comingSoonHint: 'More settings and personalization options will appear here.' },
+        profile: { title: 'My BJJ Profile', currentBelt: 'CURRENT BELT', whiteBelt: '{belt} belt', stripes: '{count} stripes', name: 'Name', namePlaceholder: 'Enter name', enter: 'Enter', editName: 'Edit name', age: 'Age', agePlaceholder: 'Enter age', notSet: 'Not set', editAge: 'Edit age', gym: 'Gym', gymPlaceholder: 'Enter gym', editGym: 'Edit gym', beltLevel: 'Belt level', white: 'White', editBelt: 'Edit belt', stripesLabel: 'Stripes:', startedTraining: 'Started training', editStarted: 'Edit starting date', favoriteMove: 'Favorite move', noFavorite: 'No favorite move set', editFavorite: 'Edit favorite move', none: 'None', months: { jan: 'Jan', feb: 'Feb', mar: 'Mar', apr: 'Apr', may: 'May', jun: 'Jun', jul: 'Jul', aug: 'Aug', sep: 'Sep', oct: 'Oct', nov: 'Nov', dec: 'Dec' }, beltColors: { white: 'White', whiteGray: 'White Gray', gray: 'Gray', blackGray: 'Black Gray', whiteYellow: 'White Yellow', yellow: 'Yellow', blackYellow: 'Black Yellow', whiteOrange: 'White Orange', orange: 'Orange', blackOrange: 'Black Orange', whiteGreen: 'White Green', green: 'Green', blackGreen: 'Black Green', blue: 'Blue', purple: 'Purple', brown: 'Brown', black: 'Black' } },
+        catalog: { pageTitle: 'Move Catalog', pageDescription: 'Browse and review your move library in one place.', searchLabel: 'Search moves', searchPlaceholder: 'Type a move name to search', clearSearch: 'Clear search', positionLabel: 'Position', allPositions: 'All positions', attempts: 'Attempts', successes: 'Successes', success: 'Success', origin: 'Origin', originOptions: { modernBjj: 'Modern BJJ', freestyleWrestling: 'Freestyle Wrestling', catchWrestling: 'Catch Wrestling', grecoRoman: 'Greco-Roman', judo: 'Judo', japaneseJuJutsu: 'Japanese Ju-Jutsu', sambo: 'Sambo', other: 'Other' }, originOtherPlaceholder: 'Specify other origin', ibjjfNote: 'IBJJF Legality note', description: 'Description', descriptionPlaceholder: 'Add notes or a quick description...', image: 'Image', noImage: 'No image selected', chooseImage: 'Choose image', removeImage: 'Remove image', deleteSubPosition: 'Delete sub-position', successRate: 'Success Rate', attemptAction: '+1 Attempt', successAction: '+1 Success', undoAction: 'Undo', deleteAction: 'Delete', emptyState: 'No moves yet. Add one from the form above or choose a filter.', exportAction: 'Export', importAction: 'Import', role: 'Role', fromTransition: 'From:', noRole: 'No role', unknownMove: 'Unknown move', editMoveDetails: 'Edit move details', toggleDependentMoves: 'Toggle dependent moves', categories: { standing: 'Standing', guard: 'Guard', guardStanding: 'Guard standing', legEntanglements: 'Leg Entanglements', advantageousPositions: 'Advantageous Positions', transitions: 'Transitions' } },
+        catalogImportExport: { close: 'Close catalog import/export', exportTitle: 'Catalog export', exportMessage: 'Copy or paste the catalog string below.', importTitle: 'Import catalog', importMessage: 'Paste the catalog export string here and confirm to import it.', includeStats: 'Import attempts and successes data', copy: 'Copy', import: 'Import', done: 'Done' },
+        messages: { importSuccess: 'Catalog imported successfully.', importError: 'That catalog export string could not be read.' }
+      },
+      pt: {
+        app: { title: 'RollBaseBJJ' },
+        tabs: { addMove: 'Adicionar técnica', catalog: 'Catálogo', profile: 'Meu perfil', settings: 'Configurações' },
+        hero: { credit: 'Criado por ig@ryanalex_g', description: 'Seu diário pessoal de técnicas BJJ.<br> Clique no (i) para ajuda.' },
+        help: { open: 'Ajuda', iconText: 'i', close: 'Fechar ajuda', title: 'Bem-vindo ao RollBase BJJ!', intro: 'Use este aplicação para registrar movimentos, salvar sub-posições, acompanhar tentativas e sucessos e visualizar notas de legalidade da IBJJF.', start: 'Por onde eu começo? - Comece indo para "Meu perfil" e preenchendo seus dados; isso desbloqueará recursos como a exibição de faixas e o índice de legalidade da IBJJF.', logMoves: 'Como registro minhas técnicas? - Primeiro, digite o nome da técnica. Depois escolha se é uma subposição, selecione a posição, escolha o papel, especifique se é gi + nogi ou só gi e clique em "adicionar técnica". Suas técnicas aparecerão no "catálogo".', whatNow: 'E agora? - Após cada roll ou sessão de treino, revise as técnicas que você conhece e registre quantas vezes tentou ou teve sucesso com elas. Você também pode adicionar descrições, informações e imagens para lembrar melhor.', successAttempt: 'O que determina sucesso/tentativa? - Um sucesso conta quando você ou ganha a luta ou ganha uma posição melhor. Uma tentativa conta quando você tenta a técnica e termina ou numa posição pior ou acaba numa posição neutra tendo gasto mais energia do que o oponente.', dictionary: 'Dicionário:', transition: 'Transição: Uma técnica realizada a partir de outra posição. Registre-a selecionando "transition" no menu e escolhendo uma técnica já registrada.', subPosition: 'Subposição: Uma técnica mais parecida com uma posição do que com uma técnica. Não inclui taxas de tentativa/sucesso. Registre-a selecionando "sub-position" no formulário.', dismiss: 'Entendi' },
+        form: { moveName: 'Nome da técnica', moveNamePlaceholder: 'Arm Lock', addSubPosition: 'Adicionar subposição', position: 'Posição', roleLabel: 'Decima ou Debaixo', transitionFromLabel: 'Transição de', transitionSelectPrompt: 'Selecione uma técnica', roleOptions: { top: 'Cima', bottom: 'Baixo', controller: 'Controlador', receiver: 'Receptor', controllerReceiverLabel: 'Controlador / Receptor' }, entanglementSide: 'Lado do entanglement', entanglementSideOptions: { backside: 'Trás', frontside: 'Frente' }, positionGroups: { guard: 'Guarda', guardStanding: 'Guarda em pé', legEntanglements: 'Entanglement de pernas', advantageousPositions: 'Posições vantajosas' }, positionOptions: { standing: 'Em pé', transition: 'Transição', closedGuard: 'Guarda fechada', halfGuard: 'Meia guarda', quarterGuard: 'Quarta guarda', butterflyGuard: 'Guarda borboleta', halfButterflyGuard: 'Meia guarda de borboleta', sittingGuard: 'Guarda sentada', delariva: 'Delariva', slx: 'SLX', xGuard: 'Guarda X', spiderGuard: 'Guarda aranha', lassoGuard: 'Guarda laço', straightAshi: 'Ashi reto (SLX)', crossAshi: 'Ashi cruzado', fiftyFifty: '50/50', sideControl: '100 Kilos', northSouth: 'Norte Sul', katagatame: 'Kesa-gatame', kneeOnBelly: 'Joelho na barriga', topCrucifix: 'Crucifixo de cima (Salaverry)', bottomCrucifix: 'Crucifixo de baixo', mount: 'Montada', backMount: 'Controle de costas', backMountBodyTriangle: 'Controle de costas (triângulo no corpo)', turtleBackside: 'Quatro Apoio (trás)', frontHeadlockSprawl: 'Headlock frontal (sprawl)' }, giAndNogi: 'Gi e Nogi', giOnly: 'Só Gi', addMove: 'Adicionar técnica', tip: 'Salve a técnica no catálogo.' },
+        seedMoves: {
+          'armbar-0001': 'Uma submissão da guarda fechada envolvendo a hiperextensão do cotovelo.\n1. Segure o braço do oponente\n2. Abra sua guarda\n3. Empurre o quadril com a perna\n4. Passe essa perna por cima da cabeça do oponente\n5. Empurre as pernas para baixo e levante os quadris',
+          'triangle-0001': 'Uma submissão da guarda fechada usando as pernas para strangulá-lo.\n1. Segure o braço do oponente\n2. Empurre os quadris para ganhar espaço\n3. Passe a perna pela ombro oposto do braço do oponente\n4. Feche um triângulo com a perna livre',
+          'armtriangle-0001': 'Uma submissão da montada de cima usando a cabeça e o braço para submeter o oponente.\n1. Coloque o braço em volta da cabeça do oponente\n2. Segure o braço do oponente entre a sua cabeça e a dele\n3. Saia para o side control (lado da cabeça)',
+          'americana-0001': 'Uma submissão do side control de cima envolvendo a superrotação da articulação do ombro do oponente.\n1. Segure a mão mais distante do oponente com a mão de fora\n2. Passe a mão de dentro por baixo do tríceps distante para conectar com o antebraço da mão de fora.\n3. Levante com cuidado a mão de dentro e empurre a mão de fora',
+          'guillotine-0001': 'Uma submissão da guarda fechada de baixo envolvendo o corte de circulação na cabeça do oponente usando o antebraço.\n1. Segure a cabeça do oponente como a imagem mostra\n2. Envolva a outra mão no braço do oponente e conecte as mãos\n3. Incline-se para trás, puxe o antebraço em direção ao bíceps e abaixe o cotovelo em direção ao quadril',
+          'rear-naked-choke-0001': 'Uma submissão do back mount envolvendo uma pegada de figura 4 com os braços para cortar a circulação do cérebro do oponente.\n1. Empurre o punho ao longo do queixo do oponente para abrir o pescoço\n2. Coloque o antebraço debaixo do queixo\n3. Alinhe o cotovelo no meio do pescoço\n4. Coloque a mão no bíceps do braço livre e a outra na nuca\n5. Aperte e puxe o braço de estrangular para trás',
+          'mount-armbar-0001': 'Uma submissão da montada envolvendo a hiperextensão do cotovelo do oponente.\n1. Pegue o braço do oponente passando por baixo da mão e segurando o tríceps\n2. Puxe em sua direção para colocá-lo de lado\n3. Vire para o lado que ele está virado e passe a perna por baixo de você sobre a cabeça dele\n4. Abra as mãos dele e deite, levantando os quadris e puxando o punho para baixo',
+          'rnc-armbar-transition-0001': 'Uma transição do Rear Naked Choke para o Armbar de costas.\n1. Use seu braço para segurar o braço esquerdo deles\n2. Puxe o braço direito para baixo e fique de joelho sobre o cotovelo direito\n3. Puxe a perna direita debaixo deles e coloque-a sobre a cabeça\n4. Termine o armbar normalmente\nVídeo: rncarmbar.mp4',
+          'lat-drop-0001': 'Uma queda de sacrifício em pé usando 2 overhooks.\n1. Quando o oponente tiver 2 underhooks, aperte os cotovelos com os braços.\n2. Empurre contra eles, e quando resistirem, sente-se com as pernas abertas para a frente e incline-se na direção em que quer jogá-los\n3. Transicione para o side control\nVídeo: latdrop.mp4',
+          'osoto-gari-0001': 'Uma queda de perna em pé envolvendo o enganchamento da perna oposta do oponente na sua.\n1. Segure com a mão e com a pegada de pescoço\n2. Desestabilize o oponente em sua direção e levante-o levemente\n3. Coloque a perna do lado da pegada de mão ao lado deles, mantendo a postura de costas perfeita e quebrando a deles\n4. Coloque a outra perna atrás da deles, levante-a atrás de você e empurre a pegada de pescoço para frente, jogando-os de lado.\nVídeo: osotogari.mp4'
+        },
+        settings: { pageTitle: 'Configurações', theme: 'Tema', themeHint: 'Alternar entre modo escuro e claro.', language: 'Idioma', languageHint: 'Escolha o idioma preferido.', languageOptions: { english: 'Inglês', portuguese: 'Português' }, comingSoon: 'Em breve', comingSoonHint: 'Mais opções de configuração aparecerão aqui.' },
+        profile: { title: 'Meu perfil BJJ', currentBelt: 'CINTURÃO ATUAL', whiteBelt: '{belt} cinto', stripes: '{count} faixas', name: 'Nome', namePlaceholder: 'Digite o nome', enter: 'Entrar', editName: 'Editar nome', age: 'Idade', agePlaceholder: 'Digite a idade', notSet: 'Não definido', editAge: 'Editar idade', gym: 'Academia', gymPlaceholder: 'Digite a academia', editGym: 'Editar academia', beltLevel: 'Nível de faixa', white: 'Branca', editBelt: 'Editar faixa', stripesLabel: 'Graus:', startedTraining: 'Começou a treinar', editStarted: 'Editar data de início', favoriteMove: 'Técnica favorita', noFavorite: 'Nenhuma', editFavorite: 'Editar técnica favorita', none: 'Escolher', months: { jan: 'Jan', feb: 'Fev', mar: 'Mar', apr: 'Abr', may: 'Mai', jun: 'Jun', jul: 'Jul', aug: 'Ago', sep: 'Set', oct: 'Out', nov: 'Nov', dec: 'Dez' }, beltColors: { white: 'Branca', whiteGray: 'Branca cinza', gray: 'Cinza', blackGray: 'Preta cinza', whiteYellow: 'Branca amarela', yellow: 'Amarela', blackYellow: 'Preta amarela', whiteOrange: 'Branca laranja', orange: 'Laranja', blackOrange: 'Preta laranja', whiteGreen: 'Branca verde', green: 'Verde', blackGreen: 'Preta verde', blue: 'Azul', purple: 'Roxa', brown: 'Marrom', black: 'Preta' } },
+        catalog: { pageTitle: 'Catálogo de técnicas', pageDescription: 'Navegue e revise sua biblioteca de técnicas em um só lugar.', searchLabel: 'Buscar técnicas', searchPlaceholder: 'Digite o nome de uma técnica', clearSearch: 'Limpar busca', positionLabel: 'Posição', allPositions: 'Todas as posições', attempts: 'Tentativas', successes: 'Sucessos', success: 'Sucesso', origin: 'Origem', originOptions: { modernBjj: 'BJJ moderno', freestyleWrestling: 'Freestyle Wrestling', catchWrestling: 'Catch Wrestling', grecoRoman: 'Greco-romana', judo: 'Judô', japaneseJuJutsu: 'Ju-jutsu japonês', sambo: 'Sambo', other: 'Outro' }, originOtherPlaceholder: 'Especifique outra origem', ibjjfNote: 'Nota de legalidade da IBJJF', description: 'Descrição', descriptionPlaceholder: 'Adicione notas ou uma descrição rápida...', image: 'Imagem', noImage: 'Nenhuma imagem selecionada', chooseImage: 'Escolher imagem', removeImage: 'Remover imagem', deleteSubPosition: 'Excluir subposição', successRate: 'Taxa de sucesso', attemptAction: '+1 Tentativa', successAction: '+1 Sucesso', undoAction: 'Desfazer', deleteAction: 'Excluir', emptyState: 'Nenhuma técnica ainda. Adicione uma no formulário acima ou escolha um filtro.', exportAction: 'Exportar', importAction: 'Importar', role: 'Papel', fromTransition: 'De:', noRole: 'Sem papel', unknownMove: 'Técnica desconhecida', editMoveDetails: 'Editar detalhes da técnica', toggleDependentMoves: 'Alternar técnicas dependentes', categories: { standing: 'Em pé', guard: 'Guarda', guardStanding: 'Guarda em pé', legEntanglements: 'Entanglement de pernas', advantageousPositions: 'Posições vantajosas', transitions: 'Transições' } },
+        catalogImportExport: { close: 'Fechar importação/exportação do catálogo', exportTitle: 'Exportar catálogo', exportMessage: 'Copie ou cole a string do catálogo abaixo.', importTitle: 'Importar catálogo', importMessage: 'Cole a string de exportação do catálogo aqui e confirme para importá-la.', includeStats: 'Importar dados de tentativas e sucessos', copy: 'Copiar', import: 'Importar', done: 'Concluído' },
+        messages: { importSuccess: 'Catálogo importado com sucesso.', importError: 'Essa string de exportação do catálogo não pôde ser lida.' }
+      }
+    };
+    let currentLanguage = localStorage.getItem(LANGUAGE_KEY) || 'en';
     const storedMoves = localStorage.getItem(STORAGE_KEY);
     const moves = storedMoves ? ensureSeedMoves(normalizeStoredMoves(JSON.parse(storedMoves))) : getDefaultMoves();
     let actionHistory = [];
@@ -481,6 +628,7 @@
     const pageSettings = document.getElementById('pageSettings');
     const pageCatalog = document.getElementById('pageCatalog');
     const themeToggle = document.getElementById('themeToggle');
+    const languageSelect = document.getElementById('languageSelect');
     const PROFILE_KEY = 'jiuJitsuProfile';
     const profileNameDisplay = document.getElementById('profileNameDisplay');
     const profileNameEdit = document.getElementById('profileNameEdit');
@@ -593,11 +741,9 @@
 
     function openCatalogImportExportModal({ title, message, initialValue, mode }) {
       catalogImportMode = mode === 'import';
-      catalogImportExportTitle.textContent = title;
-      catalogImportExportMessage.textContent = message;
       catalogImportExportInput.value = initialValue || '';
-      catalogConfirmBtn.textContent = catalogImportMode ? 'Import' : 'Done';
       catalogImportOptions?.classList.toggle('hidden', !catalogImportMode);
+      syncCatalogModalTranslations();
       if (catalogImportMode) {
         catalogImportIncludeStats.checked = true;
       }
@@ -702,8 +848,81 @@
       }
     }
 
+    function t(key, fallback = '', replacements = {}) {
+      const value = key.split('.').reduce((acc, part) => acc?.[part], translations[currentLanguage] || translations.en) || null;
+      const resolved = value || fallback || key;
+      return Object.entries(replacements).reduce((text, [placeholder, replacement]) => text.replace(new RegExp(`\\{${placeholder}\\}`, 'g'), String(replacement)), resolved);
+    }
+
+    function syncCatalogModalTranslations() {
+      if (!catalogImportExportTitle || !catalogImportExportMessage || !catalogConfirmBtn) return;
+      if (catalogImportMode) {
+        catalogImportExportTitle.textContent = t('catalogImportExport.importTitle', 'Import catalog');
+        catalogImportExportMessage.textContent = t('catalogImportExport.importMessage', 'Paste the catalog export string here and confirm to import it.');
+        catalogConfirmBtn.textContent = t('catalogImportExport.import', 'Import');
+      } else {
+        catalogImportExportTitle.textContent = t('catalogImportExport.exportTitle', 'Catalog export');
+        catalogImportExportMessage.textContent = t('catalogImportExport.exportMessage', 'Copy or paste the catalog string below.');
+        catalogConfirmBtn.textContent = t('catalogImportExport.done', 'Done');
+      }
+    }
+
+    function applyTranslationsToRoot(root) {
+      root.querySelectorAll('[data-i18n-label]').forEach(element => {
+        const key = element.getAttribute('data-i18n-label');
+        const value = t(key, element.getAttribute('label') || '');
+        if (value) {
+          element.setAttribute('label', value);
+        }
+      });
+      root.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        const value = t(key, element.textContent || element.getAttribute('placeholder') || element.getAttribute('aria-label') || '');
+        if (value) {
+          if (element.tagName === 'OPTION') {
+            element.textContent = value;
+          } else if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+            element.setAttribute('placeholder', value);
+          } else if (element.hasAttribute('aria-label')) {
+            element.setAttribute('aria-label', value);
+          } else {
+            element.textContent = value;
+          }
+        }
+      });
+      root.querySelectorAll('[data-i18n-html]').forEach(element => {
+        const key = element.getAttribute('data-i18n-html');
+        const value = t(key, element.innerHTML || '');
+        if (value) {
+          element.innerHTML = value;
+        }
+      });
+      root.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+        const key = element.getAttribute('data-i18n-placeholder');
+        const value = t(key, element.getAttribute('placeholder') || '');
+        if (value) {
+          element.setAttribute('placeholder', value);
+        }
+      });
+      root.querySelectorAll('[data-i18n-aria-label]').forEach(element => {
+        const key = element.getAttribute('data-i18n-aria-label');
+        const value = t(key, element.getAttribute('aria-label') || '');
+        if (value) {
+          element.setAttribute('aria-label', value);
+        }
+      });
+    }
+
+    function applyTranslations() {
+      applyTranslationsToRoot(document);
+      document.documentElement.lang = currentLanguage === 'pt' ? 'pt' : 'en';
+      document.title = t('app.title', 'RollBaseBJJ');
+      syncCatalogModalTranslations();
+    }
+
     function applyTheme(theme) {
       const isLight = theme === 'light';
+      document.body.classList.toggle('theme-light', isLight);
       document.body.classList.toggle('bg-slate-50', isLight);
       document.body.classList.toggle('text-slate-900', isLight);
       document.body.classList.toggle('bg-[#040812]', !isLight);
@@ -832,11 +1051,12 @@
     }
 
     function getDefaultMoves() {
+      const getSeedMoveNotes = (seedId, fallback) => t(`seedMoves.${seedId}`, fallback);
       return [
         {
           id: 'armbar-0001',
           title: 'Armbar',
-          notes: 'A submission from Closed guard involving the hyperextension of the elbow joint.\n1. Secure the arm of your opponent\n2. Open your guard\n3. Push off the hip with your leg\n4. Pass that leg over the head of your opponent\n5. Push your legs down and raise your hips',
+          notes: getSeedMoveNotes('armbar-0001', 'A submission from Closed guard involving the hyperextension of the elbow joint.\n1. Secure the arm of your opponent\n2. Open your guard\n3. Push off the hip with your leg\n4. Pass that leg over the head of your opponent\n5. Push your legs down and raise your hips'),
           imageDataUrl: 'belts/armbar.png',
           position: 'Closed Guard',
           role: 'Bottom',
@@ -852,7 +1072,7 @@
         {
           id: 'triangle-0001',
           title: 'Triangle',
-          notes: 'A submission from closed guard using your legs to choke your opponent.\n1. Secure the arm of your opponent\n2. Push off the hips to gain space\n3. Pass your leg over the opposite shoulder of the opponent\'s arm\n4. Lock a figure 4 with your free leg',
+          notes: getSeedMoveNotes('triangle-0001', 'A submission from closed guard using your legs to choke your opponent.\n1. Secure the arm of your opponent\n2. Push off the hips to gain space\n3. Pass your leg over the opposite shoulder of the opponent\'s arm\n4. Lock a figure 4 with your free leg'),
           imageDataUrl: 'belts/triangle.png',
           position: 'Closed Guard',
           role: 'Bottom',
@@ -868,7 +1088,7 @@
         {
           id: 'armtriangle-0001',
           title: 'Arm Triangle',
-          notes: 'A submission from top mount using your head and arm to submit the opponent.\n1. Place your arm around the opponent\'s head\n2. Secure the opponent\'s arm between your head and theirs\n3. Step off into side control (headside)',
+          notes: getSeedMoveNotes('armtriangle-0001', 'A submission from top mount using your head and arm to submit the opponent.\n1. Place your arm around the opponent\'s head\n2. Secure the opponent\'s arm between your head and theirs\n3. Step off into side control (headside)'),
           imageDataUrl: 'belts/armtriangle.png',
           position: 'Mount',
           role: 'Controller',
@@ -884,7 +1104,7 @@
         {
           id: 'americana-0001',
           title: 'Americana',
-          notes: 'A submission from top side control involving the superrotation of the opponent\'s shoulder joint.\n1. Secure your opponent\'s far hand with your outside hand\n2. Thread your inside hand under their far tricep to connect to your outside hand\'s forearm.\n3. Carefully lift your inside hand and push your outside hand',
+          notes: getSeedMoveNotes('americana-0001', 'A submission from top side control involving the superrotation of the opponent\'s shoulder joint.\n1. Secure your opponent\'s far hand with your outside hand\n2. Thread your inside hand under their far tricep to connect to your outside hand\'s forearm.\n3. Carefully lift your inside hand and push your outside hand'),
           imageDataUrl: 'belts/americana.png',
           position: 'Side control',
           role: 'Controller',
@@ -900,7 +1120,7 @@
         {
           id: 'guillotine-0001',
           title: 'Arm-in Guillotine',
-          notes: 'A submission from bottom closed guard involving the cutting of circulation to the opponent\'s head using your forearm.\n1. Secure your opponents head like the image shows\n2. Wrap your other hand around your opponent\'s arm and connect your hands\n3. Lean back, pull your forearm towards your bicep, and lower your elbow towards your hip',
+          notes: getSeedMoveNotes('guillotine-0001', 'A submission from bottom closed guard involving the cutting of circulation to the opponent\'s head using your forearm.\n1. Secure your opponents head like the image shows\n2. Wrap your other hand around your opponent\'s arm and connect your hands\n3. Lean back, pull your forearm towards your bicep, and lower your elbow towards your hip'),
           imageDataUrl: 'belts/guillotine.png',
           position: 'Closed Guard',
           role: 'Bottom',
@@ -916,7 +1136,7 @@
         {
           id: 'rear-naked-choke-0001',
           title: 'Rear Naked Choke',
-          notes: 'A submission from the back mount involving a figure 4 grip with the arms to cut circulation to the opponent\'s brain.\n1. Push your fist along your opponent\'s chin to open up their neck\n2. Get your forearm under their chin\n3. Align your elbow to the middle of their neck\n4. Place your hand on your free arm\'s bicep and put your other hand on the back of their head\n5. Squeeze and pull your choking arm backwards',
+          notes: getSeedMoveNotes('rear-naked-choke-0001', 'A submission from the back mount involving a figure 4 grip with the arms to cut circulation to the opponent\'s brain.\n1. Push your fist along your opponent\'s chin to open up their neck\n2. Get your forearm under their chin\n3. Align your elbow to the middle of their neck\n4. Place your hand on your free arm\'s bicep and put your other hand on the back of their head\n5. Squeeze and pull your choking arm backwards'),
           imageDataUrl: 'belts/rearnakedchoke.png',
           position: 'Back mount',
           role: 'Controller',
@@ -932,7 +1152,7 @@
         {
           id: 'mount-armbar-0001',
           title: 'Armbar',
-          notes: 'A submission from mount involving the hyperextention of the opponent\'s elbow joint.\n1. Grab your opponent\'s arm by reaching under their hand and grabbing their tricep\n2. Pull towards you to put them on their side\n3. Face the side they are facing, and pass the leg under you over their head\n4. Pry their hands open and lie down, raising your hips and pulling the wrist down',
+          notes: getSeedMoveNotes('mount-armbar-0001', 'A submission from mount involving the hyperextention of the opponent\'s elbow joint.\n1. Grab your opponent\'s arm by reaching under their hand and grabbing their tricep\n2. Pull towards you to put them on their side\n3. Face the side they are facing, and pass the leg under you over their head\n4. Pry their hands open and lie down, raising your hips and pulling the wrist down'),
           imageDataUrl: 'belts/mountarmbar.png',
           position: 'Mount',
           role: 'Controller',
@@ -948,7 +1168,7 @@
         {
           id: 'rnc-armbar-transition-0001',
           title: 'Armbar',
-          notes: 'A transition from the Rear Naked Choke to the Armbar from the back.\n1. Underhook their left arm with yours\n2. Pull your right arm down and get on your right elbow\n3. Pull your right leg from under them and put it over their head\n4. Finish the armbar like normal\nVideo: rncarmbar.mp4',
+          notes: getSeedMoveNotes('rnc-armbar-transition-0001', 'A transition from the Rear Naked Choke to the Armbar from the back.\n1. Underhook their left arm with yours\n2. Pull your right arm down and get on your right elbow\n3. Pull your right leg from under them and put it over their head\n4. Finish the armbar like normal\nVideo: rncarmbar.mp4'),
           imageDataUrl: '',
           videoUrl: 'belts/rncarmbar.mp4',
           position: 'Transition',
@@ -965,7 +1185,7 @@
         {
           id: 'lat-drop-0001',
           title: 'Lat Drop',
-          notes: 'A standing sacrifice throw using 2 overhooks.\n1. Once your opponent has 2 underhooks, clamp down on their elbows with your arms.\n2. Push against them, and when they resist, sit down with your legs spread out forward and lean back in the direction you want to throw them\n3. Transition to side control\nVideo: latdrop.mp4',
+          notes: getSeedMoveNotes('lat-drop-0001', 'A standing sacrifice throw using 2 overhooks.\n1. Once your opponent has 2 underhooks, clamp down on their elbows with your arms.\n2. Push against them, and when they resist, sit down with your legs spread out forward and lean back in the direction you want to throw them\n3. Transition to side control\nVideo: latdrop.mp4'),
           imageDataUrl: '',
           videoUrl: 'belts/latdrop.mp4',
           position: 'Standing',
@@ -982,7 +1202,7 @@
         {
           id: 'osoto-gari-0001',
           title: 'Osoto-Gari',
-          notes: 'A standing leg trip involving the hooking of the opponent\'s opposite leg to yours.\n1. Secure a hand grip and neck grip\n2. Destablize your opponent towards you and lift them slightly\n3. Step your hand grip side\'s leg to their side, staying with perfect back posture and breaking theirs down\n4. Step your other leg behind theirs, lift it behind you and push your neck grip forward, flipping them sideways.\nVideo: osotogari.mp4',
+          notes: getSeedMoveNotes('osoto-gari-0001', 'A standing leg trip involving the hooking of the opponent\'s opposite leg to yours.\n1. Secure a hand grip and neck grip\n2. Destablize your opponent towards you and lift them slightly\n3. Step your hand grip side\'s leg to their side, staying with perfect back posture and breaking theirs down\n4. Step your other leg behind theirs, lift it behind you and push your neck grip forward, flipping them sideways.\nVideo: osotogari.mp4'),
           imageDataUrl: '',
           videoUrl: 'belts/osotogari.mp4',
           position: 'Standing',
@@ -1018,12 +1238,40 @@
       return [...beltLists.under16, ...beltLists.over16];
     }
 
+    function getTranslatedBeltLabel(belt) {
+      const raw = String(belt || '').trim();
+      if (!raw) return raw;
+      const key = raw.toLowerCase().replace(/\s+/g, '');
+      const translationKey = {
+        white: 'white',
+        whitegray: 'whiteGray',
+        gray: 'gray',
+        blackgray: 'blackGray',
+        whiteyellow: 'whiteYellow',
+        yellow: 'yellow',
+        blackyellow: 'blackYellow',
+        whiteorange: 'whiteOrange',
+        orange: 'orange',
+        blackorange: 'blackOrange',
+        whitegreen: 'whiteGreen',
+        green: 'green',
+        blackgreen: 'blackGreen',
+        blue: 'blue',
+        purple: 'purple',
+        brown: 'brown',
+        black: 'black'
+      }[key];
+      return translationKey
+        ? (translations[currentLanguage]?.profile?.beltColors?.[translationKey] || translations.en.profile.beltColors[translationKey] || raw)
+        : raw;
+    }
+
     function updateBeltOptions() {
       profileBeltSelect.innerHTML = '';
       getBeltOptions().forEach(belt => {
         const option = document.createElement('option');
         option.value = belt;
-        option.textContent = belt;
+        option.textContent = getTranslatedBeltLabel(belt);
         profileBeltSelect.appendChild(option);
       });
       if (!getBeltOptions().includes(profile.belt)) {
@@ -1079,13 +1327,12 @@
     }
 
     function updateBeltSummary() {
-      profileBeltDisplay.textContent = profile.belt;
-      profileBeltSummary.textContent = `${profile.belt} belt`;
-      profileStripeSummary.textContent = profile.stripes
-        ? `${profile.stripes} stripe${profile.stripes === 1 ? '' : 's'}`
-        : '0 stripes';
+      const translatedBelt = getTranslatedBeltLabel(profile.belt);
+      profileBeltDisplay.textContent = translatedBelt;
+      profileBeltSummary.textContent = t('profile.whiteBelt', `${translatedBelt} belt`, { belt: translatedBelt });
+      profileStripeSummary.textContent = t('profile.stripes', profile.stripes ? `${profile.stripes} stripes` : '0 stripes', { count: profile.stripes || 0 });
       if (profile.belt === 'Black' && profile.stripes > 4) {
-        profileStripeSummary.textContent = `${profile.stripes} stripes`;
+        profileStripeSummary.textContent = t('profile.stripes', `${profile.stripes} stripes`, { count: profile.stripes });
       }
       updateBeltBadge();
       updateBeltImage();
@@ -1124,13 +1371,14 @@
     }
 
     function getBeltBadgeText() {
+      const translatedBelt = getTranslatedBeltLabel(profile.belt);
       if (profile.belt === 'Black') {
-        return profile.stripes ? `Black +${profile.stripes}` : 'Black';
+        return profile.stripes ? `${translatedBelt} +${profile.stripes}` : translatedBelt;
       }
       if (profile.stripes) {
-        return `${profile.belt} ${profile.stripes}`;
+        return `${translatedBelt} ${profile.stripes}`;
       }
-      return profile.belt;
+      return translatedBelt;
     }
 
     function getBeltBadgeClasses(belt) {
@@ -1345,11 +1593,24 @@
       }
     }
 
+    function populateStartedMonthOptions() {
+      const months = currentLanguage === 'pt'
+        ? ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+        : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      profileStartedMonthSelect.innerHTML = '';
+      months.forEach(month => {
+        const option = document.createElement('option');
+        option.value = month;
+        option.textContent = month;
+        profileStartedMonthSelect.appendChild(option);
+      });
+    }
+
     function populateFavoriteMoveSelect() {
       profileFavoriteSelect.innerHTML = '';
       const noneOption = document.createElement('option');
       noneOption.value = '';
-      noneOption.textContent = 'None';
+      noneOption.textContent = t('profile.none', 'None');
       profileFavoriteSelect.appendChild(noneOption);
       const sortedMoves = [...moves].sort((a, b) => a.title.localeCompare(b.title));
       sortedMoves.forEach(move => {
@@ -1371,13 +1632,14 @@
 
     function updateProfileDisplay() {
       profileNameDisplay.textContent = profile.name || defaultProfile.name;
-      profileAgeDisplay.textContent = profile.age ? String(profile.age) : 'Not set';
+      profileAgeDisplay.textContent = profile.age ? String(profile.age) : t('profile.notSet', 'Not set');
       profileGymDisplay.textContent = profile.gym || defaultProfile.gym;
-      profileStartedDisplay.textContent = profile.startedMonth && profile.startedYear ? `${profile.startedMonth} ${profile.startedYear}` : 'Not set';
-      profileFavoriteDisplay.textContent = profile.favoriteMove || 'No favorite move set';
+      profileStartedDisplay.textContent = profile.startedMonth && profile.startedYear ? `${profile.startedMonth} ${profile.startedYear}` : t('profile.notSet', 'Not set');
+      profileFavoriteDisplay.textContent = profile.favoriteMove || t('profile.noFavorite', 'No favorite move set');
       updateBeltOptions();
       renderStripeButtons();
       populateStartedYearOptions();
+      populateStartedMonthOptions();
       updateBeltSummary();
       populateFavoriteMoveSelect();
     }
@@ -1495,7 +1757,7 @@
         case 'Knee on belly': return 'bg-lime-500/15 text-lime-300 ring-1 ring-lime-400/20';
         case 'Top Crucifix (Salaverry)': return 'bg-rose-500/15 text-rose-300 ring-1 ring-rose-400/20';
         case 'Bottom Crucifix': return 'bg-rose-500/15 text-rose-300 ring-1 ring-rose-400/20';
-        case 'Katagatame': return 'bg-purple-500/15 text-purple-300 ring-1 ring-purple-400/20';
+        case 'Kesa-gatame': return 'bg-purple-500/15 text-purple-300 ring-1 ring-purple-400/20';
         case 'Standing': return 'bg-slate-500/15 text-slate-300 ring-1 ring-slate-400/20';
         default: return 'bg-slate-500/15 text-slate-300 ring-1 ring-slate-400/20';
       }
@@ -1506,7 +1768,7 @@
       'Guard': ['Closed Guard', 'Half guard', 'Quarter guard', 'Butterfly guard', 'Half butterfly guard'],
       'Guard standing': ['Sitting guard', 'Delariva', 'SLX', 'X-guard', 'Spider guard', 'Lasso guard'],
       'Leg Entanglements': ['Straight Ashi', 'Cross Ashi', '50/50'],
-      'Advantageous Positions': ['Side control', 'North South', 'Mount', 'Turtle (backside)', 'Front Headlock (Sprawl)', 'Back mount', 'Back mount (body triangle)', 'Knee on belly', 'Top Crucifix', 'Bottom Crucifix', 'Katagatame'],
+      'Advantageous Positions': ['Side control', 'North South', 'Mount', 'Turtle (backside)', 'Front Headlock (Sprawl)', 'Back mount', 'Back mount (body triangle)', 'Knee on belly', 'Top Crucifix', 'Bottom Crucifix', 'Kesa-gatame'],
       'Transitions': ['Transition']
     };
     const allPositions = ['Standing', ...positionCategories['Guard'], ...positionCategories['Guard standing'], ...positionCategories['Leg Entanglements'], ...positionCategories['Advantageous Positions'], ...positionCategories['Transitions']];
@@ -1594,7 +1856,9 @@
     }
 
     function getRoleLabel(position, side = '') {
-      return isControllerReceiverPosition(position, side) ? 'Controller / Receiver' : 'Top or Bottom';
+      return isControllerReceiverPosition(position, side)
+        ? t('form.roleOptions.controllerReceiverLabel', 'Controller / Receiver')
+        : t('form.roleLabel', 'Top or Bottom');
     }
 
     function updateRoleLabel() {
@@ -1618,7 +1882,7 @@
       }
 
       if (isTransition) {
-        roleLabel.textContent = 'Transition from';
+        roleLabel.textContent = t('form.transitionFromLabel', 'Transition from');
         roleInput.classList.add('hidden');
         transitionFromSelect.classList.remove('hidden');
         updateTransitionOptions();
@@ -1630,16 +1894,17 @@
       transitionFromSelect.classList.add('hidden');
       roleLabel.textContent = getRoleLabel(position, side);
       if (special) {
-        roleInput.innerHTML = '<option value="Controller">Controller</option><option value="Receiver">Receiver</option>';
+        roleInput.innerHTML = `<option value="Controller" data-i18n="form.roleOptions.controller">${t('form.roleOptions.controller', 'Controller')}</option><option value="Receiver" data-i18n="form.roleOptions.receiver">${t('form.roleOptions.receiver', 'Receiver')}</option>`;
         if (roleInput.value !== 'Controller' && roleInput.value !== 'Receiver') {
           roleInput.value = 'Controller';
         }
       } else {
-        roleInput.innerHTML = '<option value="Top">Top</option><option value="Bottom">Bottom</option>';
+        roleInput.innerHTML = `<option value="Top" data-i18n="form.roleOptions.top">${t('form.roleOptions.top', 'Top')}</option><option value="Bottom" data-i18n="form.roleOptions.bottom">${t('form.roleOptions.bottom', 'Bottom')}</option>`;
         if (roleInput.value !== 'Top' && roleInput.value !== 'Bottom') {
           roleInput.value = 'Top';
         }
       }
+      applyTranslations();
     }
 
     function getRateClass(rate) {
@@ -1655,16 +1920,91 @@
       return category;
     }
 
+    function getTranslatedPositionLabel(position) {
+      const rawPosition = String(position || '').trim();
+      if (!rawPosition) return rawPosition;
+      const translationKeyMap = {
+        Standing: 'standing',
+        Transition: 'transition',
+        'Closed Guard': 'closedGuard',
+        'Half guard': 'halfGuard',
+        'Quarter guard': 'quarterGuard',
+        'Butterfly guard': 'butterflyGuard',
+        'Half butterfly guard': 'halfButterflyGuard',
+        'Sitting guard': 'sittingGuard',
+        Delariva: 'delariva',
+        SLX: 'slx',
+        'X-guard': 'xGuard',
+        'Spider guard': 'spiderGuard',
+        'Lasso guard': 'lassoGuard',
+        'Straight Ashi': 'straightAshi',
+        'Cross Ashi': 'crossAshi',
+        '50/50': 'fiftyFifty',
+        'Side control': 'sideControl',
+        'North South': 'northSouth',
+        'Kesa-gatame': 'katagatame',
+        'Knee on belly': 'kneeOnBelly',
+        'Top Crucifix': 'topCrucifix',
+        'Bottom Crucifix': 'bottomCrucifix',
+        Mount: 'mount',
+        'Back mount': 'backMount',
+        'Back mount (body triangle)': 'backMountBodyTriangle',
+        'Turtle (backside)': 'turtleBackside',
+        'Front Headlock (Sprawl)': 'frontHeadlockSprawl'
+      };
+      const translationKey = translationKeyMap[rawPosition];
+      return translationKey
+        ? t(`form.positionOptions.${translationKey}`, rawPosition)
+        : rawPosition;
+    }
+
+    function getTranslatedRoleLabel(role) {
+      const rawRole = String(role || '').trim();
+      if (!rawRole) return t('catalog.noRole', 'No role');
+      const translationKeyMap = {
+        Top: 'form.roleOptions.top',
+        Bottom: 'form.roleOptions.bottom',
+        Controller: 'form.roleOptions.controller',
+        Receiver: 'form.roleOptions.receiver'
+      };
+      const translationKey = translationKeyMap[rawRole];
+      return translationKey ? t(translationKey, rawRole) : rawRole;
+    }
+
+    function getTranslatedCatalogCategoryLabel(category) {
+      const rawCategory = String(category || '').trim();
+      if (!rawCategory) return rawCategory;
+      const categoryKeyMap = {
+        Standing: 'catalog.categories.standing',
+        Guard: 'catalog.categories.guard',
+        'Guard standing': 'catalog.categories.guardStanding',
+        'Leg Entanglements': 'catalog.categories.legEntanglements',
+        'Advantageous Positions': 'catalog.categories.advantageousPositions',
+        Transitions: 'catalog.categories.transitions'
+      };
+      if (rawCategory.startsWith('Guard - ')) {
+        return `${t('catalog.categories.guard', 'Guard')} - ${t('form.roleOptions.' + (rawCategory.endsWith('Bottom') ? 'bottom' : 'top'), rawCategory.endsWith('Bottom') ? 'Bottom' : 'Top')}`;
+      }
+      if (rawCategory.startsWith('Guard standing - ')) {
+        return `${t('catalog.categories.guardStanding', 'Guard standing')} - ${t('form.roleOptions.' + (rawCategory.endsWith('Bottom') ? 'bottom' : 'top'), rawCategory.endsWith('Bottom') ? 'Bottom' : 'Top')}`;
+      }
+      if (rawCategory.startsWith('Advantageous Positions - ')) {
+        return `${t('catalog.categories.advantageousPositions', 'Advantageous Positions')} - ${t('form.roleOptions.' + (rawCategory.endsWith('Receiver') ? 'receiver' : 'controller'), rawCategory.endsWith('Receiver') ? 'Receiver' : 'Controller')}`;
+      }
+      const translationKey = categoryKeyMap[rawCategory];
+      return translationKey ? t(translationKey, rawCategory) : rawCategory;
+    }
+
     function updateFilterPositions() {
-      filterPositionSelect.innerHTML = '<option value="All">All positions</option>';
+      filterPositionSelect.innerHTML = `<option value="All">${t('catalog.allPositions', 'All positions')}</option>`;
       const baseCategory = getFilterCategoryBase(currentCategory);
       const positions = currentCategory === 'All'
-        ? allPositions
-        : positionCategories[baseCategory] || [];
+        ? allPositions.filter(position => position !== 'Transition')
+        : (positionCategories[baseCategory] || []).filter(position => position !== 'Transition');
       positions.forEach(position => {
         const item = document.createElement('option');
         item.value = position;
-        item.textContent = position;
+        item.textContent = getTranslatedPositionLabel(position);
         filterPositionSelect.appendChild(item);
       });
       currentPosition = 'All';
@@ -1673,7 +2013,7 @@
 
     function updateTransitionOptions() {
       const selectedValue = transitionFromSelect.value;
-      transitionFromSelect.innerHTML = '<option value="">Select a move</option>';
+      transitionFromSelect.innerHTML = `<option value="">${t('form.transitionSelectPrompt', 'Select a move')}</option>`;
       const sortedMoves = [...moves].sort((a, b) => a.title.localeCompare(b.title));
       sortedMoves.forEach(move => {
         const option = document.createElement('option');
@@ -1725,7 +2065,7 @@
         return matchCategory && matchPosition && matchSearch;
       });
       if (!filteredMoves.length) {
-        cardsContainer.innerHTML = '<div class="rounded-3xl border border-dashed border-slate-700/60 bg-slate-900/70 p-10 text-center text-slate-400">No moves yet. Add one from the move add form or select a different filter.</div>';
+        cardsContainer.innerHTML = `<div class="rounded-3xl border border-dashed border-slate-700/60 bg-slate-900/70 p-10 text-center text-slate-400">${t('catalog.emptyState', 'No moves yet. Add one from the move add form or select a different filter.')}</div>`;
         return;
       }
 
@@ -1774,7 +2114,7 @@
         const title = document.createElement('div');
         title.className = 'flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.24em] text-slate-300';
         const label = document.createElement('span');
-        label.textContent = group.category;
+        label.textContent = getTranslatedCatalogCategoryLabel(group.category);
         title.appendChild(label);
         const count = document.createElement('span');
         count.className = 'inline-flex h-7 min-w-[1.75rem] items-center justify-center rounded-full bg-slate-800 px-2 text-xs font-semibold text-slate-300';
@@ -1807,6 +2147,7 @@
 
         const renderMove = (move, indent = false, childMoves = [], targetContainer = list) => {
           const clone = template.content.cloneNode(true);
+          applyTranslationsToRoot(clone);
           const article = clone.querySelector('article');
           if (indent) {
             article.classList.add('ml-8', 'border-l', 'border-slate-700/40');
@@ -1826,7 +2167,7 @@
           const badge = clone.querySelector('.position-badge');
           const sideTag = clone.querySelector('.side-tag');
           const ibjjfBadge = clone.querySelector('.ibjjf-badge');
-          badge.textContent = move.position;
+          badge.textContent = getTranslatedPositionLabel(move.position);
           badge.className = `position-badge inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] ${getBadgeClasses(move.position)}`;
           const legality = getIbjjfLegalityStatus(move.title, move);
           if (legality) {
@@ -1851,25 +2192,25 @@
           if (move.position === 'Transition' && move.transitionFromId) {
             const sourceMove = sourceLookup.get(move.transitionFromId);
             if (sourceMove) {
-              clone.querySelector('.role-tag').textContent = `From: ${sourceMove.title} (${sourceMove.role || 'No role'}) (${sourceMove.position})`;
+              clone.querySelector('.role-tag').textContent = `${t('catalog.fromTransition', 'From:')} ${sourceMove.title} (${getTranslatedRoleLabel(sourceMove.role)}) (${getTranslatedPositionLabel(sourceMove.position)})`;
             } else {
-              clone.querySelector('.role-tag').textContent = 'From: Unknown move';
+              clone.querySelector('.role-tag').textContent = `${t('catalog.fromTransition', 'From:')} ${t('catalog.unknownMove', 'Unknown move')}`;
             }
-            badge.textContent = 'Transition';
+            badge.textContent = getTranslatedPositionLabel('Transition');
             badge.className = `position-badge inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] bg-violet-500/15 text-violet-300 ring-1 ring-violet-400/20`;
           } else {
             const roleTag = clone.querySelector('.role-tag');
             if (move.position === 'Standing') {
               roleTag.classList.add('hidden');
             } else {
-              roleTag.textContent = `Role: ${move.role}`;
+              roleTag.textContent = `${t('catalog.role', 'Role')}: ${getTranslatedRoleLabel(move.role)}`;
               roleTag.classList.remove('hidden');
             }
           }
           if (move.giOnly) {
             const giTag = document.createElement('span');
             giTag.className = 'ml-2 inline-flex items-center rounded-full bg-amber-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-amber-200 ring-1 ring-amber-400/20';
-            giTag.textContent = 'Gi only';
+            giTag.textContent = t('form.giOnly', 'Gi only');
             clone.querySelector('.position-badge').after(giTag);
           }
           clone.querySelector('.summary-rate').textContent = `${rate}%`;
@@ -2049,7 +2390,7 @@
 
           deleteSubPositionBtn.addEventListener('click', event => {
             event.stopPropagation();
-            if (!confirm('Delete this sub-position?')) return;
+            if (!confirm(t('catalog.confirmDeleteSubPosition', 'Delete this sub-position?'))) return;
             const index = moves.findIndex(item => item.id === move.id);
             if (index >= 0) {
               moves.splice(index, 1);
@@ -2091,7 +2432,7 @@
           deleteBtn.addEventListener('click', event => {
             event.preventDefault();
             event.stopPropagation();
-            if (!confirm('Are you sure you want to delete this?')) return;
+            if (!confirm(t('catalog.confirmDeleteMove', 'Are you sure you want to delete this?'))) return;
             const index = moves.findIndex(item => item.id === move.id);
             if (index >= 0) {
               moves.splice(index, 1);
@@ -2258,6 +2599,15 @@
       localStorage.setItem(THEME_KEY, preferredTheme);
       applyTheme(preferredTheme);
     });
+    languageSelect?.addEventListener('change', event => {
+      currentLanguage = event.target.value;
+      localStorage.setItem(LANGUAGE_KEY, currentLanguage);
+      applyTranslations();
+      updateProfileDisplay();
+      updateFilterPositions();
+      updateRoleLabel();
+      renderCards();
+    });
     exportCatalogBtn?.addEventListener('click', exportCatalogLibrary);
     importCatalogBtn?.addEventListener('click', importCatalogLibrary);
     catalogImportExportClose?.addEventListener('click', closeCatalogImportExportModal);
@@ -2280,9 +2630,9 @@
           renderCards();
           updateUndoState();
           closeCatalogImportExportModal();
-          alert('Catalog imported successfully.');
+          alert(t('messages.importSuccess', 'Catalog imported successfully.'));
         } catch (error) {
-          alert('That catalog export string could not be read.');
+          alert(t('messages.importError', 'That catalog export string could not be read.'));
         }
       } else {
         closeCatalogImportExportModal();
@@ -2299,7 +2649,14 @@
     });
 
     const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
+    const savedLanguage = localStorage.getItem(LANGUAGE_KEY) || 'en';
+    currentLanguage = savedLanguage;
+    if (languageSelect) {
+      languageSelect.value = currentLanguage;
+    }
     applyTheme(savedTheme);
+    applyTranslations();
+    updateProfileDisplay();
 
     initHelpModal();
     syncSearchClearButton();
