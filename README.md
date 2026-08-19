@@ -19,10 +19,11 @@ IOS:
 Obs. Make sure to keep your export data saved!
 
 Android: 
-1. Go to "Releases" tag on the Github Sidebar (right side)
-2. Download RollBaseBJJ.apk
-3. Install the APK on your android device (download an APK installer if needed)
-4. Done!
+1. Open Google Chrome and go to rollbase.cc
+2. Tap the three-dot menu icon in the top right corner
+3. Select Add to Home screen.
+
+Note: This option might say Install app instead, that also works. Edit the shortcut name if desired, then tap Add.
 
 
 **FAQ:**
