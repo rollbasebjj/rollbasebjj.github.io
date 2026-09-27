@@ -1174,6 +1174,11 @@
           <h2 class="text-2xl font-semibold tracking-tight text-white" data-i18n="catalog.pageTitle">Move Catalog</h2>
           <p class="mt-3 text-sm leading-6 text-slate-300" data-i18n="catalog.pageDescription">Browse and review your move library in one place.</p>
         </div>
+        <div id="moveOfWeekBanner" class="hidden flex items-center gap-2 rounded-2xl border border-sky-500/30 bg-sky-500/10 px-4 py-3 text-sm text-sky-100">
+          <span class="font-semibold" data-i18n="catalog.moveOfWeek.label">Move of the week:</span>
+          <span id="moveOfWeekName" class="text-sky-200"></span>
+          <button id="moveOfWeekInfoBtn" type="button" class="ml-1 inline-flex h-5 w-5 items-center justify-center rounded-full border border-sky-300/60 bg-sky-500/10 text-[10px] font-bold text-sky-100 transition hover:bg-sky-500/20" aria-label="Move of the week info" data-i18n-aria-label="catalog.moveOfWeek.info">i</button>
+        </div>
         <div class="rounded-3xl border border-slate-700/60 bg-slate-950/40 p-4">
           <div class="grid gap-4">
             <div>
@@ -1195,6 +1200,22 @@
         <div class="mt-6 grid grid-cols-2 gap-3 border-t border-slate-800/80 pt-4">
           <button id="exportCatalogBtn" type="button" class="w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm font-semibold text-slate-200 transition hover:border-sky-400 hover:text-white" data-i18n="catalog.exportAction">Export</button>
           <button id="importCatalogBtn" type="button" class="w-full rounded-2xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm font-semibold text-slate-200 transition hover:border-sky-400 hover:text-white" data-i18n="catalog.importAction">Import</button>
+        </div>
+      </div>
+      <div id="moveOfWeekModal" class="hidden fixed inset-0 z-[70] flex items-center justify-center bg-slate-950/80 p-4">
+        <div class="w-full max-w-lg rounded-3xl border border-slate-700 bg-slate-900 p-5 shadow-2xl shadow-slate-950/40">
+          <div class="flex items-center justify-between gap-3">
+            <h3 class="text-xl font-semibold text-white" data-i18n="catalog.moveOfWeek.title">Move of the week</h3>
+          </div>
+          <p class="mt-4 text-sm leading-6 text-slate-300" data-i18n="catalog.moveOfWeek.description">One of the best ways of learning moves deeply in an efficient way, is dedicating 1 week of training to focusing on this move and perfecting it. This app randomly selects one move from your catalog every sunday for you to focus on. If you would like to choose your own move for this week, select from the dropdown below.</p>
+          <label for="moveOfWeekSelect" class="mt-5 block text-sm font-medium text-slate-300" data-i18n="catalog.moveOfWeek.choose">Choose a move for this week</label>
+          <select id="moveOfWeekSelect" class="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-sky-400">
+            <option value="" data-i18n="catalog.moveOfWeek.select">Select a move</option>
+          </select>
+          <div class="mt-5 flex gap-3">
+            <button id="moveOfWeekSaveBtn" type="button" class="flex-1 rounded-2xl bg-sky-500 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-sky-400" data-i18n="catalog.moveOfWeek.save">Save</button>
+            <button id="moveOfWeekCancelBtn" type="button" class="flex-1 rounded-2xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm font-semibold text-slate-200 transition hover:border-slate-500 hover:text-white" data-i18n="catalog.moveOfWeek.cancel">Cancel</button>
+          </div>
         </div>
       </div>
     </section>
@@ -1346,6 +1367,102 @@
         app: { title: 'RollBaseBJJ' },
         tabs: { addMove: 'Move add', catalog: 'Move catalog', profile: 'My Profile', settings: 'Settings' },
         hero: { credit: 'Vibe-coded by ig@ryanalex_g', description: 'Your personal BJJ move journal.<br> Click the little (i) for help.' },
+        timer: {
+          session: 'Session',
+          pastFights: 'Past Fights',
+          partner1: 'Partner 1',
+          partner2: 'Partner 2',
+          redCorner: 'Red Corner',
+          blueCorner: 'Blue Corner',
+          roll: 'Roll',
+          startFight: 'Start Fight',
+          start: 'Start',
+          pause: 'Pause',
+          resume: 'Resume',
+          endRest: 'End Rest',
+          endRound: 'End Round',
+          scoreRound: 'Score Round',
+          winner: 'Winner',
+          result: 'Result',
+          points: 'Points',
+          strikes: 'Strikes',
+          advantage: 'Advantage',
+          penalty: 'Penalty',
+          undo: 'Undo',
+          sigStrikes: 'Sig. Strikes',
+          takedowns: 'Takedowns',
+          red: 'Red',
+          blue: 'Blue',
+          round: 'Round',
+          score: 'Score',
+          submission: 'Submission',
+          cancelBout: 'Cancel Bout',
+          areYouSure: 'Are you sure?',
+          tko: 'TKO / KO',
+          noFights: 'No fights logged yet.<br>Complete a session and it will appear here.',
+          bjj: {
+            score2: '+2 Takedown / Sweep',
+            score3: '+3 Guard Pass',
+            score4: '+4 Mount / Backmount',
+            advantage: 'Advantage',
+            penalty: 'Penalty',
+            undo: 'Undo',
+            points: 'Points',
+            v: 'V',
+            p: 'P',
+            winnerOnPoints: '{winner} wins on points {red}-{blue}',
+            winnerOnAdvantage: '{winner} wins on advantage {red}-{blue}',
+            draw: 'Draw {red}-{blue}, V {redV}-{blueV}'
+          }
+        },
+        catalog: {
+          moveOfWeek: {
+            title: 'Move of the week',
+            label: 'Move of the week:',
+            info: 'Move of the week info',
+            description: 'One of the best ways of learning moves deeply in an efficient way, is dedicating 1 week of training to focusing on this move and perfecting it. This app randomly selects one move from your catalog every sunday for you to focus on. If you would like to choose your own move for this week, select from the dropdown below.',
+            choose: 'Choose a move for this week',
+            select: 'Select a move',
+            save: 'Save',
+            cancel: 'Cancel'
+          },
+          pageTitle: 'Move Catalog',
+          pageDescription: 'Browse and review your move library in one place.',
+          searchLabel: 'Search moves',
+          searchPlaceholder: 'Type a move name to search',
+          clearSearch: 'Clear search',
+          positionLabel: 'Position',
+          allPositions: 'All positions',
+          attempts: 'Attempts',
+          successes: 'Successes',
+          success: 'Success',
+          origin: 'Origin',
+          originOptions: { modernBjj: 'Modern BJJ', freestyleWrestling: 'Freestyle Wrestling', catchWrestling: 'Catch Wrestling', grecoRoman: 'Greco-Roman', judo: 'Judo', japaneseJuJutsu: 'Japanese Ju-Jutsu', sambo: 'Sambo', other: 'Other' },
+          originOtherPlaceholder: 'Specify other origin',
+          ibjjfNote: 'IBJJF Legality note',
+          description: 'Description',
+          descriptionPlaceholder: 'Add notes or a quick description...',
+          image: 'Image',
+          noImage: 'No image selected',
+          chooseImage: 'Choose image',
+          removeImage: 'Remove image',
+          deleteSubPosition: 'Delete sub-position',
+          successRate: 'Success Rate',
+          attemptAction: '+1 Attempt',
+          successAction: '+1 Success',
+          undoAction: 'Undo',
+          deleteAction: 'Delete',
+          emptyState: 'No moves yet. Add one from the move add form or select a different filter.',
+          exportAction: 'Export',
+          importAction: 'Import',
+          role: 'Role',
+          fromTransition: 'From:',
+          noRole: 'No role',
+          unknownMove: 'Unknown move',
+          editMoveDetails: 'Edit move details',
+          toggleDependentMoves: 'Toggle dependent moves',
+          categories: { standing: 'Standing', guard: 'Guard', guardStanding: 'Guard standing', legEntanglements: 'Leg Entanglements', advantageousPositions: 'Advantageous Positions', transitions: 'Transitions' }
+        },
         help: { open: 'Help', iconText: 'i', close: 'Close help', title: 'Welcome to RollBase BJJ', intro: 'Use this tracker to log moves, save sub-positions, track attempts and successes, and view IBJJF legality notes.', start: 'Where should I start? - Start by going to "My Profile" and filling in your details; this will unlock features such as the belt display and IBJJF legality index.', logMoves: 'How do I log my moves? - First, enter the move name. Then choose whether it is a sub-position, select the position, choose your role, specify whether it is gi + nogi or gi only, and click "add move". Your moves will appear in the "move catalog" tab.', whatNow: 'What now? - After each roll or training session, review the moves you know and log how many times you attempted or succeeded with them. You can also add descriptions, information, and images to help you remember them.', successAttempt: 'What determines success/attempt? - A success counts when you either win the exchange or gain a better position. An attempt counts when you try the move and end in either a worse position or a neutral position having spent more energy than your opponent.', dictionary: 'Dictionary:', transition: 'Transition: A move performed from within another position. Log it by selecting "transition" from the dropdown and choosing a move you already logged.', subPosition: 'Sub-Position: A move that is more like a position than a technique. It does not include success/attempt rates. Log it by selecting "sub-position" in the move add form.', dismiss: 'Got it' },
         form: { moveName: 'Move name', moveNamePlaceholder: 'Knee Bar', addSubPosition: 'Add Sub-Position', position: 'Position', roleLabel: 'Top or Bottom', transitionFromLabel: 'Transition from', transitionSelectPrompt: 'Select a move', roleOptions: { top: 'Top', bottom: 'Bottom', controller: 'Controller', receiver: 'Receiver', controllerReceiverLabel: 'Controller / Receiver' }, entanglementSide: 'Entanglement side', entanglementSideOptions: { backside: 'Backside', frontside: 'Frontside' }, positionGroups: { guard: 'Guard', guardStanding: 'Guard standing', legEntanglements: 'Leg Entanglements', advantageousPositions: 'Advantageous Positions' }, positionOptions: { standing: 'Standing', transition: 'Transition', closedGuard: 'Closed Guard', halfGuard: 'Half guard', quarterGuard: 'Quarter guard', butterflyGuard: 'Butterfly guard', halfButterflyGuard: 'Half butterfly guard', sittingGuard: 'Sitting guard', delariva: 'Delariva', slx: 'SLX', xGuard: 'X-guard', spiderGuard: 'Spider guard', lassoGuard: 'Lasso guard', straightAshi: 'Straight Ashi (SLX)', crossAshi: 'Cross Ashi', fiftyFifty: '50/50', sideControl: 'Side control', northSouth: 'North South', katagatame: 'Kesa-gatame', kneeOnBelly: 'Knee on belly', topCrucifix: 'Top Crucifix (Salaverry)', bottomCrucifix: 'Bottom Crucifix', mount: 'Mount', backMount: 'Back mount', backMountBodyTriangle: 'Back mount (Body triangle)', turtleBackside: 'Turtle (Backside)', frontHeadlockSprawl: 'Front Headlock (Sprawl)' }, giAndNogi: 'Gi and Nogi', giOnly: 'Gi only', addMove: 'Add Move', tip: 'Save move to catalog.' },
         seedMoves: {
@@ -1362,7 +1479,54 @@
         },
         settings: { pageTitle: 'Settings', theme: 'Theme', themeHint: 'Switch between dark and light mode.', language: 'Language', languageHint: 'Choose your preferred language.', languageOptions: { english: 'English', portuguese: 'Português' }, comingSoon: 'Coming soon', comingSoonHint: 'More settings and personalization options will appear here.' },
         profile: { title: 'My BJJ Profile', currentBelt: 'CURRENT BELT', whiteBelt: '{belt} belt', stripes: '{count} stripes', name: 'Name', namePlaceholder: 'Enter name', enter: 'Enter', editName: 'Edit name', age: 'Age', agePlaceholder: 'Enter age', notSet: 'Not set', editAge: 'Edit age', gym: 'Gym', gymPlaceholder: 'Enter gym', editGym: 'Edit gym', beltLevel: 'Belt level', white: 'White', editBelt: 'Edit belt', stripesLabel: 'Stripes:', startedTraining: 'Started training', editStarted: 'Edit starting date', favoriteMove: 'Favorite move', noFavorite: 'No favorite move set', editFavorite: 'Edit favorite move', none: 'None', months: { jan: 'Jan', feb: 'Feb', mar: 'Mar', apr: 'Apr', may: 'May', jun: 'Jun', jul: 'Jul', aug: 'Aug', sep: 'Sep', oct: 'Oct', nov: 'Nov', dec: 'Dec' }, beltColors: { white: 'White', whiteGray: 'White Gray', gray: 'Gray', blackGray: 'Black Gray', whiteYellow: 'White Yellow', yellow: 'Yellow', blackYellow: 'Black Yellow', whiteOrange: 'White Orange', orange: 'Orange', blackOrange: 'Black Orange', whiteGreen: 'White Green', green: 'Green', blackGreen: 'Black Green', blue: 'Blue', purple: 'Purple', brown: 'Brown', black: 'Black' } },
-        catalog: { pageTitle: 'Move Catalog', pageDescription: 'Browse and review your move library in one place.', searchLabel: 'Search moves', searchPlaceholder: 'Type a move name to search', clearSearch: 'Clear search', positionLabel: 'Position', allPositions: 'All positions', attempts: 'Attempts', successes: 'Successes', success: 'Success', origin: 'Origin', originOptions: { modernBjj: 'Modern BJJ', freestyleWrestling: 'Freestyle Wrestling', catchWrestling: 'Catch Wrestling', grecoRoman: 'Greco-Roman', judo: 'Judo', japaneseJuJutsu: 'Japanese Ju-Jutsu', sambo: 'Sambo', other: 'Other' }, originOtherPlaceholder: 'Specify other origin', ibjjfNote: 'IBJJF Legality note', description: 'Description', descriptionPlaceholder: 'Add notes or a quick description...', image: 'Image', noImage: 'No image selected', chooseImage: 'Choose image', removeImage: 'Remove image', deleteSubPosition: 'Delete sub-position', successRate: 'Success Rate', attemptAction: '+1 Attempt', successAction: '+1 Success', undoAction: 'Undo', deleteAction: 'Delete', emptyState: 'No moves yet. Add one from the form above or choose a filter.', exportAction: 'Export', importAction: 'Import', role: 'Role', fromTransition: 'From:', noRole: 'No role', unknownMove: 'Unknown move', editMoveDetails: 'Edit move details', toggleDependentMoves: 'Toggle dependent moves', categories: { standing: 'Standing', guard: 'Guard', guardStanding: 'Guard standing', legEntanglements: 'Leg Entanglements', advantageousPositions: 'Advantageous Positions', transitions: 'Transitions' } },
+        catalog: {
+          moveOfWeek: {
+            title: 'Move of the week',
+            label: 'Move of the week:',
+            info: 'Move of the week info',
+            description: 'One of the best ways of learning moves deeply in an efficient way, is dedicating 1 week of training to focusing on this move and perfecting it. This app randomly selects one move from your catalog every sunday for you to focus on. If you would like to choose your own move for this week, select from the dropdown below.',
+            choose: 'Choose a move for this week',
+            select: 'Select a move',
+            save: 'Save',
+            cancel: 'Cancel'
+          },
+          pageTitle: 'Move Catalog',
+          pageDescription: 'Browse and review your move library in one place.',
+          searchLabel: 'Search moves',
+          searchPlaceholder: 'Type a move name to search',
+          clearSearch: 'Clear search',
+          positionLabel: 'Position',
+          allPositions: 'All positions',
+          attempts: 'Attempts',
+          successes: 'Successes',
+          success: 'Success',
+          origin: 'Origin',
+          originOptions: { modernBjj: 'Modern BJJ', freestyleWrestling: 'Freestyle Wrestling', catchWrestling: 'Catch Wrestling', grecoRoman: 'Greco-Roman', judo: 'Judo', japaneseJuJutsu: 'Japanese Ju-Jutsu', sambo: 'Sambo', other: 'Other' },
+          originOtherPlaceholder: 'Specify other origin',
+          ibjjfNote: 'IBJJF Legality note',
+          description: 'Description',
+          descriptionPlaceholder: 'Add notes or a quick description...',
+          image: 'Image',
+          noImage: 'No image selected',
+          chooseImage: 'Choose image',
+          removeImage: 'Remove image',
+          deleteSubPosition: 'Delete sub-position',
+          successRate: 'Success Rate',
+          attemptAction: '+1 Attempt',
+          successAction: '+1 Success',
+          undoAction: 'Undo',
+          deleteAction: 'Delete',
+          emptyState: 'No moves yet. Add one from the form above or choose a filter.',
+          exportAction: 'Export',
+          importAction: 'Import',
+          role: 'Role',
+          fromTransition: 'From:',
+          noRole: 'No role',
+          unknownMove: 'Unknown move',
+          editMoveDetails: 'Edit move details',
+          toggleDependentMoves: 'Toggle dependent moves',
+          categories: { standing: 'Standing', guard: 'Guard', guardStanding: 'Guard standing', legEntanglements: 'Leg Entanglements', advantageousPositions: 'Advantageous Positions', transitions: 'Transitions' }
+        },
         catalogImportExport: { close: 'Close catalog import/export', exportTitle: 'Catalog export', exportMessage: 'Copy or paste the catalog string below.', importTitle: 'Import catalog', importMessage: 'Paste the catalog export string here and confirm to import it.', includeStats: 'Import attempts and successes data', copy: 'Copy', import: 'Import', done: 'Done' },
         messages: { importSuccess: 'Catalog imported successfully.', importError: 'That catalog export string could not be read.' }
       },
@@ -1370,6 +1534,102 @@
         app: { title: 'RollBaseBJJ' },
         tabs: { addMove: 'Adicionar técnica', catalog: 'Catálogo', profile: 'Meu perfil', settings: 'Configurações' },
         hero: { credit: 'Criado por ig@ryanalex_g', description: 'Seu diário pessoal de técnicas BJJ.<br> Clique no (i) para ajuda.' },
+        timer: {
+          session: 'Sessão',
+          pastFights: 'Lutas anteriores',
+          partner1: 'Parceiro 1',
+          partner2: 'Parceiro 2',
+          redCorner: 'Canto vermelho',
+          blueCorner: 'Canto azul',
+          roll: 'Rolar',
+          startFight: 'Iniciar luta',
+          start: 'Iniciar',
+          pause: 'Pausar',
+          resume: 'Retomar',
+          endRest: 'Encerrar descanso',
+          endRound: 'Encerrar rodada',
+          scoreRound: 'Pontuar rodada',
+          winner: 'Vencedor',
+          result: 'Resultado',
+          points: 'Pontos',
+          strikes: 'Golpes',
+          advantage: 'Vantagem',
+          penalty: 'Penalidade',
+          undo: 'Desfazer',
+          sigStrikes: 'Gols. sig.',
+          takedowns: 'Quedas',
+          red: 'Vermelho',
+          blue: 'Azul',
+          round: 'Rodada',
+          score: 'Pontuação',
+          submission: 'Submissão',
+          cancelBout: 'Cancelar luta',
+          areYouSure: 'Tem certeza?',
+          tko: 'TKO / KO',
+          noFights: 'Nenhuma luta registrada ainda.<br>Complete uma sessão e ela aparecerá aqui.',
+          bjj: {
+            score2: '+2 Queda / Raspagem',
+            score3: '+3 Passagem de guarda',
+            score4: '+4 Montada / Costas',
+            advantage: 'Vantagem',
+            penalty: 'Penalidade',
+            undo: 'Desfazer',
+            points: 'Pontos',
+            v: 'V',
+            p: 'P',
+            winnerOnPoints: '{winner} vence por pontos {red}-{blue}',
+            winnerOnAdvantage: '{winner} vence por vantagem {red}-{blue}',
+            draw: 'Empate {red}-{blue}, V {redV}-{blueV}'
+          }
+        },
+        catalog: {
+          moveOfWeek: {
+            title: 'Movimento da semana',
+            label: 'Movimento da semana:',
+            info: 'Info do movimento da semana',
+            description: 'Uma das melhores formas de aprender movimentos profundamente de forma eficiente é dedicar 1 semana de treino para focar neste movimento e aperfeiçoá-lo. Este aplicativo seleciona aleatoriamente um movimento do seu catálogo toda domingo para você focar. Se quiser escolher seu próprio movimento para esta semana, selecione no menu abaixo.',
+            choose: 'Escolha um movimento para esta semana',
+            select: 'Selecione um movimento',
+            save: 'Salvar',
+            cancel: 'Cancelar'
+          },
+          pageTitle: 'Catálogo de técnicas',
+          pageDescription: 'Navegue e revise sua biblioteca de técnicas em um só lugar.',
+          searchLabel: 'Buscar técnicas',
+          searchPlaceholder: 'Digite o nome de uma técnica',
+          clearSearch: 'Limpar busca',
+          positionLabel: 'Posição',
+          allPositions: 'Todas as posições',
+          attempts: 'Tentativas',
+          successes: 'Sucessos',
+          success: 'Sucesso',
+          origin: 'Origem',
+          originOptions: { modernBjj: 'BJJ moderno', freestyleWrestling: 'Freestyle Wrestling', catchWrestling: 'Catch Wrestling', grecoRoman: 'Greco-romana', judo: 'Judô', japaneseJuJutsu: 'Ju-jutsu japonês', sambo: 'Sambo', other: 'Outro' },
+          originOtherPlaceholder: 'Especifique outra origem',
+          ibjjfNote: 'Nota de legalidade da IBJJF',
+          description: 'Descrição',
+          descriptionPlaceholder: 'Adicione notas ou uma descrição rápida...',
+          image: 'Imagem',
+          noImage: 'Nenhuma imagem selecionada',
+          chooseImage: 'Escolher imagem',
+          removeImage: 'Remover imagem',
+          deleteSubPosition: 'Excluir subposição',
+          successRate: 'Taxa de sucesso',
+          attemptAction: '+1 Tentativa',
+          successAction: '+1 Sucesso',
+          undoAction: 'Desfazer',
+          deleteAction: 'Excluir',
+          emptyState: 'Nenhuma técnica ainda. Adicione uma no formulário acima ou escolha um filtro.',
+          exportAction: 'Exportar',
+          importAction: 'Importar',
+          role: 'Papel',
+          fromTransition: 'De:',
+          noRole: 'Sem papel',
+          unknownMove: 'Técnica desconhecida',
+          editMoveDetails: 'Editar detalhes da técnica',
+          toggleDependentMoves: 'Alternar técnicas dependentes',
+          categories: { standing: 'Em pé', guard: 'Guarda', guardStanding: 'Guarda em pé', legEntanglements: 'Entanglement de pernas', advantageousPositions: 'Posições vantajosas', transitions: 'Transições' }
+        },
         help: { open: 'Ajuda', iconText: 'i', close: 'Fechar ajuda', title: 'Bem-vindo ao RollBase BJJ!', intro: 'Use este aplicação para registrar movimentos, salvar sub-posições, acompanhar tentativas e sucessos e visualizar notas de legalidade da IBJJF.', start: 'Por onde eu começo? - Comece indo para "Meu perfil" e preenchendo seus dados; isso desbloqueará recursos como a exibição de faixas e o índice de legalidade da IBJJF.', logMoves: 'Como registro minhas técnicas? - Primeiro, digite o nome da técnica. Depois escolha se é uma subposição, selecione a posição, escolha o papel, especifique se é gi + nogi ou só gi e clique em "adicionar técnica". Suas técnicas aparecerão no "catálogo".', whatNow: 'E agora? - Após cada roll ou sessão de treino, revise as técnicas que você conhece e registre quantas vezes tentou ou teve sucesso com elas. Você também pode adicionar descrições, informações e imagens para lembrar melhor.', successAttempt: 'O que determina sucesso/tentativa? - Um sucesso conta quando você ou ganha a luta ou ganha uma posição melhor. Uma tentativa conta quando você tenta a técnica e termina ou numa posição pior ou acaba numa posição neutra tendo gasto mais energia do que o oponente.', dictionary: 'Dicionário:', transition: 'Transição: Uma técnica realizada a partir de outra posição. Registre-a selecionando "transition" no menu e escolhendo uma técnica já registrada.', subPosition: 'Subposição: Uma técnica mais parecida com uma posição do que com uma técnica. Não inclui taxas de tentativa/sucesso. Registre-a selecionando "sub-position" no formulário.', dismiss: 'Entendi' },
         form: { moveName: 'Nome da técnica', moveNamePlaceholder: 'Arm Lock', addSubPosition: 'Adicionar subposição', position: 'Posição', roleLabel: 'Decima ou Debaixo', transitionFromLabel: 'Transição de', transitionSelectPrompt: 'Selecione uma técnica', roleOptions: { top: 'Cima', bottom: 'Baixo', controller: 'Controlador', receiver: 'Receptor', controllerReceiverLabel: 'Controlador / Receptor' }, entanglementSide: 'Lado do entanglement', entanglementSideOptions: { backside: 'Trás', frontside: 'Frente' }, positionGroups: { guard: 'Guarda', guardStanding: 'Guarda em pé', legEntanglements: 'Entanglement de pernas', advantageousPositions: 'Posições vantajosas' }, positionOptions: { standing: 'Em pé', transition: 'Transição', closedGuard: 'Guarda fechada', halfGuard: 'Meia guarda', quarterGuard: 'Quarta guarda', butterflyGuard: 'Guarda borboleta', halfButterflyGuard: 'Meia guarda de borboleta', sittingGuard: 'Guarda sentada', delariva: 'Delariva', slx: 'SLX', xGuard: 'Guarda X', spiderGuard: 'Guarda aranha', lassoGuard: 'Guarda laço', straightAshi: 'Ashi reto (SLX)', crossAshi: 'Ashi cruzado', fiftyFifty: '50/50', sideControl: '100 Kilos', northSouth: 'Norte Sul', katagatame: 'Kesa-gatame', kneeOnBelly: 'Joelho na barriga', topCrucifix: 'Crucifixo de cima (Salaverry)', bottomCrucifix: 'Crucifixo de baixo', mount: 'Montada', backMount: 'Controle de costas', backMountBodyTriangle: 'Controle de costas (triângulo no corpo)', turtleBackside: 'Quatro Apoio (trás)', frontHeadlockSprawl: 'Headlock frontal (sprawl)' }, giAndNogi: 'Gi e Nogi', giOnly: 'Só Gi', addMove: 'Adicionar técnica', tip: 'Salve a técnica no catálogo.' },
         seedMoves: {
@@ -1386,14 +1646,63 @@
         },
         settings: { pageTitle: 'Configurações', theme: 'Tema', themeHint: 'Alternar entre modo escuro e claro.', language: 'Idioma', languageHint: 'Escolha o idioma preferido.', languageOptions: { english: 'Inglês', portuguese: 'Português' }, comingSoon: 'Em breve', comingSoonHint: 'Mais opções de configuração aparecerão aqui.' },
         profile: { title: 'Meu perfil BJJ', currentBelt: 'CINTURÃO ATUAL', whiteBelt: '{belt} cinto', stripes: '{count} faixas', name: 'Nome', namePlaceholder: 'Digite o nome', enter: 'Entrar', editName: 'Editar nome', age: 'Idade', agePlaceholder: 'Digite a idade', notSet: 'Não definido', editAge: 'Editar idade', gym: 'Academia', gymPlaceholder: 'Digite a academia', editGym: 'Editar academia', beltLevel: 'Nível de faixa', white: 'Branca', editBelt: 'Editar faixa', stripesLabel: 'Graus:', startedTraining: 'Começou a treinar', editStarted: 'Editar data de início', favoriteMove: 'Técnica favorita', noFavorite: 'Nenhuma', editFavorite: 'Editar técnica favorita', none: 'Escolher', months: { jan: 'Jan', feb: 'Fev', mar: 'Mar', apr: 'Abr', may: 'Mai', jun: 'Jun', jul: 'Jul', aug: 'Ago', sep: 'Set', oct: 'Out', nov: 'Nov', dec: 'Dez' }, beltColors: { white: 'Branca', whiteGray: 'Branca cinza', gray: 'Cinza', blackGray: 'Preta cinza', whiteYellow: 'Branca amarela', yellow: 'Amarela', blackYellow: 'Preta amarela', whiteOrange: 'Branca laranja', orange: 'Laranja', blackOrange: 'Preta laranja', whiteGreen: 'Branca verde', green: 'Verde', blackGreen: 'Preta verde', blue: 'Azul', purple: 'Roxa', brown: 'Marrom', black: 'Preta' } },
-        catalog: { pageTitle: 'Catálogo de técnicas', pageDescription: 'Navegue e revise sua biblioteca de técnicas em um só lugar.', searchLabel: 'Buscar técnicas', searchPlaceholder: 'Digite o nome de uma técnica', clearSearch: 'Limpar busca', positionLabel: 'Posição', allPositions: 'Todas as posições', attempts: 'Tentativas', successes: 'Sucessos', success: 'Sucesso', origin: 'Origem', originOptions: { modernBjj: 'BJJ moderno', freestyleWrestling: 'Freestyle Wrestling', catchWrestling: 'Catch Wrestling', grecoRoman: 'Greco-romana', judo: 'Judô', japaneseJuJutsu: 'Ju-jutsu japonês', sambo: 'Sambo', other: 'Outro' }, originOtherPlaceholder: 'Especifique outra origem', ibjjfNote: 'Nota de legalidade da IBJJF', description: 'Descrição', descriptionPlaceholder: 'Adicione notas ou uma descrição rápida...', image: 'Imagem', noImage: 'Nenhuma imagem selecionada', chooseImage: 'Escolher imagem', removeImage: 'Remover imagem', deleteSubPosition: 'Excluir subposição', successRate: 'Taxa de sucesso', attemptAction: '+1 Tentativa', successAction: '+1 Sucesso', undoAction: 'Desfazer', deleteAction: 'Excluir', emptyState: 'Nenhuma técnica ainda. Adicione uma no formulário acima ou escolha um filtro.', exportAction: 'Exportar', importAction: 'Importar', role: 'Papel', fromTransition: 'De:', noRole: 'Sem papel', unknownMove: 'Técnica desconhecida', editMoveDetails: 'Editar detalhes da técnica', toggleDependentMoves: 'Alternar técnicas dependentes', categories: { standing: 'Em pé', guard: 'Guarda', guardStanding: 'Guarda em pé', legEntanglements: 'Entanglement de pernas', advantageousPositions: 'Posições vantajosas', transitions: 'Transições' } },
+        catalog: {
+          moveOfWeek: {
+            title: 'Movimento da semana',
+            label: 'Movimento da semana:',
+            info: 'Info do movimento da semana',
+            description: 'Uma das melhores formas de aprender movimentos profundamente de forma eficiente é dedicar 1 semana de treino para focar neste movimento e aperfeiçoá-lo. Este aplicativo seleciona aleatoriamente um movimento do seu catálogo toda domingo para você focar. Se quiser escolher seu próprio movimento para esta semana, selecione no menu abaixo.',
+            choose: 'Escolha um movimento para esta semana',
+            select: 'Selecione um movimento',
+            save: 'Salvar',
+            cancel: 'Cancelar'
+          },
+          pageTitle: 'Catálogo de técnicas',
+          pageDescription: 'Navegue e revise sua biblioteca de técnicas em um só lugar.',
+          searchLabel: 'Buscar técnicas',
+          searchPlaceholder: 'Digite o nome de uma técnica',
+          clearSearch: 'Limpar busca',
+          positionLabel: 'Posição',
+          allPositions: 'Todas as posições',
+          attempts: 'Tentativas',
+          successes: 'Sucessos',
+          success: 'Sucesso',
+          origin: 'Origem',
+          originOptions: { modernBjj: 'BJJ moderno', freestyleWrestling: 'Freestyle Wrestling', catchWrestling: 'Catch Wrestling', grecoRoman: 'Greco-romana', judo: 'Judô', japaneseJuJutsu: 'Ju-jutsu japonês', sambo: 'Sambo', other: 'Outro' },
+          originOtherPlaceholder: 'Especifique outra origem',
+          ibjjfNote: 'Nota de legalidade da IBJJF',
+          description: 'Descrição',
+          descriptionPlaceholder: 'Adicione notas ou uma descrição rápida...',
+          image: 'Imagem',
+          noImage: 'Nenhuma imagem selecionada',
+          chooseImage: 'Escolher imagem',
+          removeImage: 'Remover imagem',
+          deleteSubPosition: 'Excluir subposição',
+          successRate: 'Taxa de sucesso',
+          attemptAction: '+1 Tentativa',
+          successAction: '+1 Sucesso',
+          undoAction: 'Desfazer',
+          deleteAction: 'Excluir',
+          emptyState: 'Nenhuma técnica ainda. Adicione uma no formulário acima ou escolha um filtro.',
+          exportAction: 'Exportar',
+          importAction: 'Importar',
+          role: 'Papel',
+          fromTransition: 'De:',
+          noRole: 'Sem papel',
+          unknownMove: 'Técnica desconhecida',
+          editMoveDetails: 'Editar detalhes da técnica',
+          toggleDependentMoves: 'Alternar técnicas dependentes',
+          categories: { standing: 'Em pé', guard: 'Guarda', guardStanding: 'Guarda em pé', legEntanglements: 'Entanglement de pernas', advantageousPositions: 'Posições vantajosas', transitions: 'Transições' }
+        },
         catalogImportExport: { close: 'Fechar importação/exportação do catálogo', exportTitle: 'Exportar catálogo', exportMessage: 'Copie ou cole a string do catálogo abaixo.', importTitle: 'Importar catálogo', importMessage: 'Cole a string de exportação do catálogo aqui e confirme para importá-la.', includeStats: 'Importar dados de tentativas e sucessos', copy: 'Copiar', import: 'Importar', done: 'Concluído' },
         messages: { importSuccess: 'Catálogo importado com sucesso.', importError: 'Essa string de exportação do catálogo não pôde ser lida.' }
       }
     };
     let currentLanguage = localStorage.getItem(LANGUAGE_KEY) || 'en';
+    let renderSecretSparringLog = null;
     const storedMoves = localStorage.getItem(STORAGE_KEY);
     const moves = storedMoves ? ensureSeedMoves(normalizeStoredMoves(JSON.parse(storedMoves))) : getDefaultMoves();
+    const MOVE_OF_WEEK_KEY = 'rollbasebjjMoveOfWeek';
     let actionHistory = [];
     const expandedMoves = new Set();
     const videoBlobUrlMap = new WeakMap();
@@ -1715,6 +2024,20 @@
 
     function applyTranslations() {
       applyTranslationsToRoot(document);
+
+      const moveOfWeekLabel = document.querySelector('#moveOfWeekBanner .font-semibold');
+      const moveOfWeekInfoBtn = document.getElementById('moveOfWeekInfoBtn');
+      if (moveOfWeekLabel) {
+        moveOfWeekLabel.textContent = t('catalog.moveOfWeek.label', 'Move of the week:');
+      }
+      if (moveOfWeekInfoBtn) {
+        moveOfWeekInfoBtn.setAttribute('aria-label', t('catalog.moveOfWeek.info', 'Move of the week info'));
+      }
+
+      if (typeof renderSecretSparringLog === 'function') {
+        renderSecretSparringLog();
+      }
+
       document.documentElement.lang = currentLanguage === 'pt' ? 'pt' : 'en';
       document.title = t('app.title', 'RollBaseBJJ');
       syncCatalogModalTranslations();
@@ -1738,6 +2061,7 @@
 
     function saveData() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(moves));
+      updateMoveOfWeekBanner();
     }
 
     function encodeCatalogPayload(value) {
@@ -2855,7 +3179,86 @@
       });
     }
 
+    function getCurrentWeekKey(date = new Date()) {
+      const sunday = new Date(date);
+      sunday.setHours(0, 0, 0, 0);
+      const offset = sunday.getDay();
+      sunday.setDate(sunday.getDate() - offset);
+      return sunday.toISOString().slice(0, 10);
+    }
+
+    function getMoveOfWeekData() {
+      const stored = JSON.parse(localStorage.getItem(MOVE_OF_WEEK_KEY) || 'null');
+      if (!stored || typeof stored !== 'object') return null;
+      if (typeof stored.title !== 'string' || !stored.title.trim()) return null;
+      return stored;
+    }
+
+    function setMoveOfWeek(title, manual = false) {
+      const weekKey = getCurrentWeekKey();
+      localStorage.setItem(MOVE_OF_WEEK_KEY, JSON.stringify({ weekKey, title, manual }));
+      updateMoveOfWeekBanner();
+    }
+
+    function openMoveOfWeekModal() {
+      const select = document.getElementById('moveOfWeekSelect');
+      const modal = document.getElementById('moveOfWeekModal');
+      if (!select || !modal) return;
+
+      const current = getMoveOfWeekData();
+      const currentTitle = current && typeof current.title === 'string' ? current.title : '';
+      const sortedMoves = [...moves].filter(move => move && move.title && move.title.trim()).sort((a, b) => a.title.localeCompare(b.title));
+      const placeholder = t('catalog.moveOfWeek.select', 'Select a move');
+
+      select.innerHTML = `<option value="">${placeholder}</option>` + sortedMoves.map(move => `<option value="${move.title}">${move.title}</option>`).join('');
+      select.value = currentTitle || '';
+      modal.classList.remove('hidden');
+    }
+
+    function closeMoveOfWeekModal() {
+      const modal = document.getElementById('moveOfWeekModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function updateMoveOfWeekBanner() {
+      const banner = document.getElementById('moveOfWeekBanner');
+      const moveName = document.getElementById('moveOfWeekName');
+      const label = document.querySelector('#moveOfWeekBanner .font-semibold');
+      const infoBtn = document.getElementById('moveOfWeekInfoBtn');
+      if (!banner || !moveName) return;
+
+      if (label) {
+        label.textContent = t('catalog.moveOfWeek.label', 'Move of the week:');
+      }
+      if (infoBtn) {
+        infoBtn.setAttribute('aria-label', t('catalog.moveOfWeek.info', 'Move of the week info'));
+      }
+
+      const availableMoves = moves.filter(move => move && move.title && move.title.trim());
+      if (!availableMoves.length) {
+        banner.classList.add('hidden');
+        moveName.textContent = '';
+        return;
+      }
+
+      const weekKey = getCurrentWeekKey();
+      const stored = getMoveOfWeekData();
+      const storedTitle = stored && typeof stored.title === 'string' ? stored.title : '';
+      const validStoredMove = storedTitle && availableMoves.some(move => move.title === storedTitle);
+
+      if (!stored || stored.weekKey !== weekKey || !validStoredMove) {
+        const pick = availableMoves[Math.floor(Math.random() * availableMoves.length)];
+        localStorage.setItem(MOVE_OF_WEEK_KEY, JSON.stringify({ weekKey, title: pick.title, manual: false }));
+      }
+
+      const current = getMoveOfWeekData();
+      const currentTitle = current && typeof current.title === 'string' ? current.title : availableMoves[0].title;
+      moveName.textContent = currentTitle;
+      banner.classList.remove('hidden');
+    }
+
     function renderCards() {
+      updateMoveOfWeekBanner();
       cardsContainer.innerHTML = '';
       const query = searchTerm.trim().toLowerCase();
       const filteredMoves = moves.filter(move => {
@@ -3390,6 +3793,19 @@
       syncSearchClearButton();
       renderCards();
     });
+    document.getElementById('moveOfWeekInfoBtn')?.addEventListener('click', openMoveOfWeekModal);
+    document.getElementById('moveOfWeekCancelBtn')?.addEventListener('click', closeMoveOfWeekModal);
+    document.getElementById('moveOfWeekSaveBtn')?.addEventListener('click', () => {
+      const select = document.getElementById('moveOfWeekSelect');
+      if (!select) return;
+      const value = select.value.trim();
+      if (!value) return;
+      setMoveOfWeek(value, true);
+      closeMoveOfWeekModal();
+    });
+    document.getElementById('moveOfWeekModal')?.addEventListener('click', (event) => {
+      if (event.target === event.currentTarget) closeMoveOfWeekModal();
+    });
     trackerTabBtn.addEventListener('click', () => setActivePage('tracker'));
     settingsTabBtn.addEventListener('click', () => setActivePage('settings'));
     timerTabBtn?.addEventListener('click', () => setActivePage('timer'));
@@ -3529,8 +3945,8 @@
       }
 
       function startFight() {
-        secretState.redName = document.getElementById('secretRedName')?.value?.trim() || (secretState.mode === 'bjj' ? 'Partner 1' : 'Red Corner');
-        secretState.blueName = document.getElementById('secretBlueName')?.value?.trim() || (secretState.mode === 'bjj' ? 'Partner 2' : 'Blue Corner');
+        secretState.redName = document.getElementById('secretRedName')?.value?.trim() || (secretState.mode === 'bjj' ? t('timer.partner1', 'Partner 1') : t('timer.redCorner', 'Red Corner'));
+        secretState.blueName = document.getElementById('secretBlueName')?.value?.trim() || (secretState.mode === 'bjj' ? t('timer.partner2', 'Partner 2') : t('timer.blueCorner', 'Blue Corner'));
         secretState.currentRound = 1;
         secretState.timeLeft = secretState.mode === 'bjj' ? secretState.bjjTimerLength : secretState.roundLength;
         secretState.running = false;
@@ -3606,6 +4022,55 @@
         render();
       }
 
+      function getPenaltyLevel(warnings) {
+        if (warnings >= 4) return 4;
+        if (warnings >= 3) return 3;
+        if (warnings >= 2) return 2;
+        return 0;
+      }
+
+      function applyPenaltyState(side, previousWarnings, nextWarnings) {
+        const isRed = side === 'red';
+        const opponentAdvKey = isRed ? 'bjjBlueAdv' : 'bjjRedAdv';
+        const opponentPointsKey = isRed ? 'bjjBluePoints' : 'bjjRedPoints';
+        const previousLevel = getPenaltyLevel(previousWarnings);
+        const nextLevel = getPenaltyLevel(nextWarnings);
+
+        if (previousLevel === 2) secretState[opponentAdvKey] = Math.max(0, secretState[opponentAdvKey] - 1);
+        if (previousLevel === 3) secretState[opponentPointsKey] = Math.max(0, secretState[opponentPointsKey] - 2);
+
+        if (nextLevel === 2) secretState[opponentAdvKey] = Math.max(0, secretState[opponentAdvKey] + 1);
+        if (nextLevel === 3) secretState[opponentPointsKey] = Math.max(0, secretState[opponentPointsKey] + 2);
+
+        if (nextLevel === 4) {
+          const winner = isRed ? secretState.blueName : secretState.redName;
+          const result = {
+            id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+            redName: secretState.redName,
+            blueName: secretState.blueName,
+            redTotal: secretState.bjjRedPoints,
+            blueTotal: secretState.bjjBluePoints,
+            winner,
+            method: `${winner} wins by DQ`,
+            date: new Date().toISOString(),
+            redScore: secretState.bjjRedPoints,
+            blueScore: secretState.bjjBluePoints,
+            roundScores: []
+          };
+          secretState.result = result;
+          secretState.history.unshift(result);
+          saveHistory();
+          secretState.view = 'summary';
+          secretState.running = false;
+          secretState.paused = false;
+          secretState.showRoundEnd = false;
+          secretState.confirmAction = null;
+          return true;
+        }
+
+        return false;
+      }
+
       function updateBjjStat(side, type, delta) {
         const action = { kind: 'stat', stat: type, delta };
         if (type === 'adv') {
@@ -3618,12 +4083,20 @@
           }
         }
         if (type === 'warning') {
+          const previousWarnings = side === 'red' ? secretState.bjjRedWarnings : secretState.bjjBlueWarnings;
+          const nextWarnings = Math.max(0, previousWarnings + delta);
+
           if (side === 'red') {
-            secretState.bjjRedWarnings = Math.max(0, secretState.bjjRedWarnings + delta);
+            secretState.bjjRedWarnings = nextWarnings;
             secretState.bjjRedHistory.push(action);
           } else {
-            secretState.bjjBlueWarnings = Math.max(0, secretState.bjjBlueWarnings + delta);
+            secretState.bjjBlueWarnings = nextWarnings;
             secretState.bjjBlueHistory.push(action);
+          }
+
+          if (applyPenaltyState(side, previousWarnings, nextWarnings)) {
+            render();
+            return;
           }
         }
         render();
@@ -3650,8 +4123,13 @@
           else secretState.bjjBlueAdv = Math.max(0, secretState.bjjBlueAdv - lastAction.delta);
         }
         if (lastAction.stat === 'warning') {
-          if (side === 'red') secretState.bjjRedWarnings = Math.max(0, secretState.bjjRedWarnings - lastAction.delta);
-          else secretState.bjjBlueWarnings = Math.max(0, secretState.bjjBlueWarnings - lastAction.delta);
+          const previousWarnings = side === 'red' ? secretState.bjjRedWarnings : secretState.bjjBlueWarnings;
+          const nextWarnings = Math.max(0, previousWarnings - lastAction.delta);
+
+          if (side === 'red') secretState.bjjRedWarnings = nextWarnings;
+          else secretState.bjjBlueWarnings = nextWarnings;
+
+          applyPenaltyState(side, previousWarnings, nextWarnings);
         }
 
         render();
@@ -3790,6 +4268,62 @@
         render();
       }
 
+      function resolveBjjWinner() {
+        let redTotal = secretState.bjjRedPoints;
+        let blueTotal = secretState.bjjBluePoints;
+        let redAdv = secretState.bjjRedAdv;
+        let blueAdv = secretState.bjjBlueAdv;
+
+        if (secretState.bjjRedWarnings >= 4) {
+          return {
+            winner: secretState.blueName,
+            method: `${secretState.blueName} wins by DQ`,
+            redTotal,
+            blueTotal,
+            redAdv,
+            blueAdv
+          };
+        }
+
+        if (secretState.bjjBlueWarnings >= 4) {
+          return {
+            winner: secretState.redName,
+            method: `${secretState.redName} wins by DQ`,
+            redTotal,
+            blueTotal,
+            redAdv,
+            blueAdv
+          };
+        }
+
+        if (secretState.bjjRedWarnings >= 3) blueTotal += 2;
+        if (secretState.bjjBlueWarnings >= 3) redTotal += 2;
+        if (secretState.bjjRedWarnings >= 2 && secretState.bjjRedWarnings < 3) blueAdv += 1;
+        if (secretState.bjjBlueWarnings >= 2 && secretState.bjjBlueWarnings < 3) redAdv += 1;
+
+        let winner = 'Draw';
+        if (redTotal > blueTotal) winner = secretState.redName;
+        else if (blueTotal > redTotal) winner = secretState.blueName;
+        else if (redAdv > blueAdv) winner = secretState.redName;
+        else if (blueAdv > redAdv) winner = secretState.blueName;
+
+        let method = `Draw ${redTotal}-${blueTotal}, V ${redAdv}-${blueAdv}`;
+        if (winner !== 'Draw') {
+          method = redTotal !== blueTotal
+            ? `${winner} wins on points ${redTotal}-${blueTotal}`
+            : `${winner} wins on advantage ${redAdv}-${blueAdv}`;
+        }
+
+        return {
+          winner,
+          method,
+          redTotal,
+          blueTotal,
+          redAdv,
+          blueAdv
+        };
+      }
+
       function deleteHistory(id) {
         secretState.history = secretState.history.filter((entry) => entry.id !== id);
         saveHistory();
@@ -3801,6 +4335,39 @@
         secretState.timeLeft = Math.max(0, secretState.timeLeft - 1);
         if (secretState.timeLeft === 0) {
           secretState.running = false;
+          if (secretState.mode === 'bjj') {
+            const result = {
+              id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+              redName: secretState.redName,
+              blueName: secretState.blueName,
+              redTotal: secretState.bjjRedPoints,
+              blueTotal: secretState.bjjBluePoints,
+              winner: null,
+              method: null,
+              date: new Date().toISOString(),
+              redScore: secretState.bjjRedPoints,
+              blueScore: secretState.bjjBluePoints,
+              roundScores: []
+            };
+
+            const resolved = resolveBjjWinner();
+            result.winner = resolved.winner;
+            result.method = resolved.method;
+            result.redTotal = resolved.redTotal;
+            result.blueTotal = resolved.blueTotal;
+            result.redScore = resolved.redTotal;
+            result.blueScore = resolved.blueTotal;
+
+            secretState.result = result;
+            secretState.history.unshift(result);
+            saveHistory();
+            secretState.view = 'summary';
+            secretState.paused = false;
+            secretState.showRoundEnd = false;
+            secretState.confirmAction = null;
+            render();
+            return;
+          }
           secretState.showRoundEnd = true;
         }
         render();
@@ -3822,12 +4389,12 @@
         return `
           <div class="sl-screen">
             <div class="sl-field">
-              <label>${isBjj ? 'Partner 1' : 'Red Corner'}</label>
-              <input id="secretRedName" class="sl-input" value="" maxlength="24" placeholder="${isBjj ? 'Partner 1' : 'Red Corner'}" />
+              <label>${isBjj ? t('timer.partner1', 'Partner 1') : t('timer.redCorner', 'Red Corner')}</label>
+              <input id="secretRedName" class="sl-input" value="" maxlength="24" placeholder="${isBjj ? t('timer.partner1', 'Partner 1') : t('timer.redCorner', 'Red Corner')}" />
             </div>
             <div class="sl-field">
-              <label>${isBjj ? 'Partner 2' : 'Blue Corner'}</label>
-              <input id="secretBlueName" class="sl-input" value="" maxlength="24" placeholder="${isBjj ? 'Partner 2' : 'Blue Corner'}" />
+              <label>${isBjj ? t('timer.partner2', 'Partner 2') : t('timer.blueCorner', 'Blue Corner')}</label>
+              <input id="secretBlueName" class="sl-input" value="" maxlength="24" placeholder="${isBjj ? t('timer.partner2', 'Partner 2') : t('timer.blueCorner', 'Blue Corner')}" />
             </div>
             ${isBjj ? `
               <div class="sl-field">
@@ -3872,8 +4439,8 @@
               </div>
             `}
             <div class="sl-row">
-              <button type="button" class="sl-btn primary" data-action="start-fight">${isBjj ? 'Roll' : 'Start Fight'}</button>
-              <button type="button" class="sl-btn" data-action="history">Past Fights</button>
+              <button type="button" class="sl-btn primary" data-action="start-fight">${isBjj ? t('timer.roll', 'Roll') : t('timer.startFight', 'Start Fight')}</button>
+              <button type="button" class="sl-btn" data-action="history">${t('timer.pastFights', 'Past Fights')}</button>
             </div>
           </div>
         `;
@@ -3938,28 +4505,34 @@
           <div class="sl-fight">
             <div class="sl-topbar">
               <div class="sl-brand">
-                <span class="sl-eyebrow">Session</span>
+                <span class="sl-eyebrow">${t('timer.session', 'Session')}</span>
                 <span class="sl-name">${secretState.redName} vs ${secretState.blueName}</span>
               </div>
               <button type="button" class="sl-icon" data-action="toggle-menu">☰</button>
             </div>
             ${secretState.menuOpen ? `
               <div class="sl-menu">
-                <button type="button" data-action="label-submission">Submission</button>
-                <button type="button" data-action="label-cancel">Cancel Bout</button>
-                <button type="button" data-action="history">Past Fights</button>
+                <button type="button" data-action="label-submission">${t('timer.submission', 'Submission')}</button>
+                <button type="button" data-action="label-cancel">${t('timer.cancelBout', 'Cancel Bout')}</button>
+                <button type="button" data-action="history">${t('timer.pastFights', 'Past Fights')}</button>
               </div>
             ` : ''}
             ${secretState.confirmAction ? `
               <div class="sl-confirm">
                 <div class="sl-confirm-header">
-                  <div class="sl-confirm-title">${secretState.confirmAction === 'tko' ? 'TKO / KO' : secretState.confirmAction === 'submission' ? 'Submission' : 'Cancel Bout'}</div>
+                  <div class="sl-confirm-title">${secretState.confirmAction === 'tko' ? t('timer.tko', 'TKO / KO') : secretState.confirmAction === 'submission' ? t('timer.submission', 'Submission') : t('timer.cancelBout', 'Cancel Bout')}</div>
                   <button type="button" class="sl-close-btn" data-action="cancel-finish" aria-label="Close">×</button>
                 </div>
-                <div class="sl-confirm-grid">
-                  <button type="button" data-action="finish-red" data-finish-kind="${secretState.confirmAction}">${shortName(secretState.redName)}</button>
-                  <button type="button" data-action="finish-blue" data-finish-kind="${secretState.confirmAction}">${shortName(secretState.blueName)}</button>
-                </div>
+                ${secretState.confirmAction === 'cancel' ? `
+                  <div class="sl-confirm-grid">
+                    <button type="button" data-action="confirm-cancel">${t('timer.areYouSure', 'Are you sure?')}</button>
+                  </div>
+                ` : `
+                  <div class="sl-confirm-grid">
+                    <button type="button" data-action="finish-red" data-finish-kind="${secretState.confirmAction}">${shortName(secretState.redName)}</button>
+                    <button type="button" data-action="finish-blue" data-finish-kind="${secretState.confirmAction}">${shortName(secretState.blueName)}</button>
+                  </div>
+                `}
               </div>
             ` : ''}
             ${!isBjj ? `
@@ -3971,76 +4544,80 @@
             ` : ''}
             <div class="sl-timer">${formatTime(secretState.timeLeft)}</div>
             <div class="sl-row" style="grid-template-columns: 1fr${isBjj ? '' : ' 1fr'};">
-              <button type="button" class="sl-btn primary" data-action="toggle-timer">${secretState.running ? 'Pause' : secretState.paused ? 'Resume' : (isBjj ? 'Roll' : 'Start')}</button>
-              ${isBjj ? '' : '<button type="button" class="sl-btn" data-action="end-round">' + (secretState.phase === 'rest' ? 'End Rest' : 'End Round') + '</button>'}
+              <button type="button" class="sl-btn primary" data-action="toggle-timer">${secretState.running ? t('timer.pause', 'Pause') : secretState.paused ? t('timer.resume', 'Resume') : (isBjj ? t('timer.roll', 'Roll') : t('timer.start', 'Start'))}</button>
+              ${isBjj ? '' : '<button type="button" class="sl-btn" data-action="end-round">' + (secretState.phase === 'rest' ? t('timer.endRest', 'End Rest') : t('timer.endRound', 'End Round')) + '</button>'}
             </div>
             ${isBjj ? `
               <div class="sl-corners">
                 <div class="sl-corner red">
                   <div class="sl-corner-name">${shortName(secretState.redName)}</div>
                   <div class="sl-corner-count">${secretState.bjjRedPoints}</div>
-                  <div class="sl-corner-note">Points</div>
+                  <div class="sl-corner-note">${t('timer.points', 'Points')}</div>
                   <div class="sl-row" style="grid-template-columns: 1fr; width: 100%;">
-                    <button type="button" class="sl-btn" data-bjj-side="red" data-bjj-score="2">+2 Takedown / Sweep</button>
-                    <button type="button" class="sl-btn" data-bjj-side="red" data-bjj-score="3">+3 Guard Pass</button>
-                    <button type="button" class="sl-btn" data-bjj-side="red" data-bjj-score="4">+4 Mount / Backmount</button>
-                    <button type="button" class="sl-btn" data-bjj-side="red" data-bjj-stat="adv" data-bjj-delta="1">Advantage</button>
-                    <button type="button" class="sl-btn" data-bjj-side="red" data-bjj-stat="warning" data-bjj-delta="1">Penalty</button>
+                    <button type="button" class="sl-btn" data-bjj-side="red" data-bjj-score="2">${t('timer.bjj.score2', '+2 Takedown / Sweep')}</button>
+                    <button type="button" class="sl-btn" data-bjj-side="red" data-bjj-score="3">${t('timer.bjj.score3', '+3 Guard Pass')}</button>
+                    <button type="button" class="sl-btn" data-bjj-side="red" data-bjj-score="4">${t('timer.bjj.score4', '+4 Mount / Backmount')}</button>
+                    <button type="button" class="sl-btn" data-bjj-side="red" data-bjj-stat="adv" data-bjj-delta="1">${t('timer.bjj.advantage', 'Advantage')}</button>
+                    <button type="button" class="sl-btn" data-bjj-side="red" data-bjj-stat="warning" data-bjj-delta="1">${t('timer.bjj.penalty', 'Penalty')}</button>
                   </div>
                   <div class="sl-undo">
-                    <button type="button" data-action="undo-bjj-red">Undo</button>
+                    <button type="button" data-action="undo-bjj-red">${t('timer.bjj.undo', 'Undo')}</button>
                   </div>
                 </div>
                 <div class="sl-corner blue">
                   <div class="sl-corner-name">${shortName(secretState.blueName)}</div>
                   <div class="sl-corner-count">${secretState.bjjBluePoints}</div>
-                  <div class="sl-corner-note">Points</div>
+                  <div class="sl-corner-note">${t('timer.points', 'Points')}</div>
                   <div class="sl-row" style="grid-template-columns: 1fr; width: 100%;">
-                    <button type="button" class="sl-btn" data-bjj-side="blue" data-bjj-score="2">+2 Takedown / Sweep</button>
-                    <button type="button" class="sl-btn" data-bjj-side="blue" data-bjj-score="3">+3 Guard Pass</button>
-                    <button type="button" class="sl-btn" data-bjj-side="blue" data-bjj-score="4">+4 Mount / Backmount</button>
-                    <button type="button" class="sl-btn" data-bjj-side="blue" data-bjj-stat="adv" data-bjj-delta="1">Advantage</button>
-                    <button type="button" class="sl-btn" data-bjj-side="blue" data-bjj-stat="warning" data-bjj-delta="1">Penalty</button>
+                    <button type="button" class="sl-btn" data-bjj-side="blue" data-bjj-score="2">${t('timer.bjj.score2', '+2 Takedown / Sweep')}</button>
+                    <button type="button" class="sl-btn" data-bjj-side="blue" data-bjj-score="3">${t('timer.bjj.score3', '+3 Guard Pass')}</button>
+                    <button type="button" class="sl-btn" data-bjj-side="blue" data-bjj-score="4">${t('timer.bjj.score4', '+4 Mount / Backmount')}</button>
+                    <button type="button" class="sl-btn" data-bjj-side="blue" data-bjj-stat="adv" data-bjj-delta="1">${t('timer.bjj.advantage', 'Advantage')}</button>
+                    <button type="button" class="sl-btn" data-bjj-side="blue" data-bjj-stat="warning" data-bjj-delta="1">${t('timer.bjj.penalty', 'Penalty')}</button>
                   </div>
                   <div class="sl-undo">
-                    <button type="button" data-action="undo-bjj-blue">Undo</button>
+                    <button type="button" data-action="undo-bjj-blue">${t('timer.bjj.undo', 'Undo')}</button>
                   </div>
                 </div>
               </div>
               <div class="sl-stats" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
-                <div class="sl-stat-box"><div class="val">${secretState.bjjRedAdv}</div><div class="lab">${shortName(secretState.redName)} V</div></div>
-                <div class="sl-stat-box"><div class="val">${secretState.bjjBlueAdv}</div><div class="lab">${shortName(secretState.blueName)} V</div></div>
-                <div class="sl-stat-box"><div class="val">${secretState.bjjRedWarnings}</div><div class="lab">${shortName(secretState.redName)} P</div></div>
-                <div class="sl-stat-box"><div class="val">${secretState.bjjBlueWarnings}</div><div class="lab">${shortName(secretState.blueName)} P</div></div>
+                <div class="sl-stat-box"><div class="val">${secretState.bjjRedAdv}</div><div class="lab">${shortName(secretState.redName)} ${t('timer.bjj.v', 'V')}</div></div>
+                <div class="sl-stat-box"><div class="val">${secretState.bjjBlueAdv}</div><div class="lab">${shortName(secretState.blueName)} ${t('timer.bjj.v', 'V')}</div></div>
+                <div class="sl-stat-box"><div class="val">${secretState.bjjRedWarnings}</div><div class="lab">${shortName(secretState.redName)} ${t('timer.bjj.p', 'P')}</div></div>
+                <div class="sl-stat-box"><div class="val">${secretState.bjjBlueWarnings}</div><div class="lab">${shortName(secretState.blueName)} ${t('timer.bjj.p', 'P')}</div></div>
               </div>
             ` : `
               <div class="sl-corners">
                 <div class="sl-corner red" data-side="red">
                   <div class="sl-corner-name">${shortName(secretState.redName)}</div>
                   <div class="sl-corner-count">${secretState.redScore}</div>
-                  <div class="sl-corner-note">Sig. Strikes</div>
+                  <div class="sl-corner-note">${t('timer.sigStrikes', 'Sig. Strikes')}</div>
                   <div class="sl-mini-stat">
-                    <span class="sl-mini-label">Takedowns</span>
+                    <span class="sl-mini-label">${t('timer.takedowns', 'Takedowns')}</span>
                     <span class="sl-mini-value">${secretState.redTakedowns}</span>
+                  </div>
+                  <div class="sl-undo" style="width: 100%; margin-top: 12px;">
+                    <button type="button" data-action="takedown-red" style="width: 100%;">${t('timer.takedowns', 'Takedown')}</button>
+                  </div>
+                  <div class="sl-undo" style="width: 100%; margin-top: 8px;">
+                    <button type="button" data-action="undo-red" style="width: 100%;">${t('timer.undo', 'Undo')} ${t('timer.red', 'Red')}</button>
                   </div>
                 </div>
                 <div class="sl-corner blue" data-side="blue">
                   <div class="sl-corner-name">${shortName(secretState.blueName)}</div>
                   <div class="sl-corner-count">${secretState.blueScore}</div>
-                  <div class="sl-corner-note">Sig. Strikes</div>
+                  <div class="sl-corner-note">${t('timer.sigStrikes', 'Sig. Strikes')}</div>
                   <div class="sl-mini-stat">
-                    <span class="sl-mini-label">Takedowns</span>
+                    <span class="sl-mini-label">${t('timer.takedowns', 'Takedowns')}</span>
                     <span class="sl-mini-value">${secretState.blueTakedowns}</span>
                   </div>
+                  <div class="sl-undo" style="width: 100%; margin-top: 12px;">
+                    <button type="button" data-action="takedown-blue" style="width: 100%;">${t('timer.takedowns', 'Takedown')}</button>
+                  </div>
+                  <div class="sl-undo" style="width: 100%; margin-top: 8px;">
+                    <button type="button" data-action="undo-blue" style="width: 100%;">${t('timer.undo', 'Undo')} ${t('timer.blue', 'Blue')}</button>
+                  </div>
                 </div>
-              </div>
-              <div class="sl-undo">
-                <button type="button" data-action="takedown-red">Takedown</button>
-                <button type="button" data-action="takedown-blue">Takedown</button>
-              </div>
-              <div class="sl-undo">
-                <button type="button" data-action="undo-red">Undo Red</button>
-                <button type="button" data-action="undo-blue">Undo Blue</button>
               </div>
               ${secretState.showRoundEnd ? `
                 <div class="sl-sheet">
@@ -4063,7 +4640,7 @@
                       </div>
                     </div>
                   </div>
-                  <button type="button" class="sl-btn primary sl-score-confirm ${secretState.selectedRoundScore ? 'enabled' : ''}" data-action="confirm-round-score" ${secretState.selectedRoundScore ? '' : 'disabled'}>Score Round</button>
+                  <button type="button" class="sl-btn primary sl-score-confirm ${secretState.selectedRoundScore ? 'enabled' : ''}" data-action="confirm-round-score" ${secretState.selectedRoundScore ? '' : 'disabled'}>${t('timer.scoreRound', 'Score Round')}</button>
                 </div>
               ` : ''}
             `}
@@ -4078,20 +4655,20 @@
         return `
           <div class="sl-summary">
             <div class="sl-winner">
-              <div class="who">${result.winner === 'Draw' ? 'Result' : 'Winner'}</div>
+              <div class="who">${result.winner === 'Draw' ? t('timer.result', 'Result') : t('timer.winner', 'Winner')}</div>
               <div class="name">${result.winner}</div>
               <div class="method">${result.method}</div>
             </div>
             <div class="sl-stats">
-              <div class="sl-stat-box"><div class="val">${isBjj ? secretState.bjjRedPoints : result.redScore}</div><div class="lab">${shortName(secretState.redName)} ${isBjj ? 'points' : 'strikes'}</div></div>
-              <div class="sl-stat-box"><div class="val">${isBjj ? secretState.bjjBluePoints : result.blueScore}</div><div class="lab">${shortName(secretState.blueName)} ${isBjj ? 'points' : 'strikes'}</div></div>
+              <div class="sl-stat-box"><div class="val">${isBjj ? secretState.bjjRedPoints : result.redScore}</div><div class="lab">${shortName(secretState.redName)} ${isBjj ? t('timer.points', 'Points') : t('timer.strikes', 'Strikes')}</div></div>
+              <div class="sl-stat-box"><div class="val">${isBjj ? secretState.bjjBluePoints : result.blueScore}</div><div class="lab">${shortName(secretState.blueName)} ${isBjj ? t('timer.points', 'Points') : t('timer.strikes', 'Strikes')}</div></div>
             </div>
             ${isBjj ? `
               <div class="sl-stats">
-                <div class="sl-stat-box"><div class="val">${secretState.bjjRedAdv}</div><div class="lab">${shortName(secretState.redName)} V</div></div>
-                <div class="sl-stat-box"><div class="val">${secretState.bjjBlueAdv}</div><div class="lab">${shortName(secretState.blueName)} V</div></div>
-                <div class="sl-stat-box"><div class="val">${secretState.bjjRedWarnings}</div><div class="lab">${shortName(secretState.redName)} P</div></div>
-                <div class="sl-stat-box"><div class="val">${secretState.bjjBlueWarnings}</div><div class="lab">${shortName(secretState.blueName)} P</div></div>
+                <div class="sl-stat-box"><div class="val">${secretState.bjjRedAdv}</div><div class="lab">${shortName(secretState.redName)} ${t('timer.bjj.v', 'V')}</div></div>
+                <div class="sl-stat-box"><div class="val">${secretState.bjjBlueAdv}</div><div class="lab">${shortName(secretState.blueName)} ${t('timer.bjj.v', 'V')}</div></div>
+                <div class="sl-stat-box"><div class="val">${secretState.bjjRedWarnings}</div><div class="lab">${shortName(secretState.redName)} ${t('timer.bjj.p', 'P')}</div></div>
+                <div class="sl-stat-box"><div class="val">${secretState.bjjBlueWarnings}</div><div class="lab">${shortName(secretState.blueName)} ${t('timer.bjj.p', 'P')}</div></div>
               </div>
             ` : `
               <table>
@@ -4113,10 +4690,10 @@
         if (!secretState.history.length) {
           return `
             <div class="sl-history">
-              <div class="sl-empty">No fights logged yet.<br>Complete a session and it will appear here.</div>
+              <div class="sl-empty">${t('timer.noFights', 'No fights logged yet.<br>Complete a session and it will appear here.')}</div>
               <div class="sl-row">
-                <button type="button" class="sl-btn primary" data-action="new-fight">New fight</button>
-                <button type="button" class="sl-btn" data-action="setup">Back</button>
+                <button type="button" class="sl-btn primary" data-action="new-fight">${t('timer.startFight', 'Start Fight')}</button>
+                <button type="button" class="sl-btn" data-action="setup">${t('timer.back', 'Back')}</button>
               </div>
             </div>
           `;
@@ -4131,13 +4708,13 @@
                   <span>${new Date(entry.date).toLocaleDateString()}</span>
                 </div>
                 <div class="sl-history-winner">
-                  <span>Winner:</span>
+                  <span>${t('timer.winner', 'Winner')}:</span>
                   <span class="sl-history-winner-name">${entry.winner}</span>
                   <span class="sl-history-method">${entry.method}</span>
                 </div>
                 <div class="sl-history-actions">
-                  <button type="button" data-action="delete-history" data-id="${entry.id}">Delete</button>
-                  <button type="button" data-action="setup">Back</button>
+                  <button type="button" data-action="delete-history" data-id="${entry.id}">${t('catalog.deleteAction', 'Delete')}</button>
+                  <button type="button" data-action="setup">${t('timer.back', 'Back')}</button>
                 </div>
               </div>
             `).join('')}
@@ -4153,18 +4730,43 @@
         else content = renderHistory();
         secretRoot.innerHTML = `<div class="sparring-log-app">${renderModeToggle()}${content}</div>`;
       }
+      renderSecretSparringLog = render;
 
       secretTab.addEventListener('click', () => setActivePage('timer'));
 
       secretRoot.addEventListener('click', (event) => {
+        const target = event.target.closest('button');
+        if (!target) {
+          const side = event.target.closest('.sl-corner')?.dataset.side;
+          if (side) {
+            addScore(side);
+          }
+          return;
+        }
+
+        const action = target.dataset.action;
+        if (action === 'takedown-red') {
+          addTakedown('red');
+          return;
+        }
+        if (action === 'takedown-blue') {
+          addTakedown('blue');
+          return;
+        }
+        if (action === 'undo-red') {
+          undoScore('red');
+          return;
+        }
+        if (action === 'undo-blue') {
+          undoScore('blue');
+          return;
+        }
+
         const side = event.target.closest('.sl-corner')?.dataset.side;
         if (side) {
           addScore(side);
           return;
         }
-
-        const target = event.target.closest('button');
-        if (!target) return;
 
         const roundChoice = event.target.closest('[data-rounds]');
         if (roundChoice) {
@@ -4201,7 +4803,6 @@
         if (step === 'bjjTimerMinus') updateBjjTimerLength(-30);
         if (step === 'bjjTimerPlus') updateBjjTimerLength(30);
 
-        const action = target.dataset.action;
         if (action === 'start-fight') startFight();
         if (action === 'toggle-timer') toggleTimer();
         if (action === 'undo-bjj-red') {
@@ -4232,6 +4833,11 @@
           secretState.menuOpen = false;
           render();
         }
+        if (action === 'confirm-cancel') {
+          if (secretState.confirmAction === 'cancel') {
+            endBoutEarly('cancel');
+          }
+        }
         if (action === 'finish-red') {
           if (secretState.confirmAction) {
             endBoutEarly(secretState.confirmAction, 'red');
@@ -4243,13 +4849,9 @@
           }
         }
         if (action === 'cancel-finish') {
-          if (secretState.confirmAction === 'cancel') {
-            endBoutEarly('cancel');
-          } else {
-            secretState.confirmAction = null;
-            secretState.menuOpen = false;
-            render();
-          }
+          secretState.confirmAction = null;
+          secretState.menuOpen = false;
+          render();
         }
         if (action === 'end-round') {
           if (secretState.phase === 'rest') {
@@ -4258,10 +4860,6 @@
             endRound();
           }
         }
-        if (action === 'takedown-red') addTakedown('red');
-        if (action === 'takedown-blue') addTakedown('blue');
-        if (action === 'undo-red') undoScore('red');
-        if (action === 'undo-blue') undoScore('blue');
         if (action === 'history') {
           secretState.menuOpen = false;
           secretState.confirmAction = null;
