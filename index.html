@@ -165,6 +165,16 @@
     #secretSettingsPanel.open {
       display: block;
     }
+    .favorite-toggle.is-active,
+    #filterFavorites.is-active {
+      color: #facc15;
+      border-color: rgba(250, 204, 21, 0.6);
+      background: rgba(250, 204, 21, 0.12);
+    }
+    .favorite-toggle.is-active svg path,
+    #filterFavorites.is-active svg path {
+      fill: currentColor;
+    }
 
     /* ----- Timer app styles ----- */
     #secretSparringLog {
@@ -1194,6 +1204,10 @@
                 <option value="All" data-i18n="catalog.allPositions">All positions</option>
               </select>
             </div>
+            <button id="filterFavorites" type="button" aria-pressed="false" class="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm font-semibold text-slate-300 transition hover:border-amber-300 hover:text-amber-300">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z" stroke-linejoin="round"/></svg>
+              <span data-i18n="catalog.favoritesOnly">Favorites only</span>
+            </button>
           </div>
         </div>
         <div id="cardsContainer" class="mt-8 space-y-6"></div>
@@ -1252,6 +1266,9 @@
           </div>
         </button>
         <div class="flex flex-col gap-2">
+          <button type="button" class="favorite-toggle rounded-full border border-slate-700 bg-slate-800 p-3 text-slate-300 transition hover:border-amber-400 hover:text-amber-300" aria-label="Add to favorites" title="Add to favorites">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z" stroke-linejoin="round"/></svg>
+          </button>
           <button type="button" class="subposition-edit-btn rounded-full border border-slate-700 bg-slate-800 p-3 text-slate-300 transition hover:border-sky-400 hover:text-sky-300" aria-label="Edit move details" data-i18n-aria-label="catalog.editMoveDetails">
             <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 13.5V16h2.5l7.4-7.4-2.5-2.5L4 13.5z" stroke-linejoin="round"/><path d="M12.5 4.5l3 3" stroke-linecap="round"/></svg>
           </button>
@@ -1698,6 +1715,16 @@
         messages: { importSuccess: 'Catálogo importado com sucesso.', importError: 'Essa string de exportação do catálogo não pôde ser lida.' }
       }
     };
+    Object.assign(translations.en.catalog, {
+      favoritesOnly: 'Favorites only',
+      addFavorite: 'Add to favorites',
+      removeFavorite: 'Remove from favorites'
+    });
+    Object.assign(translations.pt.catalog, {
+      favoritesOnly: 'Somente favoritas',
+      addFavorite: 'Adicionar aos favoritos',
+      removeFavorite: 'Remover dos favoritos'
+    });
     let currentLanguage = localStorage.getItem(LANGUAGE_KEY) || 'en';
     let renderSecretSparringLog = null;
     const storedMoves = localStorage.getItem(STORAGE_KEY);
@@ -1724,6 +1751,7 @@
     const cardsContainer = document.getElementById('cardsContainer');
     const filterCategorySelect = document.getElementById('filterCategory');
     const filterPositionSelect = document.getElementById('filterPosition');
+    const filterFavoritesInput = document.getElementById('filterFavorites');
     const template = document.getElementById('moveCardTemplate');
     const trackerTabBtn = document.getElementById('trackerTabBtn');
     const settingsTabBtn = document.getElementById('settingsTabBtn');
@@ -2102,6 +2130,7 @@
         role: move?.role || '',
         transitionFromId: move?.transitionFromId || '',
         giOnly: Boolean(move?.giOnly),
+        isFavorite: Boolean(move?.isFavorite),
         isSubPosition: Boolean(move?.isSubPosition),
         legEntanglementSide: move?.legEntanglementSide || '',
         origin: move?.origin || 'Modern BJJ',
@@ -3265,7 +3294,8 @@
         const matchCategory = moveMatchesCategory(move);
         const matchPosition = moveMatchesPosition(move);
         const matchSearch = !query || move.title.toLowerCase().includes(query);
-        return matchCategory && matchPosition && matchSearch;
+        const matchFavorite = filterFavoritesInput.getAttribute('aria-pressed') !== 'true' || Boolean(move.isFavorite);
+        return matchCategory && matchPosition && matchSearch && matchFavorite;
       });
       if (!filteredMoves.length) {
         cardsContainer.innerHTML = `<div class="rounded-3xl border border-dashed border-slate-700/60 bg-slate-900/70 p-10 text-center text-slate-400">${t('catalog.emptyState', 'No moves yet. Add one from the move add form or select a different filter.')}</div>`;
@@ -3473,6 +3503,7 @@
           });
 
           const summaryBtn = clone.querySelector('.move-summary');
+          const favoriteBtn = clone.querySelector('.favorite-toggle');
           const detailsPanel = clone.querySelector('.details');
           const subPositionEditBtn = clone.querySelector('.subposition-edit-btn');
           const subPositionToggleBtn = clone.querySelector('.subposition-toggle-btn');
@@ -3486,6 +3517,11 @@
           const imageInput = clone.querySelector('.image-input');
           const removeImageBtn = clone.querySelector('.remove-image-btn');
           undoBtn.disabled = actionHistory.length === 0;
+
+          favoriteBtn.classList.toggle('is-active', Boolean(move.isFavorite));
+          favoriteBtn.setAttribute('aria-pressed', String(Boolean(move.isFavorite)));
+          favoriteBtn.setAttribute('aria-label', t(move.isFavorite ? 'catalog.removeFavorite' : 'catalog.addFavorite', move.isFavorite ? 'Remove from favorites' : 'Add to favorites'));
+          favoriteBtn.title = t(move.isFavorite ? 'catalog.removeFavorite' : 'catalog.addFavorite', move.isFavorite ? 'Remove from favorites' : 'Add to favorites');
 
           subPositionEditBtn.classList.remove('hidden');
           subPositionToggleBtn.classList.remove('hidden');
@@ -3540,6 +3576,14 @@
           transitionCountBadge.classList.toggle('hidden', transitionChildren.length <= 0);
 
           updateCardHighlight();
+
+          favoriteBtn.addEventListener('click', event => {
+            event.preventDefault();
+            event.stopPropagation();
+            move.isFavorite = !move.isFavorite;
+            saveData();
+            renderCards();
+          });
 
           summaryBtn.addEventListener('click', event => {
             event.preventDefault();
@@ -3731,6 +3775,7 @@
         role,
         transitionFromId: transitionFromId || '',
         giOnly: Boolean(giOnly),
+        isFavorite: false,
         isSubPosition: Boolean(isSubPosition),
         legEntanglementSide: ['Cross Ashi', '50/50'].includes(position) ? legEntanglementSide : '',
         origin: 'Modern BJJ',
@@ -3775,6 +3820,12 @@
     
     filterPositionSelect.addEventListener('change', () => {
       currentPosition = filterPositionSelect.value;
+      renderCards();
+    });
+    filterFavoritesInput.addEventListener('click', () => {
+      const isActive = filterFavoritesInput.getAttribute('aria-pressed') !== 'true';
+      filterFavoritesInput.setAttribute('aria-pressed', String(isActive));
+      filterFavoritesInput.classList.toggle('is-active', isActive);
       renderCards();
     });
     function syncSearchClearButton() {
